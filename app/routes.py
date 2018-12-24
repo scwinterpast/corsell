@@ -23,6 +23,18 @@ def index():
 def aboutus():
     return render_template('aboutus.html')
 
+#UPLOAD
+@app.route('/upload', methods=['POST'])
+# @login_required
+def upload_file():
+    file = request.files['image']
+    f = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
+
+    # add your custom code to check that the uploaded file is a valid image and not a malicious file (out-of-scope for this post)
+    file.save(f)
+
+    return render_template('index.html')
+
 #LOGIN
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -37,10 +49,12 @@ def login():
             flash('Invalid username or password')
             return redirect(url_for('login'))
         login_user(user, remember=form.remember.data)
-        next_page = request.args.get('next')
-        if not next_page or url_parse(next_page).netloc != '':
-            next_page = url_for('index')
-        return redirect(next_page)
+        # next_page = request.args.get('next')
+        # if not next_page or url_parse(next_page).netloc != '':
+        #     next_page = url_for('index')
+        # return redirect(next_page)
+        return redirect(url_for('index'))
+>>>>>>> a72dd5ccbed32c87d9e5b3a1603ea8a3ea7b9cfd
     return render_template('login.html', form=form)
 
 #REGISTER
