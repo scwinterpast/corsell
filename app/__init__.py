@@ -16,4 +16,9 @@ login = LoginManager()
 login.init_app(app)
 login.login_view = 'login'
 
+#UPLOAD
+UPLOAD_FOLDER = '/Users/SamuelDNinja/Downloads/corsell/uploads'
+# UPLOAD_FOLDER = '/Users/rishabhsarup/Desktop/Corsell/uploads'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
 from app import routes, models

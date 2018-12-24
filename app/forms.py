@@ -12,6 +12,8 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from wtforms import BooleanField, HiddenField, PasswordField, SubmitField, StringField
 from wtforms import ValidationError
 from wtforms.validators import DataRequired, InputRequired, Email, Length, EqualTo
+from flask_wtf.file import FileField, FileRequired, FileAllowed
+from flask_uploads import UploadSet, IMAGES
 from app.models import User
 
 class RegisterForm(FlaskForm):
@@ -53,10 +55,11 @@ class LoginForm(FlaskForm):
 
 class UploadForm(FlaskForm):
     """Upload Form"""
-    ItemName = StringField('Item Name', validators=[DataRequired(message='Item Name is required')])
-    Description = StringField('Description', validators=[DataRequired(message='Description is required')])
-    Price = StringField('Price', validators=[DataRequired(message='Price is required')])
-    
+    title = StringField('Item Name', validators=[DataRequired(message='Item Name is required')])
+    description = StringField('Description', validators=[DataRequired(message='Description is required')])
+    price = StringField('Price', validators=[DataRequired(message='Price is required')])
+    photo = FileField('image', validators=[FileRequired(),FileAllowed(['jpg', 'png'], 'Images only!')])
+
     # def validate_username(self, username):
     #     user = User.query.filter_by(username=username.data).first()
     #     if user is None:

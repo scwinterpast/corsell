@@ -1,14 +1,15 @@
 from app import app
+import os
 
 import functools
 from flask import (
     Blueprint, flash, g, redirect, render_template, request, session, url_for
 )
 from werkzeug.security import check_password_hash, generate_password_hash
-from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.utils import secure_filename
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from flask_sqlalchemy  import SQLAlchemy
-from app.models import User
+from app.models import User, Post
 from app.forms import LoginForm, RegisterForm, UploadForm
 from app import db
 
@@ -78,35 +79,37 @@ def user(username):
     return render_template('user.html', user=user, posts=posts)
 
 #UPLOAD
-UPLOAD_FOLDER = '/Users/rishabhsarup/Desktop/Corsell/uploads'
-ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
-
-@app.route('/user/<username>')
-@login_required
-def allowed_file(filename):
-    return '.' in filename and \
-        filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
 @app.route('/upload', methods=['GET', 'POST'])
 @login_required
 def upload():
     form = UploadForm()
-    if request.method == 'POST':
-        # check if the post request has the file part
-        if 'file' not in request.files:
-            flash('No file part')
-            return redirect(request.url)
-        file = request.files['file']
-        # if user does not select file, browser also
-        # submit an empty part without filename
-        if file.filename == '':
-            flash('No selected file')
-            return redirect(request.url)
-        if file and allowed_file(file.filename):
-            p = Post()
-            filename = secure_filename(file.filename)
-            flash('file {} saved'.format(file.filename))
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return redirect(url_for('index'))
-        return render_template('upload.html')
+    if form.validate_on_submit():
+        f = form.photo.data
+        filename = secure_filename(f.filename)
+        f.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        p = Post(title=form.title.data, description=form.description.data,\
+        price=form.price.data, photos=filename, author=current_user)
+        db.session.add(p)
+        db.session.commit()
+        return redirect(url_for('user', username=current_user.username))
+
     return render_template('upload.html', form=form)
+
+    # if request.method == 'POST':
+    #     # check if the post request has the file part
+    #     if 'file' not in request.files:
+    #         flash('No file part')
+    #         return redirect(request.url)
+    #     file = request.files['file']
+    #     # if user does not select file, browser also
+    #     # submit an empty part without filename
+    #     if file.filename == '':
+    #         flash('No selected file')
+    #         return redirect(request.url)
+    #     if file and allowed_file(file.filename):
+    #         p = Post()
+    #         filename = secure_filename(file.filename)
+    #         flash('file {} saved'.format(file.filename))
+    #         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+    #         return redirect(url_for('index'))
+    # return render_template('upload.html', form=form)

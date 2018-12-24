@@ -40,20 +40,21 @@
 						Upload your item
 					</span>
 					<div class="container">
-			      		<form class="form-signin" method="POST">
+			      		<form class="form-signin" method="POST" enctype="multipart/form-data">
 							{{ form.hidden_tag() }}
-							{{ wtf.form_field(form.ItemName) }}
-								{% for error in form.ItemName.errors %}
+							{{ wtf.form_field(form.title) }}
+								{% for error in form.title.errors %}
 								<span style="color: red;">[{{ error }}]</span>
 								{% endfor %}
-							{{ wtf.form_field(form.Description) }}
-								{% for error in form.Description.errors %}
+							{{ wtf.form_field(form.description) }}
+								{% for error in form.description.errors %}
 								<span style="color: red;">[{{ error }}]</span>
 								{% endfor %}
-                {{ wtf.form_field(form.Price) }}
-  								{% for error in form.Price.errors %}
+                {{ wtf.form_field(form.price) }}
+  								{% for error in form.price.errors %}
   								<span style="color: red;">[{{ error }}]</span>
   								{% endfor %}
+								{{ form.photo }}
           	<button class="btn btn-lg btn-primary btn-block" type="submit">Upload</button>
 			   			</form>
 			    	</div> <!-- /container -->
@@ -61,8 +62,6 @@
 			</div>
 		</div>
 	</div>
-
-
 	<div id="dropDownSelect1"></div>
 </body>
 {% endblock %}

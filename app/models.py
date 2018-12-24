@@ -14,6 +14,7 @@ class User( UserMixin, db.Model):
     contact = db.Column(db.String(15))
     college = db.Column(db.String(50))
     password_hash = db.Column(db.String(128))
+    posts = db.relationship('Post', backref='author', lazy='dynamic')
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
@@ -24,22 +25,22 @@ class User( UserMixin, db.Model):
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
 
-    def avatar(self, size):
-        digest = md5(self.email.lower().encode('utf-8')).hexdigest()
-        return 'https://www.gravatar.com/avatar/{}?d=identicon&s={}'.format(
-            digest, size)
+    # def avatar(self, size):
+    #     digest = md5(self.email.lower().encode('utf-8')).hexdigest()
+    #     return 'https://www.gravatar.com/avatar/{}?d=identicon&s={}'.format(
+    #         digest, size)
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(140))
-    photos = db.Column(db.String(140))
     description = db.Column(db.String(140))
     price = db.Column(db.Integer)
+    photos = db.Column(db.String())
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
     def __repr__(self):
-        return '<Post {}>'.format(self.body)
+        return '<Post {}>'.format(self.title)
 
 @login.user_loader
 def load_user(id):
