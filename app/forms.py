@@ -13,7 +13,7 @@ from wtforms import BooleanField, HiddenField, PasswordField, SubmitField, Strin
 from wtforms import ValidationError
 from wtforms.validators import DataRequired, InputRequired, Email, Length, EqualTo
 from flask_wtf.file import FileField, FileRequired, FileAllowed
-from flask_uploads import UploadSet, IMAGES
+#from flask_uploads import UploadSet, IMAGES
 from app.models import User
 
 class RegisterForm(FlaskForm):
