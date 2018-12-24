@@ -1,0 +1,250 @@
+[
+  {
+    "name": "Calculus: Early Transcendentals 8th edition",
+    "description": "Lorem ipsum",
+    "brand": "dolor sit amet",
+    "categories": [
+      "Textbook",
+      "Second hand"
+    ],
+    "hierarchicalCategories": {
+      "lvl0": "Best Buy Gift Cards",
+      "lvl1": "Best Buy Gift Cards > Entertainment Gift Cards"
+    },
+    "type": "Textbook",
+    "price": 42.0,
+    "price_range": "1 - 50",
+    "image": "https://ebooksforclass.com/wp-content/uploads/2018/08/Calculus-Early-Transcendentals-8th-edition-Cover.jpg",
+    "url": "http://www.bestbuy.com/site/3-year-unlimited-cloud-storage-service-activation-card-other/1696302.p?id=1219066776306&skuId=1696302&cmp=RMX&ky=1uWSHMdQqBeVJB9cXgEke60s5EjfS6M1W",
+    "free_shipping": true,
+    "popularity": 10000,
+    "rating": 2,
+    "objectID": "1696302"
+  },{
+      "name": "Beginner Programming For Dummies",
+      "description": "Lorem ipsum",
+      "brand": "dolor sit amet",
+      "categories": [
+        "Textbook",
+        "Second hand"
+      ],
+      "hierarchicalCategories": {
+        "lvl0": "Best Buy Gift Cards",
+        "lvl1": "Best Buy Gift Cards > Entertainment Gift Cards"
+      },
+      "type": "Textbook",
+      "price": 22.5,
+      "price_range": "1 - 50",
+      "image": "https://prodimage.images-bn.com/pimages/9780470088708_p0_v1_s550x406.jpg",
+      "url": "http://www.bestbuy.com/site/3-year-unlimited-cloud-storage-service-activation-card-other/1696302.p?id=1219066776306&skuId=1696302&cmp=RMX&ky=1uWSHMdQqBeVJB9cXgEke60s5EjfS6M1W",
+      "free_shipping": true,
+      "popularity": 10000,
+      "rating": 2,
+      "objectID": "1696303"
+  },{
+      "name": "The illiad and the odyssey",
+      "description": "Homer",
+      "brand": "dolor sit amet",
+      "categories": [
+        "Textbook",
+        "Second hand"
+      ],
+      "hierarchicalCategories": {
+        "lvl0": "Best Buy Gift Cards",
+        "lvl1": "Best Buy Gift Cards > Entertainment Gift Cards"
+      },
+      "type": "Textbook",
+      "price": 15.0,
+      "price_range": "1 - 50",
+      "image": "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQqhI9p8-YkrJrMoVO5gH6EKl0NsvbIIhd-anIgBUUnlgkrNTI1HE2wCwKJg3l66nVC2z5gHLJmFVXYzK_ljO2Gs4J-jIvCAx9P3FqlgygqqkgU9ZWwZzmk&usqp=CAE",
+      "url": "http://www.bestbuy.com/site/3-year-unlimited-cloud-storage-service-activation-card-other/1696302.p?id=1219066776306&skuId=1696302&cmp=RMX&ky=1uWSHMdQqBeVJB9cXgEke60s5EjfS6M1W",
+      "free_shipping": true,
+      "popularity": 10000,
+      "rating": 2,
+      "objectID": "1696304"
+  },{
+      "name": "Campbell Biology 11th edition",
+      "description": "Lorem ipsum",
+      "brand": "dolor sit amet",
+      "categories": [
+        "Textbook",
+        "Second hand"
+      ],
+      "hierarchicalCategories": {
+        "lvl0": "Best Buy Gift Cards",
+        "lvl1": "Best Buy Gift Cards > Entertainment Gift Cards"
+      },
+      "type": "Textbook",
+      "price": 65.0,
+      "price_range": "1 - 100",
+      "image": "https://ebooksforclass.com/wp-content/uploads/2018/08/Campbell-Biology-11th-Edition-Cover.jpg",
+      "url": "http://www.bestbuy.com/site/3-year-unlimited-cloud-storage-service-activation-card-other/1696302.p?id=1219066776306&skuId=1696302&cmp=RMX&ky=1uWSHMdQqBeVJB9cXgEke60s5EjfS6M1W",
+      "free_shipping": true,
+      "popularity": 10000,
+      "rating": 2,
+      "objectID": "1696305"
+  },{
+      "name": "Foundations of College Chemistry, 15th Edition",
+      "description": "Lorem ipsum",
+      "brand": "dolor sit amet",
+      "categories": [
+        "Textbook",
+        "Second hand"
+      ],
+      "hierarchicalCategories": {
+        "lvl0": "Best Buy Gift Cards",
+        "lvl1": "Best Buy Gift Cards > Entertainment Gift Cards"
+      },
+      "type": "Textbook",
+      "price": 60.0,
+      "price_range": "1 - 70",
+      "image": "https://images-na.ssl-images-amazon.com/images/I/51DagM2pDkL.jpg",
+      "url": "http://www.bestbuy.com/site/3-year-unlimited-cloud-storage-service-activation-card-other/1696302.p?id=1219066776306&skuId=1696302&cmp=RMX&ky=1uWSHMdQqBeVJB9cXgEke60s5EjfS6M1W",
+      "free_shipping": true,
+      "popularity": 10000,
+      "rating": 2,
+      "objectID": "1696306"
+  },{
+      "name": "Think Python: How to Think Like a Computer Scientist edition 2",
+      "description": "Lorem ipsum",
+      "brand": "dolor sit amet",
+      "categories": [
+        "Textbook",
+        "Second hand"
+      ],
+      "hierarchicalCategories": {
+        "lvl0": "Best Buy Gift Cards",
+        "lvl1": "Best Buy Gift Cards > Entertainment Gift Cards"
+      },
+      "type": "Textbook",
+      "price": 30.0,
+      "price_range": "1 - 50",
+      "image": "https://books.google.com/books/content?id=mZwbCwAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&imgtk=AFLRE70xcXpv5gIcDPuwjhmUPXreZi0SrnH7sd3lCVMiX0z9kqtPILPRism8vKbBEIrHyi-Pnmj6dx72Denu4Lf5_Xwcw7mpxNPkNeeIHvnVVf6MhahrnAfbVukH-XFkgBlles1SsKOM",
+      "url": "http://www.bestbuy.com/site/3-year-unlimited-cloud-storage-service-activation-card-other/1696302.p?id=1219066776306&skuId=1696302&cmp=RMX&ky=1uWSHMdQqBeVJB9cXgEke60s5EjfS6M1W",
+      "free_shipping": true,
+      "popularity": 10000,
+      "rating": 2,
+      "objectID": "1696307"
+  },{
+      "name": "Materials Science of Polymers for Engineers 3E",
+      "description": "Lorem ipsum",
+      "brand": "dolor sit amet",
+      "categories": [
+        "Textbook",
+        "Second hand"
+      ],
+      "hierarchicalCategories": {
+        "lvl0": "Best Buy Gift Cards",
+        "lvl1": "Best Buy Gift Cards > Entertainment Gift Cards"
+      },
+      "type": "Textbook",
+      "price": 9999.0,
+      "price_range": "1 - 50",
+      "image": "https://images-na.ssl-images-amazon.com/images/I/41MK4NQ-hGL.jpg",
+      "url": "http://www.bestbuy.com/site/3-year-unlimited-cloud-storage-service-activation-card-other/1696302.p?id=1219066776306&skuId=1696302&cmp=RMX&ky=1uWSHMdQqBeVJB9cXgEke60s5EjfS6M1W",
+      "free_shipping": true,
+      "popularity": 10000,
+      "rating": 2,
+      "objectID": "1696308"
+  },{
+      "name": "Linear Algebra and its Applications 2nd Ed.",
+      "description": "Lorem ipsum",
+      "brand": "dolor sit amet",
+      "categories": [
+        "Textbook",
+        "Second hand"
+      ],
+      "hierarchicalCategories": {
+        "lvl0": "Best Buy Gift Cards",
+        "lvl1": "Best Buy Gift Cards > Entertainment Gift Cards"
+      },
+      "type": "Textbook",
+      "price": 420.0,
+      "price_range": "1 - 500",
+      "image": "http://t2.gstatic.com/images?q=tbn:ANd9GcQXSn6G1q-5Z9H0SSn49QoZv-Uh0agtJSLAbwkImcSz4OwtkNOD",
+      "url": "http://www.bestbuy.com/site/3-year-unlimited-cloud-storage-service-activation-card-other/1696302.p?id=1219066776306&skuId=1696302&cmp=RMX&ky=1uWSHMdQqBeVJB9cXgEke60s5EjfS6M1W",
+      "free_shipping": true,
+      "popularity": 10000,
+      "rating": 2,
+      "objectID": "1696309"
+  },{
+      "name": "Quantum Computing: From linear algebra to physical realizations",
+      "description": "Lorem ipsum",
+      "brand": "dolor sit amet",
+      "categories": [
+        "Textbook",
+        "Second hand"
+      ],
+      "hierarchicalCategories": {
+        "lvl0": "Best Buy Gift Cards",
+        "lvl1": "Best Buy Gift Cards > Entertainment Gift Cards"
+      },
+      "type": "Textbook",
+      "price": 69.69,
+      "price_range": "1 - 50",
+      "image": "https://prodimage.images-bn.com/pimages/9780750309837_p0_v1_s600x595.jpg",
+      "url": "http://www.bestbuy.com/site/3-year-unlimited-cloud-storage-service-activation-card-other/1696302.p?id=1219066776306&skuId=1696302&cmp=RMX&ky=1uWSHMdQqBeVJB9cXgEke60s5EjfS6M1W",
+      "free_shipping": true,
+      "popularity": 10000,
+      "rating": 2,
+      "objectID": "1696310"
+  },{
+      "name": "Introduction to classical mechanics with problems",
+      "description": "Lorem ipsum",
+      "brand": "dolor sit amet",
+      "categories": [
+        "Textbook",
+        "Second hand"
+      ],
+      "hierarchicalCategories": {
+        "lvl0": "Best Buy Gift Cards",
+        "lvl1": "Best Buy Gift Cards > Entertainment Gift Cards"
+      },
+      "type": "Textbook",
+      "price": 30.0,
+      "price_range": "1 - 50",
+      "image": "https://books.google.com/books/content?id=Ni6CD7K2X4MC&printsec=frontcover&img=1&zoom=5&edge=curl&imgtk=AFLRE70SFUmKwEfDxXuz8WywCDYcqtsB70DNArhOs9BBMsT1TPsJf2Hso2VymG6R4UKRQMQ6SR6N1kjeloJHeesTXzzIvwogZKnjgFzqZ_snzGQHNwdsGqsNn9Ih4iboChk9aHqGU0Qm",
+      "url": "http://www.bestbuy.com/site/3-year-unlimited-cloud-storage-service-activation-card-other/1696302.p?id=1219066776306&skuId=1696302&cmp=RMX&ky=1uWSHMdQqBeVJB9cXgEke60s5EjfS6M1W",
+      "free_shipping": true,
+      "popularity": 10000,
+      "rating": 2,
+      "objectID": "1696311"
+  },{
+    "name": "Oak House",
+    "address" : "120 Linden Avenue",
+    "seller" : "John Doe",
+    "price" : "$800/month",
+    "image": "http://www.matoulashouses.com/images/120_small.jpg",
+    "type" : "Housing"
+  },{
+    "name": "Ravenwood Apartments",
+    "address": "516 University Avenue",
+    "seller": "Samuel Lye",
+    "price": "$640/month",
+    "image": "https://d2cc5bro5bu049.cloudfront.net/62274/12286898/large.jpg",
+    "type" : "Housing"
+  },{
+    "name": "The Lux Cornell",
+    "address": "112 Summit Ave",
+    "seller": "Yu Yuxiang",
+    "price": "$1340/month",
+    "image": "https://photos.zillowstatic.com/p_c/IS2z3tkk6ecohg0000000000.jpg",
+    "type" : "Housing"
+  }, {
+    "name": "Collegetown Terrace Apartments",
+    "address": "115 Quarry St",
+    "seller": "Fabian Doe",
+    "price": "$1050/month",
+    "image": "http://collegetownterraceithaca.com/assets/photos/gallery/small/HP%203%20option%201.jpg",
+    "type" : "Housing"
+
+  }, {
+    "name": "Eddygate Park Apartments",
+    "address": "110 Dryden Rd",
+    "seller": "Charles Wu",
+    "price": "$850/month",
+    "image": "https://medialibrarycdn.entrata.com/media_library/3085/4e57f733039b5915.jpg",
+    "type": "Housing"
+
+  }
+]

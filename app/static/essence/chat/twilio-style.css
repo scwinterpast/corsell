@@ -1,0 +1,633 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600,700);.Twilio-DarkTheme {
+  /* Placeholder color for input area */
+}
+.Twilio-DarkTheme .Twilio-Channel {
+  background: #f3f3f3;
+}
+.Twilio-DarkTheme .Twilio-Channel-Main {
+  background: linear-gradient(to bottom, #000000, #3c3c3c);
+}
+.Twilio-DarkTheme .Twilio-Channel-InputTextArea {
+  background: #222222;
+  color: #ffffff;
+}
+.Twilio-DarkTheme .Twilio-Channel-Input {
+  background: #222222;
+}
+.Twilio-DarkTheme .Twilio-Channel-InputUpperLine {
+  background-color: #444444;
+}
+.Twilio-DarkTheme .Twilio-Channel-SendButton {
+  background-color: #222222;
+}
+.Twilio-DarkTheme .Twilio-Channel-SendButton svg {
+  fill: #ffffff;
+}
+.Twilio-DarkTheme .Twilio-Channel-ButtonOverlay {
+  background-color: #000000;
+}
+.Twilio-DarkTheme .Twilio-Channel-InputTextArea::-webkit-input-placeholder {
+  color: #999999;
+}
+.Twilio-DarkTheme .Twilio-Channel-InputTextArea:-moz-placeholder {
+  color: #999999;
+}
+.Twilio-DarkTheme .Twilio-Channel-InputTextArea::-moz-placeholder {
+  color: #999999;
+}
+.Twilio-DarkTheme .Twilio-Channel-InputTextArea:-ms-input-placeholder {
+  color: #999999;
+}
+.Twilio-DarkTheme .Twilio-ChatItem-Avatar {
+  background-color: #3a3a3a;
+}
+.Twilio-DarkTheme .Twilio-ChatItem-Avatar svg {
+  fill: #e8e8e8;
+}
+.Twilio-DarkTheme .Twilio-ChatItem-fromOthers .Twilio-ChatItem-AvatarLine {
+  background-color: #3a3a3a;
+}
+.Twilio-DarkTheme .Twilio-ChatItem-fromOthers .Twilio-ChatItem-Bubble {
+  background-color: #3a3a3a;
+}
+.Twilio-DarkTheme .Twilio-ChatItem-fromOthers .Twilio-ChatItem-Spike {
+  fill: #3a3a3a;
+}
+.Twilio-DarkTheme .Twilio-ChatItem-fromOthers .Twilio-ChatItem-Header p {
+  color: #cccccc;
+}
+.Twilio-DarkTheme .Twilio-ChatItem-fromOthers .Twilio-ChatItem-Body p {
+  color: #ffffff;
+}
+.Twilio-DarkTheme .Twilio-ChatItem-fromMe .Twilio-ChatItem-AvatarLine {
+  background-color: #555c61;
+}
+.Twilio-DarkTheme .Twilio-ChatItem-fromMe .Twilio-ChatItem-Bubble {
+  background-color: #555c61;
+}
+.Twilio-DarkTheme .Twilio-ChatItem-fromMe .Twilio-ChatItem-Spike {
+  fill: #555c61;
+}
+.Twilio-DarkTheme .Twilio-ChatItem-fromMe .Twilio-ChatItem-Header p {
+  color: #ffffff;
+}
+.Twilio-DarkTheme .Twilio-ChatItem-fromMe .Twilio-ChatItem-Body p {
+  color: #ffffff;
+}
+.Twilio-DarkTheme .Twilio-Chrome {
+  background-color: #222222;
+}
+.Twilio-DarkTheme .Twilio-Chrome-Close svg {
+  stroke: #ffffff;
+}
+.Twilio-DarkTheme .Twilio-ChannelHeader {
+  background: #222222;
+  border-bottom-width: 0px;
+}
+.Twilio-DarkTheme .Twilio-ChannelHeader-FirstLine {
+  color: #ffffff;
+}
+.Twilio-MessageList-TypingIndicator span {
+  color: #cccccc;
+}
+.Twilio-LightTheme {
+  /* Placeholder color for input area */
+}
+.Twilio-LightTheme .Twilio-Channel {
+  background: #f3f3f3;
+}
+.Twilio-LightTheme .Twilio-Channel-Main {
+  background: #ffffff;
+}
+.Twilio-LightTheme .Twilio-Channel-InputTextArea {
+  background: #f6f6f6;
+  color: #444444;
+}
+.Twilio-LightTheme .Twilio-Channel-Input {
+  background: #f6f6f6;
+}
+.Twilio-LightTheme .Twilio-Channel-InputUpperLine {
+  background-color: #e6e6e6;
+}
+.Twilio-LightTheme .Twilio-Channel-SendButton {
+  background-color: #f6f6f6;
+}
+.Twilio-LightTheme .Twilio-Channel-SendButton svg {
+  fill: #444444;
+}
+.Twilio-LightTheme .Twilio-Channel-ButtonOverlay {
+  background-color: #000000;
+}
+.Twilio-LightTheme .Twilio-Channel-InputTextArea::-webkit-input-placeholder {
+  color: #999999;
+}
+.Twilio-LightTheme .Twilio-Channel-InputTextArea:-moz-placeholder {
+  color: #999999;
+}
+.Twilio-LightTheme .Twilio-Channel-InputTextArea::-moz-placeholder {
+  color: #999999;
+}
+.Twilio-LightTheme .Twilio-Channel-InputTextArea:-ms-input-placeholder {
+  color: #999999;
+}
+.Twilio-LightTheme .Twilio-ChatItem-Avatar {
+  background-color: #ecf0f4;
+}
+.Twilio-LightTheme .Twilio-ChatItem-Avatar svg {
+  fill: #666666;
+}
+.Twilio-LightTheme .Twilio-ChatItem-fromOthers .Twilio-ChatItem-AvatarLine {
+  background-color: #ecf0f4;
+}
+.Twilio-LightTheme .Twilio-ChatItem-fromOthers .Twilio-ChatItem-Bubble {
+  background-color: #ecf0f4;
+}
+.Twilio-LightTheme .Twilio-ChatItem-fromOthers .Twilio-ChatItem-Spike {
+  fill: #ecf0f4;
+}
+.Twilio-LightTheme .Twilio-ChatItem-fromOthers .Twilio-ChatItem-Header p {
+  color: #666666;
+}
+.Twilio-LightTheme .Twilio-ChatItem-fromOthers .Twilio-ChatItem-Body p {
+  color: #222222;
+}
+.Twilio-LightTheme .Twilio-ChatItem-fromMe .Twilio-ChatItem-AvatarLine {
+  background-color: #ccd2d8;
+}
+.Twilio-LightTheme .Twilio-ChatItem-fromMe .Twilio-ChatItem-Bubble {
+  background-color: #ccd2d8;
+}
+.Twilio-LightTheme .Twilio-ChatItem-fromMe .Twilio-ChatItem-Spike {
+  fill: #ccd2d8;
+}
+.Twilio-LightTheme .Twilio-ChatItem-fromMe .Twilio-ChatItem-Header p {
+  color: #222222;
+}
+.Twilio-LightTheme .Twilio-ChatItem-fromMe .Twilio-ChatItem-Body p {
+  color: #222222;
+}
+.Twilio-LightTheme .Twilio-Chrome {
+  background-color: #ffffff;
+}
+.Twilio-LightTheme .Twilio-Chrome-Close svg {
+  stroke: #999999;
+}
+.Twilio-LightTheme .Twilio-ChannelHeader {
+  background: #ffffff;
+  border-bottom-width: 1px;
+}
+.Twilio-LightTheme .Twilio-ChannelHeader-FirstLine {
+  color: #222222;
+}
+.Twilio-MessageList-TypingIndicator span {
+  color: #666666;
+}
+.Twilio-MediumTheme {
+  /* Placeholder color for input area */
+}
+.Twilio-MediumTheme .Twilio-Channel {
+  background: #f3f3f3;
+}
+.Twilio-MediumTheme .Twilio-Channel-Main {
+  background: linear-gradient(to top, #f5f5f5, #ededed);
+}
+.Twilio-MediumTheme .Twilio-Channel-InputTextArea {
+  background: #ffffff;
+  color: #444444;
+}
+.Twilio-MediumTheme .Twilio-Channel-Input {
+  background: #ffffff;
+}
+.Twilio-MediumTheme .Twilio-Channel-InputUpperLine {
+  background-color: #cccccc;
+}
+.Twilio-MediumTheme .Twilio-Channel-SendButton {
+  background-color: #ffffff;
+}
+.Twilio-MediumTheme .Twilio-Channel-SendButton svg {
+  fill: #444444;
+}
+.Twilio-MediumTheme .Twilio-Channel-ButtonOverlay {
+  background-color: #000000;
+}
+.Twilio-MediumTheme .Twilio-Channel-InputTextArea::-webkit-input-placeholder {
+  color: #999999;
+}
+.Twilio-MediumTheme .Twilio-Channel-InputTextArea:-moz-placeholder {
+  color: #999999;
+}
+.Twilio-MediumTheme .Twilio-Channel-InputTextArea::-moz-placeholder {
+  color: #999999;
+}
+.Twilio-MediumTheme .Twilio-Channel-InputTextArea:-ms-input-placeholder {
+  color: #999999;
+}
+.Twilio-MediumTheme .Twilio-ChatItem-Avatar {
+  background-color: #ffffff;
+}
+.Twilio-MediumTheme .Twilio-ChatItem-Avatar svg {
+  fill: #666666;
+}
+.Twilio-MediumTheme .Twilio-ChatItem-fromOthers .Twilio-ChatItem-AvatarLine {
+  background-color: #ffffff;
+}
+.Twilio-MediumTheme .Twilio-ChatItem-fromOthers .Twilio-ChatItem-Bubble {
+  background-color: #ffffff;
+}
+.Twilio-MediumTheme .Twilio-ChatItem-fromOthers .Twilio-ChatItem-Spike {
+  fill: #ffffff;
+}
+.Twilio-MediumTheme .Twilio-ChatItem-fromOthers .Twilio-ChatItem-Header p {
+  color: #666666;
+}
+.Twilio-MediumTheme .Twilio-ChatItem-fromOthers .Twilio-ChatItem-Body p {
+  color: #444444;
+}
+.Twilio-MediumTheme .Twilio-ChatItem-fromMe .Twilio-ChatItem-AvatarLine {
+  background-color: #ccd2d8;
+}
+.Twilio-MediumTheme .Twilio-ChatItem-fromMe .Twilio-ChatItem-Bubble {
+  background-color: #ccd2d8;
+}
+.Twilio-MediumTheme .Twilio-ChatItem-fromMe .Twilio-ChatItem-Spike {
+  fill: #ccd2d8;
+}
+.Twilio-MediumTheme .Twilio-ChatItem-fromMe .Twilio-ChatItem-Header p {
+  color: #222222;
+}
+.Twilio-MediumTheme .Twilio-ChatItem-fromMe .Twilio-ChatItem-Body p {
+  color: #222222;
+}
+.Twilio-MediumTheme .Twilio-Chrome {
+  background-color: #ffffff;
+}
+.Twilio-MediumTheme .Twilio-Chrome-Close svg {
+  stroke: #999999;
+}
+.Twilio-MediumTheme .Twilio-ChannelHeader {
+  background: #ffffff;
+  border-bottom-width: 0px;
+}
+.Twilio-MediumTheme .Twilio-ChannelHeader-FirstLine {
+  color: #222222;
+}
+.Twilio-MessageList-TypingIndicator span {
+  color: #666666;
+}
+.Twilio-Channel {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  padding: 3px;
+  display: flex;
+  flex-direction: column;
+}
+.Twilio-Channel-Main {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  overflow: hidden;
+}
+.Twilio-Channel-MessageList {
+  display: flex;
+  margin-top: auto;
+  overflow: hidden;
+}
+.Twilio-Channel-InputUpperLine {
+  display: none;
+  height: 1px;
+  margin-left: 12px;
+  margin-right: 12px;
+}
+.Twilio-Channel-InputLowerArea {
+  display: flex;
+  flex-direction: row;
+  padding: 8px;
+}
+.Twilio-Channel-InputTextAreaContainer {
+  flex: 1 0 auto;
+  margin-right: 8px;
+}
+.Twilio-Channel-InputSendButtonContainer {
+  display: flex;
+}
+.Twilio-Channel-InputTextArea {
+  background: transparent;
+  max-height: 82px;
+  border: 0px;
+  display: block;
+  font-family: "Open Sans";
+  font-size: 13px;
+  width: 100%;
+  resize: none;
+  outline: none;
+  box-sizing: border-box;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+.Twilio-Channel-SendButton {
+  padding: 10px;
+  font-size: 18px;
+  border: none;
+  border-radius: 18px;
+  width: 36px;
+  height: 36px;
+  padding-left: 8px;
+  margin-left: auto;
+  margin-top: auto;
+  position: relative;
+}
+.Twilio-Channel-SendButton-Disabled .Twilio-Channel-ButtonOverlay {
+  display: none;
+}
+.Twilio-Channel-SendButton-Disabled svg {
+  opacity: 0.5;
+}
+.Twilio-Channel-ButtonOverlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  border-radius: inherit;
+}
+.Twilio-Channel-ButtonOverlay:hover {
+  opacity: 0.15;
+}
+.Twilio .Twilio-Channel-Input.Twilio-Channel-InputStyleBubble {
+  background: transparent;
+}
+.Twilio .Twilio-Channel-Input.Twilio-Channel-InputStyleBubble .Twilio-Channel-InputTextArea {
+  padding-left: 12px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-right: 8px;
+  border-radius: 18px;
+}
+.Twilio .Twilio-Channel-Input.Twilio-Channel-InputStyleRegular {
+  background: transparent;
+}
+.Twilio .Twilio-Channel-Input.Twilio-Channel-InputStyleRegular .Twilio-Channel-InputTextArea {
+  background: transparent;
+}
+.Twilio .Twilio-Channel-Input.Twilio-Channel-InputStyleRegular .Twilio-Channel-InputUpperLine {
+  display: block;
+}
+.Twilio .Twilio-Channel-Input.Twilio-Channel-InputStyleBoxed .Twilio-Channel-InputTextArea {
+  background: transparent;
+}
+.Twilio-ChannelHeader {
+  display: flex;
+  flex: 0 0 auto;
+  border-bottom-style: solid;
+  border-bottom-color: #e6e6e6;
+  border-bottom-width: 1px;
+}
+.Twilio-ChannelHeader-Container {
+  height: 52px;
+  width: 100%;
+}
+.Twilio-ChannelHeader-Logo {
+  display: flex;
+  margin-left: 8px;
+  margin-right: 0;
+  margin-top: auto;
+  margin-bottom: auto;
+  padding: 0;
+}
+.Twilio-ChannelHeader-LogoImage {
+  max-height: 50px;
+  margin: auto;
+}
+.Twilio-ChannelHeader-Content {
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 12px;
+  margin-right: 12px;
+  flex: 0 1 auto;
+  overflow: hidden;
+}
+.Twilio-ChannelHeader-FirstLine {
+  clear: both;
+  color: #222222;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: "Open Sans";
+  font-size: 16px;
+}
+.Twilio-MessageList-Container {
+  overflow-y: scroll;
+  -ms-box-orient: horizontal;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -moz-flex;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-flow: row wrap;
+  flex-flow: row wrap;
+  flex-grow: 1;
+}
+.Twilio-MessageList-TypingIndicator {
+  height: 28px;
+  flex-shrink: 0;
+  display: flex;
+}
+.Twilio-MessageList-TypingIndicator span {
+  font-family: "Open Sans";
+  font-size: 10px;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 12px;
+  margin-right: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.Twilio-ChatItem {
+  flex: 1 1 100%;
+  display: flex;
+  margin-bottom: 20px;
+  margin-top: 0px;
+  overflow-wrap: break-word;
+  overflow-x: hidden;
+}
+.Twilio-ChatItem.Twilio-ChatItem-GroupWithNext {
+  margin-bottom: 4px;
+}
+.Twilio-ChatItem.Twilio-ChatItem-LastMessage {
+  margin-bottom: 0px;
+}
+.Twilio-ChatItem.Twilio-ChatItem-GroupWithPrevious .Twilio-ChatItem-Avatar {
+  display: none;
+}
+.Twilio-ChatItem-fromMe {
+  justify-content: space-between;
+}
+.Twilio-ChatItem-fromMe .Twilio-ChatItem-BubbleContainer {
+  margin-left: 44px;
+  margin-right: 12px;
+}
+.Twilio-ChatItem-fromMe .Twilio-ChatItem-Spike {
+  align-self: flex-end;
+}
+.Twilio-ChatItem-fromMe .Twilio-ChatItem-Avatar {
+  display: none;
+}
+.Twilio-ChatItem-fromOthers .Twilio-ChatItem-BubbleContainer {
+  margin-left: 0px;
+  margin-right: 44px;
+}
+.Twilio-ChatItem-AvatarContainer {
+  flex: 0 0 52px;
+  font-size: 18px;
+  vertical-align: top;
+}
+.Twilio-ChatItem-Avatar {
+  text-align: center;
+  width: 36px;
+  height: 36px;
+  margin-left: 8px;
+  margin-right: 8px;
+  border-radius: 18px;
+  overflow: hidden;
+}
+.Twilio-ChatItem-Avatar svg {
+  margin-top: 8px;
+}
+.Twilio-ChatItem-Avatar img {
+  width: 36px;
+  height: 36px;
+}
+.Twilio-ChatItem-AvatarLine {
+  width: 4px;
+  height: 100%;
+  margin-left: 12px;
+  margin-right: 0px;
+}
+.Twilio-ChatItem-BubbleContainer {
+  display: flex;
+  flex-direction: column;
+  max-width: 440px;
+  min-width: 100px;
+  overflow-x: hidden;
+}
+.Twilio-ChatItem-BubbleContainer p {
+  margin: 0;
+}
+.Twilio-ChatItem-Bubble {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  border-radius: 4px;
+  overflow-x: hidden;
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-top: 5px;
+  padding-bottom: 8px;
+}
+.Twilio-ChatItem-Header {
+  display: flex;
+  justify-content: space-between;
+}
+.Twilio-ChatItem-Header p {
+  font-family: "Open Sans";
+  font-size: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.Twilio-ChatItem-UserName {
+  flex: 0 1 auto;
+  margin-right: 8px;
+  overflow: hidden;
+}
+.Twilio-ChatItem-UserName p {
+  font-family: "Open Sans";
+  font-size: 10px;
+  font-weight: bold;
+}
+.Twilio-ChatItem-Time {
+  flex: 0 0 auto;
+  text-align: right;
+}
+.Twilio-ChatItem-Time p {
+  font-family: "Open Sans";
+  font-size: 10px;
+}
+.Twilio-ChatItem-Body {
+  margin-top: 3px;
+}
+.Twilio-ChatItem-Body p {
+  font-family: "Open Sans";
+  font-size: 13px;
+  line-height: 1.54;
+}
+.Twilio-ChatItem-Body a {
+  color: inherit;
+  text-decoration: initial;
+}
+.Twilio-ChatItem-Body a:hover {
+  text-decoration: underline;
+}
+.Twilio .Twilio-ChatItem.Twilio-ChatItem-SquareBubbles {
+  margin-bottom: 4px;
+}
+.Twilio .Twilio-ChatItem.Twilio-ChatItem-SquareBubbles .Twilio-ChatItem-Avatar {
+  border-radius: 0px;
+}
+.Twilio .Twilio-ChatItem.Twilio-ChatItem-SquareBubbles .Twilio-ChatItem-Bubble {
+  border-radius: 0px;
+}
+.Twilio .Twilio-ChatItem.Twilio-ChatItem-MinimalBubbles {
+  justify-content: flex-start;
+  margin-bottom: 24px;
+}
+.Twilio .Twilio-ChatItem.Twilio-ChatItem-MinimalBubbles .Twilio-ChatItem-AvatarContainer {
+  flex: 0 0 auto;
+}
+.Twilio .Twilio-ChatItem.Twilio-ChatItem-MinimalBubbles .Twilio-ChatItem-Header {
+  justify-content: flex-start;
+  margin-top: 0px;
+}
+.Twilio .Twilio-ChatItem.Twilio-ChatItem-MinimalBubbles .Twilio-ChatItem-UserName {
+  font-weight: 600;
+}
+.Twilio .Twilio-ChatItem.Twilio-ChatItem-MinimalBubbles .Twilio-ChatItem-BubbleContainer {
+  margin-left: 0px;
+  margin-right: 8px;
+}
+.Twilio .Twilio-ChatItem.Twilio-ChatItem-MinimalBubbles .Twilio-ChatItem-Bubble {
+  background-color: transparent;
+}
+.Twilio .Twilio-ChatItem.Twilio-ChatItem-MinimalBubbles .Twilio-ChatItem-Body {
+  margin-top: 2px;
+  margin-left: 0px;
+  margin-bottom: 0px;
+  margin-right: 17px;
+}
+.Twilio-Chrome {
+  background-color: #ffffff;
+  height: 24px;
+}
+.Twilio-Chrome-Close {
+  text-align: center;
+  width: 24px;
+  height: 24px;
+  float: right;
+}
+.Twilio-Chrome-Close svg {
+  stroke: #666;
+  margin-top: 7px;
+  width: 9px;
+  height: 9px;
+}
+
+/*# sourceMappingURL=twilio-style.css.map*/

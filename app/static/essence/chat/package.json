@@ -1,0 +1,36 @@
+{
+	"name": "template-chat",
+	"version": "0.0.1",
+	"description": "A template project for Twilio Programmable Chat",
+	"main": "server.js",
+	"scripts": {
+		"test": "mocha",
+		"start": "node server.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/abhijitmehta/template-node.git"
+	},
+	"keywords": [
+		"twilio",
+		"node",
+		"template"
+	],
+	"author": "Abhijit Mehta",
+	"license": "MIT",
+	"bugs": {
+		"url": " https://github.com/abhijitmehta/template-node/issues"
+	},
+	"homepage": "https://github.com/abhijitmehta/template-node",
+	"dependencies": {
+		"express": "^4.15.2",
+		"facebook-login-vuejs": "*",
+		"twilio": "^2.11.1",
+		"uniqid": "^5.0.3"
+	},
+	"devDependencies": {
+		"mocha": "^1.20.1",
+		"chai": "^1.9.1",
+		"request": "^2.37.0"
+	}
+}

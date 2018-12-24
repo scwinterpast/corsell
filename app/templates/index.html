@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+{% block header %}
+  {% if user %}
+    <h1>Hello, {{ user.username }}!</h1>
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+<!-- ##### Welcome Area Start ##### -->
+<section class="welcome_area bg-img background-overlay" style="background-image: url(static/essence/img/bg-img/cornell.jpg)">
+    <div class="container h-100">
+        <div class="row h-100 align-items-center">
+            <div class="col-12">
+                <div class="hero-content">
+                  <style>
+                    h1 {
+                      font-size: 100px;
+                      font-family: 'Oleo Script', cursive;
+                      margin-bottom: 20px;
+                      line-height: 105px;
+                      color: #B3001B;
+                    }
+                  </style>
+                  <style>
+                  h2 {
+                    font-family: 'Karla', sans-serif;
+                    font-weight: 300;
+                    font-size: 30px;
+                    line-height: 40px;
+                    letter-spacing: 5px;
+                    color: #fff !important
+                  }
+                  </style>
+                  <center><br><h1 style="font-size:15vw">Corsell</h1></center>
+                  <center><br><h2><font size="6">Any Person, Any Product</h2></center>
+
+                    <center><a href="shop.html" class="btn essence-btn">Start Shopping</a></center>
+                    <center><a href="login.html" class="btn essence-btn">Start Selling</a></center>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ##### Welcome Area End ##### -->
+
+<!-- ##### Top Catagory Area Start ##### -->
+<div class="top_catagory_area section-padding-80 clearfix">
+    <div class="container">
+        <div class="row justify-content-center">
+            <!-- Single Catagory -->
+            <div class="col-12 col-sm-6 col-md-6">
+                <div class="single_catagory_area d-flex align-items-center justify-content-center bg-img" style="background-image: url(static/essence/img/bg-img/clothes.jpg);">
+                    <div class="catagory-content">
+                        <a href="shop.html?type=Clothing">Clothing</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Single Catagory -->
+            <div class="col-12 col-sm-6 col-md-6">
+                <div class="single_catagory_area d-flex align-items-center justify-content-center bg-img" style="background-image: url(static/essence/img/bg-img/education.jpg);">
+                    <div class="catagory-content">
+                        <a href="shop.html?type=Textbook">Education</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Single Catagory -->
+            <div class="col-12 col-sm-6 col-md-6">
+                <div class="single_catagory_area d-flex align-items-center justify-content-center bg-img" style="background-image: url(static/essence/img/bg-img/living.jpg);">
+                    <div class="catagory-content">
+                        <a href="shop.html?type=Living">Living</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Single Catagory -->
+            <div class="col-12 col-sm-6 col-md-6">
+                <div class="single_catagory_area d-flex align-items-center justify-content-center bg-img" style="background-image: url(static/essence/img/bg-img/housing.jpg);">
+                    <div class="catagory-content">
+                        <a href="shop.html?type=Housing">Housing</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ##### Top Catagory Area End ##### -->
+{% endblock %}
