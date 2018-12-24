@@ -51,7 +51,7 @@ class LoginForm(FlaskForm):
     Length(min=8,max=30)])
     remember = BooleanField('Remember me')
     submit = SubmitField('Login')
-    # 
+
     # def validate_username(self, username):
     #     user = User.query.filter_by(username=username.data).first()
     #     if user is None:
