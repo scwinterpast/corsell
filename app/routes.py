@@ -9,7 +9,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug.utils import secure_filename
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from flask_sqlalchemy  import SQLAlchemy
-from app.models import User, Post
+from app.models import User, Post, Image
 from app.forms import LoginForm, RegisterForm, UploadForm
 from app import db
 
@@ -78,10 +78,7 @@ def logout():
 @login_required
 def user(username):
     user = User.query.filter_by(username=username).first_or_404()
-    posts = [
-        {'author': user, 'body': 'Test post #1'},
-        {'author': user, 'body': 'Test post #2'}
-    ]
+    posts = Post.query.filter_by(user_id=user.id).all()
     return render_template('user.html', user=user, posts=posts)
 
 
@@ -94,25 +91,30 @@ def upload():
     form = UploadForm()
     if form.validate_on_submit():
         folder_name = str(current_user.username)
-
-
         target = os.path.join(STATIC_ROOT, 'uploads/{}'.format(folder_name))
         if not os.path.isdir(target):
             os.mkdir(target)
 
-        f = form.photo.data
-        filename = secure_filename(f.filename)
-        destination = "/".join([target, filename])
-        f.save(destination)
-
-        #For flexibility across differnt computers
-        i = destination.find('/static/uploads')
-        final_destination = destination[i:]
-
         p = Post(title=form.title.data, description=form.description.data,\
-        price=form.price.data, photos=final_destination, author=current_user)
+        price=form.price.data, author=current_user)
         db.session.add(p)
         db.session.commit()
+        print('posted!')
+
+        for f in request.files.getlist('photo'):
+            filename = secure_filename(f.filename)
+            destination = "/".join([target, filename])
+            f.save(destination)
+
+            #For flexibility across differnt computers
+            i = destination.find('/static/uploads')
+            final_destination = destination[i:]
+
+            post = Post.query.filter_by(author=current_user, title=form.title.data).first()
+            i = Image(link=final_destination,user_id=post.id)
+            db.session.add(i)
+            db.session.commit()
+
         return redirect(url_for('user', username=current_user.username))
 
     return render_template('upload.html', form=form)

@@ -31,16 +31,26 @@ class User( UserMixin, db.Model):
     #         digest, size)
 
 class Post(db.Model):
+    __tablename__ = 'posts'
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(140))
     description = db.Column(db.String(140))
     price = db.Column(db.Integer)
-    photos = db.Column(db.String())
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    photos = db.relationship('Image', backref='listing', lazy='dynamic')
 
     def __repr__(self):
         return '<Post {}>'.format(self.title)
+
+class Image(db.Model):
+    __tablename__ = 'images'
+    id = db.Column(db.Integer, primary_key=True)
+    link = db.Column(db.String())
+    user_id = db.Column(db.Integer, db.ForeignKey('posts.id'))
+
+    def __repr__(self):
+        return '<Image {}>'.format(self.link)
 
 @login.user_loader
 def load_user(id):

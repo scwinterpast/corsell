@@ -8,8 +8,7 @@ try:
 except ImportError:
     from flask_wtf import Form as FlaskForm     # Fallback to Flask-WTF v0.12 or older
 from werkzeug.security import check_password_hash, generate_password_hash
-from werkzeug.security import generate_password_hash, check_password_hash
-from wtforms import BooleanField, HiddenField, PasswordField, SubmitField, StringField
+from wtforms import BooleanField, HiddenField, PasswordField, SubmitField, StringField, TextAreaField
 from wtforms import ValidationError
 from wtforms.validators import DataRequired, InputRequired, Email, Length, EqualTo
 from flask_wtf.file import FileField, FileRequired, FileAllowed
@@ -54,10 +53,10 @@ class LoginForm(FlaskForm):
 
 class UploadForm(FlaskForm):
     """Upload Form"""
-    title = StringField('Item Name', validators=[DataRequired(message='Item Name is required')])
-    description = StringField('Description', validators=[DataRequired(message='Description is required')])
+    title = StringField('Title', validators=[DataRequired(message='Item Name is required')])
+    description = TextAreaField('Description', validators=[DataRequired(message='Description is required')])
     price = StringField('Price', validators=[DataRequired(message='Price is required')])
-    photo = FileField('image', validators=[FileRequired(),FileAllowed(['jpg', 'png','jpeg'], 'Images only!')])
+    photo = FileField('Image', validators=[FileRequired(),FileAllowed(['jpg', 'png','jpeg'], 'Images only!')])
 
     # def validate_username(self, username):
     #     user = User.query.filter_by(username=username.data).first()

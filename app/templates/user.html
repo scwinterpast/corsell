@@ -76,11 +76,12 @@
       bottom: 0;
       right: 0;
       margin: auto;
-      background: #3DC0F1 url(img/link.png) no-repeat center 20%;
+      background: #ea1142 url(img/link.png) no-repeat center 20%;
       background-size:50px 50px;
       opacity:0;
       filter:alpha(opacity=0);/*For IE6 - IE8*/
       transition:all 0.6s;
+      z-index: 999
   }
   #rig li:hover .rig-overlay {
       opacity:0.8;
@@ -106,6 +107,7 @@
       filter:alpha(opacity=0);/*For older IE*/
       transform:translateY(-20px);
       transition:all .3s;
+      z-index: 999
   }
   #rig li:hover .rig-text {
       transform:translateY(0px);
@@ -131,12 +133,20 @@
   }
   </style>
   <ul id="rig">
-    {% for post in user.posts %}
+    {% for post in posts %}
     <li>
         <a class="rig-cell" href="#">
-            <img class="rig-img" src={{post.photos}}>
-            <span class="rig-overlay"></span>
-            <span class="rig-text">{{ post.title }}</span>
+          <span class="rig-overlay"></span>
+          <span class="rig-text">{{ post.title }}</span>
+
+          <div class="single_product_thumb clearfix">
+              <div class="product_thumbnail_slides owl-carousel">
+                {% for img in post.photos %}
+                  <img class="rig-img" src="{{ img.link }}" alt="">
+                {% endfor %}
+              </div>
+          </div>
+
         </a>
     </li>
     {% endfor %}
