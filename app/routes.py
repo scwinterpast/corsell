@@ -83,7 +83,6 @@ ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
 @app.route('/user/<username>')
 @login_required
-
 def allowed_file(filename):
     return '.' in filename and \
         filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -104,6 +103,7 @@ def upload():
             flash('No selected file')
             return redirect(request.url)
         if file and allowed_file(file.filename):
+            p = Post()
             filename = secure_filename(file.filename)
             flash('file {} saved'.format(file.filename))
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))

@@ -37,7 +37,7 @@
 			<div class="wrap-login100 p-l-110 p-r-110 p-t-33 p-b-33">
 				<div class="login100-form validate-form flex-sb flex-w">
 					<span class="login100-form-title p-b-53">
-						Login to Corsell
+						Upload your item
 					</span>
 					<div class="container">
 			      		<form class="form-signin" method="POST">
@@ -54,19 +54,9 @@
   								{% for error in form.Price.errors %}
   								<span style="color: red;">[{{ error }}]</span>
   								{% endfor %}
-          	<button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+          	<button class="btn btn-lg btn-primary btn-block" type="submit">Upload</button>
 			   			</form>
 			    	</div> <!-- /container -->
-
-					<div class="w-full text-center p-t-55">
-						<span class="txt2">
-							Not a member?
-						</span>
-
-						<a class="txt2 bo1" href="{{ url_for('register') }}">
-							Sign up now
-						</a>
-					</div>
 				</div>
 			</div>
 		</div>

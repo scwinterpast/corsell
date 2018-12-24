@@ -2,10 +2,12 @@
 {% block title %}{{ user.username }}{% endblock %}
 
 {% block content %}
-
+<head>
+  <link rel="stylesheet" href="/static/essence/css/imagehover.css">
+</head>
   <!-- header content section -->
-  <section id="hero" class="section ">
-    <div class="container">
+  <section>
+    <div class="container h-100">
       <div class="row">
         <div class="col-md-7 col-sm-6 hero">
           <div class="hero-content">
@@ -15,76 +17,130 @@
         </div>
         <div class="col-md-5 col-sm-6 hero">
           <div class="hero-content">
-            <p>FREE Bootstrap v3.3.5 frame work base minimal portfolio template for presonal use and creative agency.</p>
+            <p>Your listings</p>
           </div>
           <!-- hero -->
         </div>
       </div>
     </div>
   </section>
-  <!-- header content section -->
-  <!-- portfolio grid section -->
-  <section id="portfolio">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12 text-center">
-          <hr class="section">
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-6 portfolio-item"> <a href="/static/profile/work-details.html" class="portfolio-link">
-          <div class="caption">
-            <div class="caption-content">
-              <h3>The Shape of Design</h3>
-              <h4>Branding/Graphic</h4>
-            </div>
-          </div>
-          <img src="/static/profile/images/portfolio/work-1.jpg" class="img-responsive" alt=""> </a> </div>
-        <div class="col-sm-6 portfolio-item"> <a href="/static/profile/work-details.html" class="portfolio-link">
-          <div class="caption">
-            <div class="caption-content">
-              <h3>czarna kawka</h3>
-              <h4>Branding</h4>
-            </div>
-          </div>
-          <img src="/static/profile/images/portfolio/work-2.jpg" class="img-responsive" alt=""> </a> </div>
-        <div class="col-sm-6 portfolio-item"> <a href="/static/profile/work-details.html" class="portfolio-link">
-          <div class="caption">
-            <div class="caption-content">
-              <h3>czarna kawka</h3>
-              <h4>Branding</h4>
-            </div>
-          </div>
-          <img src="/static/profile/images/portfolio/work-3.jpg" class="img-responsive" alt=""> </a> </div>
-        <div class="col-sm-6 portfolio-item"> <a href="/static/profile/work-details.html" class="portfolio-link">
-          <div class="caption">
-            <div class="caption-content">
-              <h3>czarna kawka</h3>
-              <h4>Branding</h4>
-            </div>
-          </div>
-          <img src="/static/profile/images/portfolio/work-4.jpg" class="img-responsive" alt=""> </a> </div>
-        <div class="col-sm-6 portfolio-item"> <a href="/static/profile/work-details.html" class="portfolio-link">
-          <div class="caption">
-            <div class="caption-content">
-              <h3>czarna kawka</h3>
-              <h4>Branding</h4>
-            </div>
-          </div>
-          <img src="/static/profile/images/portfolio/work-5.jpg" class="img-responsive" alt=""> </a> </div>
-        <div class="col-sm-6 portfolio-item"> <a href="/static/profile/work-details.html" class="portfolio-link">
-          <div class="caption">
-            <div class="caption-content">
-              <h3>czarna kawka</h3>
-              <h4>Branding</h4>
-            </div>
-          </div>
-          <img src="images/portfolio/work-6.jpg" class="img-responsive" alt=""> </a> </div>
-      </div>
-    </div>
-  </section>
-  <!-- portfolio grid section -->
+  <div class="top_catagory_area section-padding-80 clearfix">
 
+<style>
+  #rig {
+      max-width:900px;
+      margin:0 auto; /*center aligned*/
+      padding:0;
+      font-size:0; /* Remember to change it back to normal font size if have captions */
+      list-style:none;
+  }
+  #rig li {
+      display: inline-block;
+      *display:inline;/*for IE6 - IE7*/
+      width:25%;
+      vertical-align:middle;
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
+  }
+
+  /* The wrapper for each item */
+  .rig-cell {
+      /*margin:12px;
+      box-shadow:0 0 6px rgba(0,0,0,0.3);*/
+      display:block;
+      position: relative;
+      overflow:hidden;
+  }
+
+  /* If have the image layer */
+  .rig-img {
+      display:block;
+      width: 100%;
+      height: auto;
+      border:none;
+      transform:scale(1);
+      transition:all 1s;
+  }
+
+  #rig li:hover .rig-img {
+      transform:scale(1.05);
+  }
+
+  /* If have the overlay layer */
+  .rig-overlay {
+      position: absolute;
+      display:block;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      margin: auto;
+      background: #3DC0F1 url(img/link.png) no-repeat center 20%;
+      background-size:50px 50px;
+      opacity:0;
+      filter:alpha(opacity=0);/*For IE6 - IE8*/
+      transition:all 0.6s;
+  }
+  #rig li:hover .rig-overlay {
+      opacity:0.8;
+  }
+
+  /* If have captions */
+  .rig-text {
+      display:block;
+      padding:0 30px;
+      box-sizing:border-box;
+      position:absolute;
+      left:0;
+      width:100%;
+      text-align:center;
+      text-transform:capitalize;
+      font-size:18px;
+      font-weight:bold;
+      font-family: 'Oswald', sans-serif;
+      font-weight:normal!important;
+      top:40%;
+      color:white;
+      opacity:0;
+      filter:alpha(opacity=0);/*For older IE*/
+      transform:translateY(-20px);
+      transition:all .3s;
+  }
+  #rig li:hover .rig-text {
+      transform:translateY(0px);
+      opacity:0.9;
+  }
+
+  @media (max-width: 9000px) {
+      #rig li {
+          width:25%;
+      }
+  }
+
+  @media (max-width: 700px) {
+      #rig li {
+          width:33.33%;
+      }
+  }
+
+  @media (max-width: 550px) {
+      #rig li {
+          width:50%;
+      }
+  }
+  </style>
+
+  <ul id="rig">
+    <li>
+        <a class="rig-cell" href="#">
+            <img class="rig-img" src="/static/profile/images/portfolio/work-1.jpg">
+            <span class="rig-overlay"></span>
+            <span class="rig-text">Lorem Ipsum Dolor</span>
+        </a>
+    </li>
+</ul>
+</div>
 
     <!-- <h1>User: {{ user.username }}</h1>
     <h1> HI </h1>
