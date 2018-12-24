@@ -9,7 +9,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from flask_sqlalchemy  import SQLAlchemy
 from app.models import User
-from app.forms import LoginForm, RegisterForm
+from app.forms import LoginForm, RegisterForm, UploadForm
 from app import db
 
 #HOME PAGE
@@ -88,8 +88,10 @@ def allowed_file(filename):
     return '.' in filename and \
         filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-@app.route('/', methods=['GET', 'POST'])
-def upload_file():
+@app.route('/upload', methods=['GET', 'POST'])
+@login_required
+def upload():
+    form = UploadForm()
     if request.method == 'POST':
         # check if the post request has the file part
         if 'file' not in request.files:
@@ -105,13 +107,6 @@ def upload_file():
             filename = secure_filename(file.filename)
             flash('file {} saved'.format(file.filename))
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return redirect('/')
-    return '''
-    <!doctype html>
-    <title>Upload new File</title>
-    <h1>Upload new File</h1>
-    <form method=post enctype=multipart/form-data>
-      <input type=file name=file>
-      <input type=submit value=Upload>
-    </form>
-    '''
+            return redirect(url_for('index'))
+        return render_template('upload.html')
+    return render_template('upload.html', form=form)
