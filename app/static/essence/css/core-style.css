@@ -253,6 +253,7 @@ img {
   transition-duration: 500ms; }
   @media only screen and (max-width: 767px) {
     .header_area .classy-nav-container {
+      margin-top: 20px;
       -ms-flex-wrap: wrap;
       flex-wrap: wrap; } }
   @media only screen and (max-width: 767px) {

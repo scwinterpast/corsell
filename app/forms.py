@@ -7,7 +7,8 @@ try:
     from flask_wtf import FlaskForm             # Try Flask-WTF v0.13+
 except ImportError:
     from flask_wtf import Form as FlaskForm     # Fallback to Flask-WTF v0.12 or older
-
+from werkzeug.security import check_password_hash, generate_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 from wtforms import BooleanField, HiddenField, PasswordField, SubmitField, StringField
 from wtforms import ValidationError
 from wtforms.validators import DataRequired, InputRequired, Email, Length, EqualTo
@@ -45,10 +46,8 @@ class RegisterForm(FlaskForm):
 
 class LoginForm(FlaskForm):
     """Login form."""
-    username = StringField('Username', validators=[InputRequired('Username is required'),\
-    Length(min=4,max=15)])
-    password = PasswordField('Password', validators=[InputRequired('Password is required'),\
-    Length(min=8,max=30)])
+    username = StringField('Username', validators=[DataRequired(message='Username is required')])
+    password = PasswordField('Password', validators=[DataRequired(message='Password is required')])
     remember = BooleanField('Remember me')
     submit = SubmitField('Login')
     # 
@@ -56,3 +55,9 @@ class LoginForm(FlaskForm):
     #     user = User.query.filter_by(username=username.data).first()
     #     if user is None:
     #         raise ValidationError('Username not registered.')
+    #     if user is not None and
+    #
+    # def validate_password(self, username, password):
+    #     user = User.query.filter_by(username=username.data).first()
+    #     if not user.check_password(password.data):
+    #         raise ValidationError('Incorrect password.')
