@@ -1,6 +1,7 @@
 import string
 from flask import current_app
 from flask_login import current_user
+"henlo"
 
 # Flask-WTF v0.13 renamed Flask to FlaskForm
 try:
@@ -50,7 +51,7 @@ class LoginForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired(message='Password is required')])
     remember = BooleanField('Remember me')
     submit = SubmitField('Login')
-    # 
+
     # def validate_username(self, username):
     #     user = User.query.filter_by(username=username.data).first()
     #     if user is None:
