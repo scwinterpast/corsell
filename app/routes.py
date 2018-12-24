@@ -23,18 +23,6 @@ def index():
 def aboutus():
     return render_template('aboutus.html')
 
-#UPLOAD
-@app.route('/upload', methods=['POST'])
-# @login_required
-def upload_file():
-    file = request.files['image']
-    f = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
-
-    # add your custom code to check that the uploaded file is a valid image and not a malicious file (out-of-scope for this post)
-    file.save(f)
-
-    return render_template('index.html')
-
 #LOGIN
 @app.route('/login', methods=['GET', 'POST'])
 def login():

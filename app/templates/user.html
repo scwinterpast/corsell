@@ -2,14 +2,6 @@
 {% block title %}{{ user.username }}{% endblock %}
 
 {% block content %}
-<link rel="stylesheet" href="/static/profile/css/bootstrap.min.css">
-<link rel="stylesheet" href="/static/profile/css/flexslider.css">
-<link rel="stylesheet" href="/static/profile/css/jquery.fancybox.css">
-<link rel="stylesheet" href="/static/profile/css/main.css">
-<link rel="stylesheet" href="/static/profile/css/responsive.css">
-<link rel="stylesheet" href="/static/profile/css/animate.min.css">
-<link rel="stylesheet" href="/static/profile/css/font-icon.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/static/profile/css/font-awesome.min.css">
 
   <!-- header content section -->
   <section id="hero" class="section ">
@@ -17,7 +9,7 @@
       <div class="row">
         <div class="col-md-7 col-sm-6 hero">
           <div class="hero-content">
-            <h1>Mordern, Minimal & Inspiring.</h1>
+            <h1>{{ user.username }}</h1>
           </div>
           <!-- hero -->
         </div>
@@ -92,35 +84,7 @@
     </div>
   </section>
   <!-- portfolio grid section -->
-  <!-- service section -->
-  <section id="service" class="service section">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-5 col-sm-6">
-          <h4>We're expert to create beautiful design & smart technology</h4>
-          <p>Nullam at enim mauris. Donec et nunc ipsum. Suspendi tempus fringilla ipsu Cras metus euismod velit gravida at nunc ipsum.</p>
-        </div>
-        <div class="col-md-7 col-sm-6">
-          <div class="col-md-4 col-sm-6 service text-center"> <span class="icon icon-browser"></span>
-            <div class="service-content">
-              <h5>Web & Mobile</h5>
-            </div>
-          </div>
-          <div class="col-md-4 col-sm-6 service text-center"> <span class="icon icon-trophy"></span>
-            <div class="service-content">
-              <h5>Branding</h5>
-            </div>
-          </div>
-          <div class="col-md-4 col-sm-6 service text-center"> <span class="icon icon-megaphone"></span>
-            <div class="service-content">
-              <h5>Digital Marketing</h5>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- service section -->
+
 
     <!-- <h1>User: {{ user.username }}</h1>
     <h1> HI </h1>
@@ -131,10 +95,4 @@
     </p>
     {% endfor %} -->
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/static/profile/jquery.min.js"></script>
-    <script src="/static/profile/js/bootstrap.min.js"></script>
-    <script src="/static/profile/js/jquery.fancybox.pack.js"></script>
-    <script src="/static/profile/js/retina.min.js"></script>
-    <script src="/static/profile/js/modernizr.js"></script>
-    <script src="/static/profile/js/main.js"></script>
 {% endblock %}

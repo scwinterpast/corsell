@@ -42,16 +42,19 @@
 					<div class="container">
 			      		<form class="form-signin" method="POST">
 							{{ form.hidden_tag() }}
-							{{ wtf.form_field(form.username) }}
-								{% for error in form.username.errors %}
+							{{ wtf.form_field(form.ItemName) }}
+								{% for error in form.ItemName.errors %}
 								<span style="color: red;">[{{ error }}]</span>
 								{% endfor %}
-							{{ wtf.form_field(form.password) }}
-								{% for error in form.password.errors %}
+							{{ wtf.form_field(form.Description) }}
+								{% for error in form.Description.errors %}
 								<span style="color: red;">[{{ error }}]</span>
 								{% endfor %}
-							{{wtf.form_field(form.remember)}}
-							<button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+                {{ wtf.form_field(form.Price) }}
+  								{% for error in form.Price.errors %}
+  								<span style="color: red;">[{{ error }}]</span>
+  								{% endfor %}
+          	<button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
 			   			</form>
 			    	</div> <!-- /container -->
 
