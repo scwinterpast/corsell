@@ -13,16 +13,19 @@ from app.models import User, Post
 from app.forms import LoginForm, RegisterForm, UploadForm
 from app import db
 
+
 #HOME PAGE
 @app.route('/')
 # @login_required #add login view to base.html
 def index():
     return render_template('index.html')
 
+
 #ABOUT US
 @app.route('/aboutus')
 def aboutus():
     return render_template('aboutus.html')
+
 
 #LOGIN
 @app.route('/login', methods=['GET', 'POST'])
@@ -45,6 +48,7 @@ def login():
         return redirect(url_for('index'))
     return render_template('login.html', form=form)
 
+
 #REGISTER
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -61,11 +65,13 @@ def register():
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
 
+
 #LOGOUT
 @app.route('/logout')
 def logout():
     logout_user()
     return redirect(url_for('index'))
+
 
 #PROFILE
 @app.route('/user/<username>')
@@ -78,17 +84,27 @@ def user(username):
     ]
     return render_template('user.html', user=user, posts=posts)
 
+
+APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 #UPLOAD
 @app.route('/upload', methods=['GET', 'POST'])
 @login_required
 def upload():
     form = UploadForm()
     if form.validate_on_submit():
+        folder_name = str(current_user.username)
+
+        target = os.path.join(APP_ROOT, 'uploads/{}'.format(folder_name))
+        if not os.path.isdir(target):
+            os.mkdir(target)
+
         f = form.photo.data
         filename = secure_filename(f.filename)
-        f.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        destination = "/".join([target, filename])
+        f.save(destination)
+
         p = Post(title=form.title.data, description=form.description.data,\
-        price=form.price.data, photos=filename, author=current_user)
+        price=form.price.data, photos=destination, author=current_user)
         db.session.add(p)
         db.session.commit()
         return redirect(url_for('user', username=current_user.username))
