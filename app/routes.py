@@ -23,7 +23,6 @@ def index():
 def aboutus():
     return render_template('aboutus.html')
 
-
 #LOGIN
 @app.route('/login', methods=['GET', 'POST'])
 def login():
