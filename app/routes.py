@@ -15,7 +15,6 @@ from app import db
 #HOME PAGE
 @app.route('/')
 @app.route('/index')
-# @login_required #add login view to base.html
 def index():
     return render_template('index.html')
 
@@ -23,6 +22,17 @@ def index():
 @app.route('/aboutus')
 def aboutus():
     return render_template('aboutus.html')
+
+#PROFILE PAGE
+@app.route('/user/<username>')
+@login_required
+def user(username):
+    user = User.query.filter_by(username=username).first_or_404()
+    posts = [
+        {'author': user, 'body': 'Test post #1'},
+        {'author': user, 'body': 'Test post #2'}
+    ]
+    return render_template('user.html', user=user, posts=posts)
 
 #UPLOAD
 @app.route('/upload', methods=['POST'])
