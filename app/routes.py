@@ -86,6 +86,7 @@ def user(username):
 
 
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
+STATIC_ROOT = os.path.join(APP_ROOT, 'static')
 #UPLOAD
 @app.route('/upload', methods=['GET', 'POST'])
 @login_required
@@ -94,7 +95,8 @@ def upload():
     if form.validate_on_submit():
         folder_name = str(current_user.username)
 
-        target = os.path.join(APP_ROOT, 'uploads/{}'.format(folder_name))
+
+        target = os.path.join(STATIC_ROOT, 'uploads/{}'.format(folder_name))
         if not os.path.isdir(target):
             os.mkdir(target)
 
@@ -104,8 +106,8 @@ def upload():
         f.save(destination)
 
         #For flexibility across differnt computers
-        i = destination.find('/uploads')
-        final_destination = destination[i+1:]
+        i = destination.find('/static/uploads')
+        final_destination = destination[i:]
 
         p = Post(title=form.title.data, description=form.description.data,\
         price=form.price.data, photos=final_destination, author=current_user)

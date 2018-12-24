@@ -98,7 +98,7 @@
       text-transform:capitalize;
       font-size:18px;
       font-weight:bold;
-      font-family: 'Oswald', sans-serif;
+      font-family: "Poppins", sans-serif;
       font-weight:normal!important;
       top:40%;
       color:white;
@@ -134,7 +134,7 @@
     {% for post in user.posts %}
     <li>
         <a class="rig-cell" href="#">
-            <img class="rig-img" src="{{post.photos}}">
+            <img class="rig-img" src={{post.photos}}>
             <span class="rig-overlay"></span>
             <span class="rig-text">{{ post.title }}</span>
         </a>
