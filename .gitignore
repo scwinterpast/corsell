@@ -1,2 +1,5 @@
 # ignore virtual env folder
 env/
+
+# ignore _pycache_ folder
+__pycache__/
