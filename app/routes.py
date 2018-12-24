@@ -14,7 +14,6 @@ from app import db
 
 #HOME PAGE
 @app.route('/')
-@app.route('/index')
 # @login_required #add login view to base.html
 def index():
     return render_template('index.html')
