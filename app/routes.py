@@ -54,7 +54,6 @@ def login():
         #     next_page = url_for('index')
         # return redirect(next_page)
         return redirect(url_for('index'))
->>>>>>> a72dd5ccbed32c87d9e5b3a1603ea8a3ea7b9cfd
     return render_template('login.html', form=form)
 
 #REGISTER
