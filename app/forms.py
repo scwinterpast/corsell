@@ -51,6 +51,12 @@ class LoginForm(FlaskForm):
     remember = BooleanField('Remember me')
     submit = SubmitField('Login')
 
+class UploadForm(FlaskForm):
+    """Upload Form"""
+    ItemName = StringField('Item Name', validators=[DataRequired(message='Item Name is required')])
+    Description = StringField('Description', validators=[DataRequired(message='Description is required')])
+    Price = StringField('Price', validators=[DataRequired(message='Price is required')])
+    
     # def validate_username(self, username):
     #     user = User.query.filter_by(username=username.data).first()
     #     if user is None:
