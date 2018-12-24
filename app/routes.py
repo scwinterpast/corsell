@@ -103,8 +103,12 @@ def upload():
         destination = "/".join([target, filename])
         f.save(destination)
 
+        #For flexibility across differnt computers
+        i = destination.find('/uploads')
+        final_destination = destination[i+1:]
+
         p = Post(title=form.title.data, description=form.description.data,\
-        price=form.price.data, photos=destination, author=current_user)
+        price=form.price.data, photos=final_destination, author=current_user)
         db.session.add(p)
         db.session.commit()
         return redirect(url_for('user', username=current_user.username))

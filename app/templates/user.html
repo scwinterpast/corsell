@@ -130,14 +130,13 @@
       }
   }
   </style>
-
   <ul id="rig">
-    {% for post in posts %}
+    {% for post in user.posts %}
     <li>
         <a class="rig-cell" href="#">
-            <img class="rig-img" src="post.photos" alt = 'Photo Here'>
+            <img class="rig-img" src="{{post.photos}}">
             <span class="rig-overlay"></span>
-            <span class="rig-text">post.title</span>
+            <span class="rig-text">{{ post.title }}</span>
         </a>
     </li>
     {% endfor %}
