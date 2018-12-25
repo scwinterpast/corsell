@@ -4,8 +4,14 @@
 {% block content %}
 
 <!-- ##### Single Product Details Area Start ##### -->
-<div class="container">
-  <h2>Carousel Example</h2>
+
+
+<section class="single_product_details_area d-flex align-items-right">
+
+    <!-- Single Product Thumb -->
+    
+    <div class="container" style="float:right;width:420px;height:420px;">
+
   <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
     <ol class="carousel-indicators">
@@ -17,15 +23,21 @@
     <!-- Wrapper for slides -->
     <div class="carousel-inner">
       <div class="item active">
-        <img src="https://images.pexels.com/photos/51342/books-education-school-literature-51342.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="Los Angeles" style="width:100%;">
+        {% for img in product.images %}
+          <img class="rig-img" src="{{ img.link }}" alt="">
+        {% endfor %}
       </div>
 
       <div class="item">
-        <img src="https://images.pexels.com/photos/51342/books-education-school-literature-51342.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="Chicago" style="width:100%;">
+        {% for img in product.images %}
+          <img class="rig-img" src="{{ img.link }}" alt="">
+        {% endfor %}
       </div>
 
       <div class="item">
-        <img src="https://images.pexels.com/photos/51342/books-education-school-literature-51342.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="New york" style="width:100%;">
+        {% for img in product.images %}
+          <img class="rig-img" src="{{ img.link }}" alt="">
+        {% endfor %}
       </div>
     </div>
 
@@ -41,23 +53,13 @@
   </div>
 </div>
 
-<section class="single_product_details_area d-flex align-items-center">
-
-    <!-- Single Product Thumb -->
-    <div class="single_product_thumb clearfix">
-        <div class="product_thumbnail_slides owl-carousel">
-          {% for img in product.images %}
-            <img src= "img.link" alt="Picture of Product here">
-          {% endfor %}
-        </div>
-    </div>
-
     <!-- Single Product Description -->
     <div class="single_product_desc clearfix">
         <span>{{ user.username }}</span>
             <h2>{{product.title}}</h2>
         <p class="product-price"><h4><font size="4">{{product.price}}</h4>
         <p class="product-desc">{{product.description}}</p>
+
 
 
         <center><a href="chat/chat.html" class="btn essence-btn" style="padding-left:40px; padding-right:40px; border-style: none; padding-top: 0px; padding-bottom: 0px;">Contact Seller</a></center>
