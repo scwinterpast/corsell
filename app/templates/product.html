@@ -5,7 +5,7 @@
 {% block content %}
 
 <!-- ##### Single Product Details Area Start ##### -->
-<div class="container">
+<div class="container" style = "float:left; width:420px;height:420px">
   <h2>Carousel Example</h2>
   <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
@@ -18,15 +18,21 @@
     <!-- Wrapper for slides -->
     <div class="carousel-inner">
       <div class="item active">
-        <img src="https://images.pexels.com/photos/51342/books-education-school-literature-51342.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="Los Angeles" style="width:100%;">
+        {% for img in product.images %}
+          <img class="rig-img" src="{{ img.link }}" alt="">
+        {% endfor %}
       </div>
 
       <div class="item">
-        <img src="https://images.pexels.com/photos/51342/books-education-school-literature-51342.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="Chicago" style="width:100%;">
+        {% for img in product.images %}
+          <img class="rig-img" src="{{ img.link }}" alt="">
+        {% endfor %}
       </div>
 
       <div class="item">
-        <img src="https://images.pexels.com/photos/51342/books-education-school-literature-51342.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="New york" style="width:100%;">
+        {% for img in product.images %}
+          <img class="rig-img" src="{{ img.link }}" alt="">
+        {% endfor %}
       </div>
     </div>
 
