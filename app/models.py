@@ -14,7 +14,7 @@ class User( UserMixin, db.Model):
     contact = db.Column(db.String(15))
     college = db.Column(db.String(50))
     password_hash = db.Column(db.String(128))
-    posts = db.relationship('Post', backref='author', lazy='dynamic')
+    products = db.relationship('Product', backref='author', lazy='dynamic')
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
@@ -30,24 +30,24 @@ class User( UserMixin, db.Model):
     #     return 'https://www.gravatar.com/avatar/{}?d=identicon&s={}'.format(
     #         digest, size)
 
-class Post(db.Model):
-    __tablename__ = 'posts'
+class Product(db.Model):
+    __tablename__ = 'products'
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(140))
     description = db.Column(db.String(140))
     price = db.Column(db.Integer)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    photos = db.relationship('Image', backref='listing', lazy='dynamic')
+    images = db.relationship('Image', backref='listing', lazy='dynamic')
 
     def __repr__(self):
-        return '<Post {}>'.format(self.title)
+        return '<Product {}>'.format(self.title)
 
 class Image(db.Model):
     __tablename__ = 'images'
     id = db.Column(db.Integer, primary_key=True)
     link = db.Column(db.String())
-    user_id = db.Column(db.Integer, db.ForeignKey('posts.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('products.id'))
 
     def __repr__(self):
         return '<Image {}>'.format(self.link)

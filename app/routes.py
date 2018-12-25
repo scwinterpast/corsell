@@ -9,7 +9,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug.utils import secure_filename
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from flask_sqlalchemy  import SQLAlchemy
-from app.models import User, Post, Image
+from app.models import User, Product, Image
 from app.forms import LoginForm, RegisterForm, UploadForm
 from app import db
 
@@ -78,8 +78,8 @@ def logout():
 @login_required
 def user(username):
     user = User.query.filter_by(username=username).first_or_404()
-    posts = Post.query.filter_by(user_id=user.id).all()
-    return render_template('user.html', user=user, posts=posts)
+    products = Product.query.filter_by(user_id=user.id).all()
+    return render_template('user.html', user=user, products=products)
 
 
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -95,7 +95,7 @@ def upload():
         if not os.path.isdir(target):
             os.mkdir(target)
 
-        p = Post(title=form.title.data, description=form.description.data,\
+        p = Product(title=form.title.data, description=form.description.data,\
         price=form.price.data, author=current_user)
         db.session.add(p)
         db.session.commit()
@@ -110,8 +110,8 @@ def upload():
             i = destination.find('/static/uploads')
             final_destination = destination[i:]
 
-            post = Post.query.filter_by(author=current_user, title=form.title.data).first()
-            i = Image(link=final_destination,user_id=post.id)
+            product = Product.query.filter_by(author=current_user, title=form.title.data).first()
+            i = Image(link=final_destination,user_id=product.id)
             db.session.add(i)
             db.session.commit()
 
@@ -119,21 +119,13 @@ def upload():
 
     return render_template('upload.html', form=form)
 
-    # if request.method == 'POST':
-    #     # check if the post request has the file part
-    #     if 'file' not in request.files:
-    #         flash('No file part')
-    #         return redirect(request.url)
-    #     file = request.files['file']
-    #     # if user does not select file, browser also
-    #     # submit an empty part without filename
-    #     if file.filename == '':
-    #         flash('No selected file')
-    #         return redirect(request.url)
-    #     if file and allowed_file(file.filename):
-    #         p = Post()
-    #         filename = secure_filename(file.filename)
-    #         flash('file {} saved'.format(file.filename))
-    #         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-    #         return redirect(url_for('index'))
-    # return render_template('upload.html', form=form)
+
+#PRODUCT
+@app.route('/user/<title>/<key>')
+def product(title,key):
+    product = Product.query.filter_by(id=key).first()
+    user = User.query.filter_by(id=product.user_id).first()
+    return render_template('product.html', product=product, user=user)
+#     user = User.qery.filter_by(username=username).first_or_404()
+#     posts = Post.query.filter_by(user_id=user.id).all()
+#     return render_template('user.html', user=user, posts=posts)

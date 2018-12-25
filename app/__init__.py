@@ -21,7 +21,7 @@ login.init_app(app)
 login.login_view = 'login'
 
 from app import routes, models
-from app.models import User, Post, Image
+from app.models import User, Product, Image
 
 if __name__ == "__main__":
     manager.run()

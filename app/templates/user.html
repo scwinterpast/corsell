@@ -2,9 +2,6 @@
 {% block title %}{{ user.username }}{% endblock %}
 
 {% block content %}
-<head>
-  <link rel="stylesheet" href="/static/essence/css/imagehover.css">
-</head>
   <!-- header content section -->
   <section>
     <div class="container h-100">
@@ -133,18 +130,18 @@
   }
   </style>
   <ul id="rig">
-    {% for post in posts %}
+    {% for product in products %}
     <li>
-        <a class="rig-cell" href="#">
+        <a class="rig-cell" href="{{ url_for('product', title=product.title, key=product.id) }}">
           <span class="rig-overlay"></span>
-          <span class="rig-text">{{ post.title }}</span>
+          <span class="rig-text">{{ product.title }}</span>
 
           <div class="single_product_thumb clearfix">
-              <div class="product_thumbnail_slides owl-carousel">
-                {% for img in post.photos %}
+              <!-- <div class="product_thumbnail_slides owl-carousel"> -->
+                {% for img in product.images %}
                   <img class="rig-img" src="{{ img.link }}" alt="">
                 {% endfor %}
-              </div>
+              <!-- </div> -->
           </div>
 
         </a>
