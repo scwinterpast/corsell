@@ -57,6 +57,7 @@ class UploadForm(FlaskForm):
     description = TextAreaField('Description', validators=[DataRequired(message='Description is required')])
     price = StringField('Price', validators=[DataRequired(message='Price is required')])
     photo = FileField('Image', validators=[FileRequired(),FileAllowed(['jpg', 'png','jpeg'], 'Images only!')])
+    
 
     # def validate_username(self, username):
     #     user = User.query.filter_by(username=username.data).first()
