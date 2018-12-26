@@ -129,4 +129,3 @@ def product(username,key):
 #     user = User.qery.filter_by(username=username).first_or_404()
 #     posts = Post.query.filter_by(user_id=user.id).all()
 #     return render_template('user.html', user=user, posts=posts)
-
