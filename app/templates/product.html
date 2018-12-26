@@ -73,7 +73,8 @@ min-height: 100%
      {% for u, c in comments.items() %}
       {% for posts in c %}
         <h1>{{u}}</h1>
-        <h2>{{posts}}</h2>
+        <h2>{{posts.text}}</h2>
+        <h3>{{posts.timestamp}}</h3>
      {% endfor %}
     {% endfor %}
 </section>

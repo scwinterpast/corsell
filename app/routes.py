@@ -131,9 +131,9 @@ def product(title,key):
     for c in comments:
         u = User.query.filter_by(id=c.user_id).first()
         if u.username in dict.keys():
-            dict[u.username].append(c.text)
+            dict[u.username].append(c)
         else:
-            dict[u.username]=[c.text]
+            dict[u.username]=[c]
 
     form = CommentForm()
     if form.validate_on_submit():
@@ -145,9 +145,9 @@ def product(title,key):
         for c in comments:
             u = User.query.filter_by(id=c.user_id).first()
             if u.username in dict.keys():
-                dict[u.username].append(c.text)
+                dict[u.username].append(c)
             else:
-                dict[u.username]=[c.text]
+                dict[u.username]=[c]
         return render_template('product.html', form=form, product=product, user=user, comments=dict, current=current_user)
     return render_template('product.html', form=form, product=product, user=user, comments=dict, current=current_user)
 #     user = User.qery.filter_by(username=username).first_or_404()
