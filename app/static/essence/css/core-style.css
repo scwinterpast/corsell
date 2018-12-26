@@ -254,6 +254,7 @@ img {
   @media only screen and (max-width: 767px) {
     .header_area .classy-nav-container {
       -ms-flex-wrap: wrap;
+      z-index: 999;
       flex-wrap: wrap; } }
   @media only screen and (max-width: 767px) {
     .header_area .classy-nav-container .classy-navbar-toggler {
