@@ -37,7 +37,7 @@ class Product(db.Model):
     title = db.Column(db.String(140))
     description = db.Column(db.String(140))
     price = db.Column(db.Integer)
-    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    timestamp = db.Column(db.Integer, index=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     images = db.relationship('Image', backref='listing', lazy='dynamic')
     comments = db.relationship('Comment', backref='post_comments', lazy='dynamic')

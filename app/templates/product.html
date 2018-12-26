@@ -1,43 +1,24 @@
 {% extends "base.html" %}
-{% import "bootstrap/wtf.html" as wtf %}
 {% block title %}{{ product.title }}{% endblock %}
 
 {% block content %}
-<!-- ##### Single Product Details Area Start ##### -->
-<style>
-  .fill {
-display: flex;
-justify-content: center;
-align-items: center;
-overflow: hidden
-}
-.fill img {
-flex-shrink: 0;
-min-width: 100%;
-min-height: 100%
-}
-</style>
 
+<!-- ##### Single Product Details Area Start ##### -->
 <section class="single_product_details_area d-flex align-items-center">
 
     <!-- Single Product Thumb -->
     <div class="single_product_thumb clearfix">
-      {% if product.images.count() > 1 %}
-        <div class="product_thumbnail_slides owl-carousel">
-          {% for img in product.images %}
-            <img src="{{ img.link }}" alt="">
-          {% endfor %}
-        </div>
-
-      {% else %}
-
-      <div class="fill">
-        {% for img in product.images %}
-          <img src="{{img.link}}" alt="">
-        {% endfor %}
-      </div>
-      {% endif %}
-
+        {% if product.images.all() | count < 2 %}
+            <div>
+                <img style="width:100%" src="{{ product.images.first().link }}" alt="">
+            </div>
+        {% else %}
+            <div class="product_thumbnail_slides owl-carousel">
+              {% for img in product.images %}
+                <img src="{{ img.link }}" alt="">
+              {% endfor %}
+            </div>
+        {% endif %}
     </div>
 
     <!-- Single Product Description -->
@@ -45,38 +26,12 @@ min-height: 100%
         <span>{{ user.username }}</span>
             <h2>{{product.title}}</h2>
         <p class="product-price"><h4><font size="4">{{product.price}}</h4>
-        <p class="product-cat">Category: {{product.description}}</p>
-        <p class="product-desc"></p>
+        <p class="product-desc">{{product.description}}</p>
         <p>The Ravenwood Apartments are located just 1 block from the edge of Cornell's West Campus. These modern, spacious apartments are fully furnished from the couches, easy chairs and coffee tables in the living rooms to the desks, dressers and single or double beds (your choice) in your bedrooms. The apartments all have private entrances and are equipped with large kitchens. There are 2 well-lit parking lots to fulfill most parking needs. A conveniently located bus stop is right out front on the corner of University Ave. and Lake St.</p>
 
         <center><a href="chat/chat.html" class="btn essence-btn" style="padding-left:40px; padding-right:40px; border-style: none; padding-top: 0px; padding-bottom: 0px;">Contact Seller</a></center>
     </div>
 
-</section>
-
-
-<section class="container">
-  <form method="post">
-    {{ form.hidden_tag() }}
-    {{ wtf.form_field(form.comment) }}
-    <span>{{ current }}</span>
-      {% for error in form.comment.errors %}
-      <span style="color: red;">[{{ error }}]</span>
-      {% endfor %}
- <div>
- </div>
- <input type="submit" value="Submit">
- </form>
- </section>
-
-<section class="container">
-     {% for u, c in comments.items() %}
-      {% for posts in c %}
-        <h1>{{u}}</h1>
-        <h2>{{posts.text}}</h2>
-        <h3>{{posts.timestamp}}</h3>
-     {% endfor %}
-    {% endfor %}
 </section>
 
 {% endblock %}

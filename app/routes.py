@@ -2,6 +2,8 @@ from app import app
 import os
 
 import functools
+import time
+import math
 from flask import (
     Blueprint, flash, g, redirect, render_template, request, session, url_for
 )
@@ -13,6 +15,9 @@ from app.models import User, Product, Image, Comment
 from app.forms import LoginForm, RegisterForm, UploadForm, CommentForm
 from app import db
 
+APP_ROOT = os.path.dirname(os.path.abspath(__file__))
+STATIC_ROOT = os.path.join(APP_ROOT, 'static')
+MEDIA_ROOT = os.path.join(STATIC_ROOT, 'uploads')
 
 #HOME PAGE
 @app.route('/')
@@ -72,6 +77,40 @@ def logout():
     logout_user()
     return redirect(url_for('index'))
 
+#UPLOAD
+@app.route('/upload', methods=['GET', 'POST'])
+@login_required
+def upload():
+    form = UploadForm()
+    if form.validate_on_submit():
+        user_folder = os.path.join(MEDIA_ROOT, str(current_user.username))
+        if not os.path.isdir(user_folder):
+            os.mkdir(user_folder)
+        current_time = math.floor(time.time())
+        product_folder = os.path.join(user_folder, str(current_time))
+        os.mkdir(product_folder)
+
+        p = Product(title=form.title.data, description=form.description.data,\
+        price=form.price.data, author=current_user, timestamp=current_time)
+        db.session.add(p)
+        db.session.commit()
+        print('posted!')
+
+        for f in request.files.getlist('photo'):
+            filename = secure_filename(f.filename)
+            destination = os.path.join(product_folder, filename)
+            f.save(destination)
+
+            link = os.sep + os.path.relpath(destination, APP_ROOT)
+
+            product = Product.query.filter_by(author=current_user, title=form.title.data).first()
+            i = Image(link=link ,user_id=product.id)
+            db.session.add(i)
+            db.session.commit()
+
+        return redirect(url_for('user', username=current_user.username))
+
+    return render_template('upload.html', form=form)
 
 #PROFILE
 @app.route('/user/<username>')
@@ -81,75 +120,13 @@ def user(username):
     products = Product.query.filter_by(user_id=user.id).all()
     return render_template('user.html', user=user, products=products)
 
-
-APP_ROOT = os.path.dirname(os.path.abspath(__file__))
-STATIC_ROOT = os.path.join(APP_ROOT, 'static')
-#UPLOAD
-@app.route('/upload', methods=['GET', 'POST'])
-@login_required
-def upload():
-    form = UploadForm()
-    if form.validate_on_submit():
-        folder_name = str(current_user.username)
-        target = os.path.join(STATIC_ROOT, 'uploads/{}'.format(folder_name))
-        if not os.path.isdir(target):
-            os.mkdir(target)
-
-        p = Product(title=form.title.data, description=form.description.data,\
-        price=form.price.data, author=current_user)
-        db.session.add(p)
-        db.session.commit()
-        print('posted!')
-
-        for f in request.files.getlist('photo'):
-            filename = secure_filename(f.filename)
-            destination = "/".join([target, filename])
-            f.save(destination)
-
-            #For flexibility across differnt computers
-            i = destination.find('/static/uploads')
-            final_destination = destination[i:]
-
-            product = Product.query.filter_by(author=current_user, title=form.title.data).first()
-            i = Image(link=final_destination,user_id=product.id)
-            db.session.add(i)
-            db.session.commit()
-
-        return redirect(url_for('user', username=current_user.username))
-
-    return render_template('upload.html', form=form)
-
-
 #PRODUCT
-@app.route('/product/<title>/<key>', methods=['GET', 'POST'])
-def product(title,key):
-    product = Product.query.filter_by(id=key).first()
-    comments = Comment.query.filter_by(post_id=product.id).all()
-    user = User.query.filter_by(id=product.user_id).first()
-
-    dict = {}
-    for c in comments:
-        u = User.query.filter_by(id=c.user_id).first()
-        if u.username in dict.keys():
-            dict[u.username].append(c)
-        else:
-            dict[u.username]=[c]
-
-    form = CommentForm()
-    if form.validate_on_submit():
-        c=Comment(text=form.comment.data,post_id=product.id,user_id=current_user.id)
-        db.session.add(c)
-        db.session.commit()
-        comments = Comment.query.filter_by(post_id=product.id).all()
-        dict = {}
-        for c in comments:
-            u = User.query.filter_by(id=c.user_id).first()
-            if u.username in dict.keys():
-                dict[u.username].append(c)
-            else:
-                dict[u.username]=[c]
-        return render_template('product.html', form=form, product=product, user=user, comments=dict, current=current_user)
-    return render_template('product.html', form=form, product=product, user=user, comments=dict, current=current_user)
+@app.route('/user/<username>/<key>')
+def product(username,key):
+    user = User.query.filter_by(username=username).first_or_404()
+    product = Product.query.filter_by(user_id=user.id, timestamp=key).first_or_404()
+    return render_template('product.html', product=product, user=user)
 #     user = User.qery.filter_by(username=username).first_or_404()
 #     posts = Post.query.filter_by(user_id=user.id).all()
 #     return render_template('user.html', user=user, posts=posts)
+

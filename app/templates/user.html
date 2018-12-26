@@ -145,7 +145,7 @@ min-height: 100%
   <ul id="rig">
     {% for product in products %}
     <li>
-        <a class="rig-cell" href="{{ url_for('product', title=product.title, key=product.id) }}">
+        <a class="rig-cell" href="{{ url_for('product', username=user.username, key=product.timestamp) }}">
           <span class="rig-overlay"></span>
           <span class="rig-text">{{ product.title }}</span>
 
