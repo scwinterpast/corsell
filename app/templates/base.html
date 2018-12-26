@@ -12,10 +12,11 @@
     <title>{% block title %}{% endblock %} - Corsell</title>
 
     <!-- Favicon  -->
-    <link rel="icon" type="image/png" href="/static/essence/img/core-img/fav2.jpg">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='essence/img/core-img/fav2.jpg') }}">
 
     <!-- Core Style CSS -->
-    <link rel="stylesheet" href="/static/essence/css/core-style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='essence/css/core-style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='essence/css/owl-carousel.css') }}">
     <link rel = "stylesheet" href="https://fonts.googleapis.com/css?family=Kaushan+Script">
     <link rel = "stylesheet" href="http://fonts.googleapis.com/css?family=Oleo+Script">
     <link rel = "stylesheet" href="http://fonts.googleapis.com/css?family=Pacifico">
@@ -24,13 +25,8 @@
     <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,400i,700,700i" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
-  <!--  <script language="javascript" type="text/javascript">
-        function redirectSearch(){
-            let query = document.getElementById('headerSearch').value;
-            window.location.href = "shop.html?search=" + query;
-            return false;
-        }
-    </script>-->
+</head>
+
   <content>
     <!-- ##### Header Area Start ##### -->
     <header class="header_area">
@@ -57,7 +53,8 @@
                                     <ul class="single-mega cn-col-4">
                                         <li class="title">Clothing</li>
                                         <li><a href="shop.html?type=Clothing">Jackets &amp Sweaters</a></li>
-                                        <li><a href="shop.html?type=Clothing">Shirts</a></li>
+                                        <li><a href="shop.html?type=Clothing">Tops</a></li>
+                                        <li><a href="shop.html?type=Clothing">Bottoms</a></li>
                                         <li><a href="shop.html?type=Clothing">Footwear</a></li>
                                         <li><a href="shop.html?type=Clothing">Cornell Gear</a></li>
                                     </ul>
@@ -213,18 +210,17 @@
     <!-- ##### Footer Area End ##### -->
 
     <!-- jQuery (Necessary for All JavaScript Plugins) -->
-    <script src="/static/essence/js/jquery/jquery-2.2.4.min.js"></script>
+    <script src="{{ url_for('static', filename='essence/js/jquery/jquery-2.2.4.min.js') }}"></script>
     <!-- Popper js -->
-    <script src="/static/essence/js/popper.min.js"></script>
+    <script src="{{ url_for('static', filename='essence/js/popper.min.js') }}"></script>
     <!-- Bootstrap js -->
-    <script src="/static/essence/js/bootstrap.min.js"></script>
+    <script src="{{ url_for('static', filename='essence/js/bootstrap.min.js') }}"></script>
     <!-- Plugins js -->
-    <script src="/static/essence/js/plugins.js"></script>
+    <script src="{{ url_for('static', filename='essence/js/plugins.js') }}"></script>
     <!-- Classy Nav js -->
-    <script src="/static/essence/js/classy-nav.min.js"></script>
+    <script src="{{ url_for('static', filename='essence/js/classy-nav.min.js') }}"></script>
     <!-- Active js -->
-    <script src="/static/essence/js/active.js"></script>
-    <script src="/static/essence/js/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+    <script src="{{ url_for('static', filename='essence/js/active.js') }}"></script>
 
 </content>
 

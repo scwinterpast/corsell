@@ -15,6 +15,7 @@ class User(UserMixin, db.Model):
     college = db.Column(db.String(50))
     password_hash = db.Column(db.String(128))
     products = db.relationship('Product', backref='author', lazy='dynamic')
+    comments = db.relationship('Comment', backref='user_comments', lazy='dynamic')
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
@@ -39,9 +40,21 @@ class Product(db.Model):
     timestamp = db.Column(db.Integer, index=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     images = db.relationship('Image', backref='listing', lazy='dynamic')
+    comments = db.relationship('Comment', backref='post_comments', lazy='dynamic')
 
     def __repr__(self):
         return '<Product {}>'.format(self.title)
+
+class Comment(db.Model):
+    __tablename__ = 'comments'
+    id = db.Column(db.Integer, primary_key=True)
+    text = db.Column(db.String())
+    timestamp = db.Column(db.DateTime,index=True, default=datetime.utcnow)
+    post_id = db.Column(db.Integer, db.ForeignKey('products.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+
+    def __repr__(self):
+        return '<Comment %r>' % (self.text)
 
 class Image(db.Model):
     __tablename__ = 'images'

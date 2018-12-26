@@ -57,6 +57,7 @@ class UploadForm(FlaskForm):
     description = TextAreaField('Description', validators=[DataRequired(message='Description is required')])
     price = StringField('Price', validators=[DataRequired(message='Price is required')])
     photo = FileField('Image', validators=[FileRequired(),FileAllowed(['jpg', 'png','jpeg'], 'Images only!')])
+    
 
     # def validate_username(self, username):
     #     user = User.query.filter_by(username=username.data).first()
@@ -68,3 +69,8 @@ class UploadForm(FlaskForm):
     #     user = User.query.filter_by(username=username.data).first()
     #     if not user.check_password(password.data):
     #         raise ValidationError('Incorrect password.')
+
+class CommentForm(FlaskForm):
+    """Comment Form"""
+    comment = TextAreaField('Add a comment', validators=[DataRequired()])
+    submit = SubmitField("Post")

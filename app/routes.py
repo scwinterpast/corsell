@@ -11,8 +11,8 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug.utils import secure_filename
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from flask_sqlalchemy  import SQLAlchemy
-from app.models import User, Product, Image
-from app.forms import LoginForm, RegisterForm, UploadForm
+from app.models import User, Product, Image, Comment
+from app.forms import LoginForm, RegisterForm, UploadForm, CommentForm
 from app import db
 
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -121,11 +121,43 @@ def user(username):
     return render_template('user.html', user=user, products=products)
 
 #PRODUCT
+<<<<<<< HEAD
 @app.route('/user/<username>/<key>')
 def product(username,key):
     user = User.query.filter_by(username=username).first_or_404()
     product = Product.query.filter_by(user_id=user.id, timestamp=key).first_or_404()
     return render_template('product.html', product=product, user=user)
+=======
+@app.route('/product/<title>/<key>', methods=['GET', 'POST'])
+def product(title,key):
+    product = Product.query.filter_by(id=key).first()
+    comments = Comment.query.filter_by(post_id=product.id).all()
+    user = User.query.filter_by(id=product.user_id).first()
+
+    dict = {}
+    for c in comments:
+        u = User.query.filter_by(id=c.user_id).first()
+        if u.username in dict.keys():
+            dict[u.username].append(c)
+        else:
+            dict[u.username]=[c]
+
+    form = CommentForm()
+    if form.validate_on_submit():
+        c=Comment(text=form.comment.data,post_id=product.id,user_id=current_user.id)
+        db.session.add(c)
+        db.session.commit()
+        comments = Comment.query.filter_by(post_id=product.id).all()
+        dict = {}
+        for c in comments:
+            u = User.query.filter_by(id=c.user_id).first()
+            if u.username in dict.keys():
+                dict[u.username].append(c)
+            else:
+                dict[u.username]=[c]
+        return render_template('product.html', form=form, product=product, user=user, comments=dict, current=current_user)
+    return render_template('product.html', form=form, product=product, user=user, comments=dict, current=current_user)
+>>>>>>> 48096f1944a62ba7fad51f272bf35f88210397b9
 #     user = User.qery.filter_by(username=username).first_or_404()
 #     posts = Post.query.filter_by(user_id=user.id).all()
 #     return render_template('user.html', user=user, posts=posts)
