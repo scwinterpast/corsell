@@ -13,7 +13,7 @@
 
 @import '../css/bootstrap.min.css';
 @import '../css/classy-nav.min.css';
-@import '../css/owl.carousel.css';
+@import '../css/owl-carousel.css';
 @import '../css/animate.css';
 @import '../css/magnific-popup.css';
 @import '../css/jquery-ui.min.css';
@@ -726,12 +726,6 @@ img {
     z-index: 1;
     width: 100%;
     height: 600px;
-    @media #{$breakpoint-md} {
-        height: 450px;
-    }
-    @media #{$breakpoint-xs} {
-        height: 350px;
-    }
     .hero-content {
         h6 {
             font-size: 18px;

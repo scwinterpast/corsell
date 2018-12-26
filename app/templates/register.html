@@ -125,12 +125,15 @@
 		background: #27AE60;
 		color: white;
 	}
+.height {
+	height: 600px
+}
 
 </style>
 
 <body>
 
-	<section class="welcome_area bg-img background-overlay" style="background-image: url('/static/essence/img/bg-img/login.jpg')">
+	<section class="welcome_area bg-img background-overlay height" style="background-image: url('/static/essence/img/bg-img/login.jpg'); height="900px">
 	    <div class="container h-100">
 				<
 		<form id="msform" method="POST">
@@ -199,7 +202,7 @@
 				{% endfor %}
 		    <input type="button" onclick="prev_step2()" class="previous action-button" value="Previous" />
 		   <!-- <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button> -->
-			 <button type="submit" class="submit action-button">Submit</button>
+			 <button id="submit" type="submit" class="action-button">Submit</button>
 		  </fieldset>
 		</form>
 	</div>
