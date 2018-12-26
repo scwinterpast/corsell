@@ -6,3 +6,6 @@ env/
 
 # ignore _pycache_ folder
 __pycache__/
+
+# ignore local db
+app.db
