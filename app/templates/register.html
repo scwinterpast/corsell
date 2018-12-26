@@ -1,111 +1,209 @@
 {% extends "base.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
+
 {% block title %}Register{% endblock %}
 {% block content %}
 
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <!--===============================================================================================-->
-	<link rel="icon" type="image/png" href="/static/login/images/icons/fav.png"/>
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="/static/login/vendor/bootstrap/css/bootstrap.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="/static/login/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="/static/login/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="/static/login/vendor/animate/animate.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="/static/login/vendor/css-hamburgers/hamburgers.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="/static/login/vendor/animsition/css/animsition.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="/static/login/vendor/select2/select2.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="/static/login/vendor/daterangepicker/daterangepicker.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="/static/login/css/util.css">
-	<link rel="stylesheet" type="text/css" href="/static/login/css/main.css">
-<!--===============================================================================================-->
+
 </head>
+
+<style>
+	/*form styles*/
+	#msform {
+		width: 400px;
+
+		text-align: center;
+		position: relative;
+		margin: 0 auto;
+	}
+	#msform fieldset {
+		background: white;
+		border: 0 none;
+		border-radius: 3px;
+		box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+		padding: 20px 30px;
+		box-sizing: border-box;
+		width: 80%;
+		margin: 0 10%;
+
+		/*stacking fieldsets above each other*/
+		position: relative;
+	}
+	/*Hide all except first fieldset*/
+	#msform fieldset:not(:first-of-type) {
+		display: none;
+	}
+	/*inputs*/
+	#msform input, #msform textarea {
+		padding: 15px;
+		border: 1px solid #ccc;
+		border-radius: 3px;
+		margin-bottom: 10px;
+		width: 100%;
+		box-sizing: border-box;
+		font-family: montserrat;
+		color: #2C3E50;
+		font-size: 13px;
+	}
+	/*buttons*/
+	#msform .action-button {
+		width: 100px;
+		background: #27AE60;
+		font-weight: bold;
+		color: white;
+		border: 0 none;
+		border-radius: 1px;
+		cursor: pointer;
+		padding: 10px 5px;
+		margin: 10px 5px;
+	}
+	#msform .action-button:hover, #msform .action-button:focus {
+		box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
+	}
+	/*headings*/
+	.fs-title {
+		font-size: 15px;
+		text-transform: uppercase;
+		color: #2C3E50;
+		margin-bottom: 10px;
+	}
+	.fs-subtitle {
+		font-weight: normal;
+		font-size: 13px;
+		color: #666;
+		margin-bottom: 20px;
+	}
+	/*progressbar*/
+	#progressbar {
+		margin-bottom: 30px;
+		overflow: hidden;
+		/*CSS counters to number the steps*/
+		counter-reset: step;
+	}
+	#progressbar li {
+		list-style-type: none;
+		color: black;
+		text-transform: uppercase;
+		font-size: 9px;
+		width: 33.33%;
+		float: left;
+		position: relative;
+	}
+	#progressbar li:before {
+		content: counter(step);
+		counter-increment: step;
+		width: 20px;
+		line-height: 20px;
+		display: block;
+		font-size: 10px;
+		color: #333;
+		background: white;
+		border-radius: 3px;
+		margin: 0 auto 5px auto;
+	}
+	/*progressbar connectors*/
+	#progressbar li:after {
+		content: '';
+		width: 100%;
+		height: 2px;
+		background: white;
+		position: absolute;
+		left: -50%;
+		top: 9px;
+		z-index: -1; /*put it behind the numbers*/
+	}
+	#progressbar li:first-child:after {
+		/*connector not needed before the first step*/
+		content: none;
+	}
+	/*marking active/completed steps green*/
+	/*The number of the step and the connector before it = green*/
+	#progressbar li.active:before,  #progressbar li.active:after{
+		background: #27AE60;
+		color: white;
+	}
+
+</style>
+
 <body>
 
-	<div class="limiter">
-		<div class="container-login100" style="background-image: url('/static/essence/img/bg-img/login.jpg');">
-			<div class="wrap-login100 p-l-110 p-r-110 p-t-33 p-b-33">
-				<div class="login100-form validate-form flex-sb flex-w">
-					<span class="login100-form-title p-b-53">
-						Sign Up
-					</span>
-
-					<div class="container">
-
-			      <form class="form-signin" method="POST">
-			        {{ form.hidden_tag() }}
-					{{ wtf.form_field(form.email) }}
-							<!-- {% for error in form.username.errors %}
-							<span style="color: red;">[{{ error }}]</span>
-							{% endfor %} -->
-
-			        {{ wtf.form_field(form.firstname) }}
-			        {{ wtf.form_field(form.lastname) }}
-					{{ wtf.form_field(form.contact) }}
-			        {{ wtf.form_field(form.college) }}
-			        {{ wtf.form_field(form.username) }}
-							<!-- {% for error in form.username.errors %}
-							<span style="color: red;">[{{ error }}]</span>
-							{% endfor %} -->
-
-			        {{ wtf.form_field(form.password) }}
-							<!-- {% for error in form.password.errors %}
-							<span style="color: red;">[{{ error }}]</span>
-							{% endfor %} -->
-
-			        {{ wtf.form_field(form.confirm) }}
-							<!-- {% for error in form.confirm.errors %}
-							<span style="color: red;">[{{ error }}]</span>
-							{% endfor %} -->
-			        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
-			      </form>
-
-			    </div> <!-- /container -->
-
-
-
-					<div class="w-full text-center p-t-55">
-						<span class="txt2">
-							Already a member?
-						</span>
-
-						<a class="txt2 bo1" href="{{ url_for('login') }}">
-							Login here
-						</a>
-					</div>
-				</div>
-			</div>
-		</div>
+	<section class="welcome_area bg-img background-overlay" style="background-image: url('/static/essence/img/bg-img/login.jpg')">
+	    <div class="container h-100">
+				<
+		<form id="msform" method="POST">
+			  {{ form.hidden_tag() }}
+		  <!-- progressbar -->
+		  <ul id="progressbar">
+		    <li class="active" id="active1">Account Setup</li>
+		    <li id="active2">Account Details</li>
+		    <li id="active3">Personal Details</li>
+		  </ul>
+		  <!-- fieldsets -->
+		  <fieldset id="first">
+		    <h2 class="fs-title">Create your account</h2>
+		    <h3 class="fs-subtitle">This is step 1</h3>
+				<!-- {{ wtf.form_field(form.email) }}
+				{{ wtf.form_field(form.password) }}
+				{{ wtf.form_field(form.confirm) }} -->
+		    <input id="email" name="email" type="text" value="" placeholder="Cornell Email" />
+				{% for error in form.email.errors %}
+				<span style="color: red;">[{{ error }}]</span>
+				{% endfor %}
+		    <input id="password" name="password" value="" type="password" placeholder="Password" />
+				{% for error in form.password.errors %}
+				<span style="color: red;">[{{ error }}]</span>
+				{% endfor %}
+		    <input id="confirm" name="confirm" value="" type="password" placeholder="Confirm Password" />
+				{% for error in form.confirm.errors %}
+				<span style="color: red;">[{{ error }}]</span>
+				{% endfor %}
+				<input type="button" class="next action-button" onclick="next_step1()" value="Next" />
+				<!-- <input id="next_btn1" onclick="next_step1()" type="button" value="Next"> -->
+		  </fieldset>
+		  <fieldset>
+		    <h2 class="fs-title">Account Details</h2>
+		    <h3 class="fs-subtitle">Your presence on this site</h3>
+				<!-- {{ wtf.form_field(form.username) }}
+				{{ wtf.form_field(form.firstname) }}
+				{{ wtf.form_field(form.lastname) }} -->
+		    <input id="username" name="username" type="text" value="" placeholder="Username" />
+				{% for error in form.username.errors %}
+				<span style="color: red;">[{{ error }}]</span>
+				{% endfor %}
+		    <input id="firstname" name="firstname" type="text" value="" placeholder="First Name" />
+				{% for error in form.firstname.errors %}
+				<span style="color: red;">[{{ error }}]</span>
+				{% endfor %}
+		    <input id="lastname" name="lastname" type="text" value="" placeholder="Last Name" />
+				{% for error in form.lastname.errors %}
+				<span style="color: red;">[{{ error }}]</span>
+				{% endfor %}
+		    <input type="button" onclick="prev_step1()" class="previous action-button" value="Previous" />
+		    <input type="button" onclick="next_step2()" class="next action-button" value="Next" />
+		  </fieldset>
+		  <fieldset>
+		    <h2 class="fs-title">Personal Details</h2>
+		    <h3 class="fs-subtitle">We will never sell it</h3>
+				<!-- {{ wtf.form_field(form.contact) }}
+				{{ wtf.form_field(form.college) }} -->
+		    <input id="contact" name="contact" type="text" value="" placeholder="Contact Number" />
+				{% for error in form.contact.errors %}
+				<span style="color: red;">[{{ error }}]</span>
+				{% endfor %}
+		    <input id="college" name="college" type="text" value="" placeholder="College (eg.A&S, CALS)" />
+				{% for error in form.college.errors %}
+				<span style="color: red;">[{{ error }}]</span>
+				{% endfor %}
+		    <input type="button" onclick="prev_step2()" class="previous action-button" value="Previous" />
+		   <!-- <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button> -->
+			 <button type="submit" class="submit action-button">Submit</button>
+		  </fieldset>
+		</form>
 	</div>
-
-
-	<div id="dropDownSelect1"></div>
-
-<!--===============================================================================================-->
-	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
-<!--===============================================================================================-->
-	<script src="vendor/animsition/js/animsition.min.js"></script>
-<!--===============================================================================================-->
-	<script src="vendor/bootstrap/js/popper.js"></script>
-	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-<!--===============================================================================================-->
-	<script src="vendor/select2/select2.min.js"></script>
-<!--===============================================================================================-->
-	<script src="vendor/daterangepicker/moment.min.js"></script>
-	<script src="vendor/daterangepicker/daterangepicker.js"></script>
-<!--===============================================================================================-->
-	<script src="vendor/countdowntime/countdowntime.js"></script>
-<!--===============================================================================================-->
-	<script src="js/main.js"></script>
+	</section>
 
 </body>
 {% endblock %}
