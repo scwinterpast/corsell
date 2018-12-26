@@ -8,11 +8,17 @@
 
     <!-- Single Product Thumb -->
     <div class="single_product_thumb clearfix">
-        <div class="product_thumbnail_slides owl-carousel">
-          {% for img in product.images %}
-            <img src="{{ img.link }}" alt="">
-          {% endfor %}
-        </div>
+        {% if product != None and product.images.all() | count < 2 %}
+            <div>
+                <img style="width:100%" src="{{ product.images.first().link }}" alt="">
+            </div>
+        {% else %}
+            <div class="product_thumbnail_slides owl-carousel">
+              {% for img in product.images %}
+                <img src="{{ img.link }}" alt="">
+              {% endfor %}
+            </div>
+        {% endif %}
     </div>
 
     <!-- Single Product Description -->

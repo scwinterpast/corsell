@@ -3,3 +3,6 @@ env/
 
 # ignore _pycache_ folder
 __pycache__/
+
+# ignore uploads folder
+app/static/uploads/

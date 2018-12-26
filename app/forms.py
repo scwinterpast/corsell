@@ -53,7 +53,7 @@ class LoginForm(FlaskForm):
 
 class UploadForm(FlaskForm):
     """Upload Form"""
-    title = StringField('Title', validators=[DataRequired(message='Item Name is required')])
+    title = StringField('Title', validators=[DataRequired(message='Title is required')])
     description = TextAreaField('Description', validators=[DataRequired(message='Description is required')])
     price = StringField('Price', validators=[DataRequired(message='Price is required')])
     photo = FileField('Image', validators=[FileRequired(),FileAllowed(['jpg', 'png','jpeg'], 'Images only!')])

@@ -4,7 +4,7 @@ from flask_login import LoginManager, UserMixin, login_user, login_required, log
 from werkzeug.security import generate_password_hash, check_password_hash
 from app import login
 
-class User( UserMixin, db.Model):
+class User(UserMixin, db.Model):
     __tablename__='users'
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), index=True, unique=True)
@@ -36,7 +36,7 @@ class Product(db.Model):
     title = db.Column(db.String(140))
     description = db.Column(db.String(140))
     price = db.Column(db.Integer)
-    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    timestamp = db.Column(db.Integer, index=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     images = db.relationship('Image', backref='listing', lazy='dynamic')
 
