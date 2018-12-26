@@ -128,7 +128,20 @@
           width:50%;
       }
   }
+
+  .fill {
+display: flex;
+justify-content: center;
+align-items: center;
+overflow: hidden
+}
+.fill img {
+flex-shrink: 0;
+min-width: 100%;
+min-height: 100%
+}
   </style>
+
   <ul id="rig">
     {% for product in products %}
     <li>
@@ -137,11 +150,21 @@
           <span class="rig-text">{{ product.title }}</span>
 
           <div class="single_product_thumb clearfix">
-              <!-- <div class="product_thumbnail_slides owl-carousel"> -->
+            {% if product.images.count() > 1 %}
+              <div class="product_thumbnail_slides owl-carousel">
                 {% for img in product.images %}
                   <img class="rig-img" src="{{img.link}}" alt="">
                 {% endfor %}
-              <!-- </div> -->
+              </div>
+
+            {% else %}
+            <div class="fill">
+              {% for img in product.images %}
+                <img class="rig-img" src="{{img.link}}" alt="">
+              {% endfor %}
+            </div>
+
+            {% endif %}
           </div>
 
         </a>
