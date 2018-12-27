@@ -46,7 +46,6 @@
 		margin-bottom: 10px;
 		width: 100%;
 		box-sizing: border-box;
-		font-family: montserrat;
 		color: #2C3E50;
 		font-size: 13px;
 	}
@@ -278,7 +277,7 @@
 				{% for error in form.confirm.errors %}
 				<span style="color: red;">[{{ error }}]</span>
 				{% endfor %}
-				<input id="submit_1" type="submit" class="next action-button" onclick="next_step1()" value="Next" />
+				<input id="submit_1" type="button" class="next action-button" onclick="next_step1()" value="Next" />
 		  </fieldset>
 		  <fieldset id="second">
 		    <h2 class="fs-title">Account Details</h2>
