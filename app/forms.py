@@ -32,7 +32,9 @@ class RegisterForm(FlaskForm):
     confirm = PasswordField('Verify password',
             validators=[DataRequired(), EqualTo('password',
             message='Passwords must match')])
-    submit = SubmitField('Register')
+    submit_1 = SubmitField('Next')
+    submit_2 = SubmitField('Next')
+    submit_final = SubmitField('Register')
 
     def validate_username(self, username):
         user = User.query.filter_by(username=username.data).first()
@@ -57,7 +59,7 @@ class UploadForm(FlaskForm):
     description = TextAreaField('Description', validators=[DataRequired(message='Description is required')])
     price = StringField('Price', validators=[DataRequired(message='Price is required')])
     photo = FileField('Image', validators=[FileRequired(),FileAllowed(['jpg', 'png','jpeg'], 'Images only!')])
-    
+
 
     # def validate_username(self, username):
     #     user = User.query.filter_by(username=username.data).first()
