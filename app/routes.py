@@ -127,11 +127,32 @@ def user(username):
     return render_template('user.html', user=user, products=products)
 
 #PRODUCT
-@app.route('/user/<username>/<key>')
+@app.route('/user/<username>/<key>', methods=['GET', 'POST'])
 def product(username,key):
     user = User.query.filter_by(username=username).first_or_404()
     product = Product.query.filter_by(user_id=user.id, timestamp=key).first_or_404()
-    return render_template('product.html', product=product, user=user)
-#     user = User.qery.filter_by(username=username).first_or_404()
-#     posts = Post.query.filter_by(user_id=user.id).all()
-#     return render_template('user.html', user=user, posts=posts)
+    comments = Comment.query.filter_by(post_id=product.id).all()
+    form=CommentForm()
+
+    d={}
+    for comment in comments:
+        u=User.query.filter_by(id=comment.user_id).first()
+        username=u.username
+        if username not in d:
+            d[username]=[comment]
+        else:
+            d[username].append(comment)
+
+    if form.validate_on_submit():
+        c=Comment(text=form.comment.data,post_id=product.id,user_id=current_user.id)
+        db.session.add(c)
+        db.session.commit()
+
+        if current_user.username not in d:
+            d[current_user.username]=[c]
+        else:
+            d[current_user.username].append(c)
+
+        return render_template('product.html', product=product, user=user, current=current_user, comments=d, form=form)
+
+    return render_template('product.html', product=product, user=user, current=current_user, comments=d, form=form)

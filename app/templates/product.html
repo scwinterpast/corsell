@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
 {% block title %}{{ product.title }}{% endblock %}
 
 {% block content %}
@@ -34,6 +35,23 @@
 
 </section>
 
+<div class=="row">
+  <form method='post'>
+    {{ form.hidden_tag() }}
+    {{ wtf.form_field(form.comment) }}
+    {{ wtf.form_field(form.submit) }}
+    <h2>{{current.username}}</h2>
+  </form>
+</div>
 
+<div class=="row">
+{% for u,comment in comments.items() %}
+{% for c in comment %}
+<span>{{ u }}</span>
+<span>{{ c.text }}</span>
+<span>{{ c.timestamp }}</span>
+{% endfor %}
+{% endfor %}
+</div>
 
 {% endblock %}
