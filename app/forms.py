@@ -8,7 +8,7 @@ try:
 except ImportError:
     from flask_wtf import Form as FlaskForm     # Fallback to Flask-WTF v0.12 or older
 from werkzeug.security import check_password_hash, generate_password_hash
-from wtforms import BooleanField, HiddenField, PasswordField, SubmitField, StringField, TextAreaField
+from wtforms import BooleanField, HiddenField, PasswordField, SubmitField, StringField, TextAreaField, SelectField
 from wtforms import ValidationError
 from wtforms.validators import DataRequired, InputRequired, Email, Length, EqualTo
 from flask_wtf.file import FileField, FileRequired, FileAllowed
@@ -59,7 +59,9 @@ class UploadForm(FlaskForm):
     description = TextAreaField('Description', validators=[DataRequired(message='Description is required')])
     price = StringField('Price', validators=[DataRequired(message='Price is required')])
     photo = FileField('Image', validators=[FileRequired(),FileAllowed(['jpg', 'png','jpeg'], 'Images only!')])
-
+    category = SelectField(u'Category', validators=[DataRequired(message='Category is required')],\
+    choices=[('property','Cars & Housing'),('clothing','Clothing'),('living','Living'),\
+    ('education','Education'),('services','Serivces'),('electronics','Electronics')])
 
     # def validate_username(self, username):
     #     user = User.query.filter_by(username=username.data).first()

@@ -13,11 +13,17 @@ from flask_login import LoginManager, UserMixin, login_user, login_required, log
 from flask_sqlalchemy  import SQLAlchemy
 from app.models import User, Product, Image, Comment
 from app.forms import LoginForm, RegisterForm, UploadForm, CommentForm
-from app import db
+from app import db, login
 
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = os.path.join(APP_ROOT, 'static')
 MEDIA_ROOT = os.path.join(STATIC_ROOT, 'uploads')
+
+
+@login.user_loader
+def load_user(id):
+    return User.query.get(int(id))
+
 
 #HOME PAGE
 @app.route('/')

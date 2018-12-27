@@ -2,7 +2,6 @@ from app import db
 from datetime import datetime
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
-from app import login
 
 class User(UserMixin, db.Model):
     __tablename__='users'
@@ -38,6 +37,8 @@ class Product(db.Model):
     description = db.Column(db.String(140))
     price = db.Column(db.Integer)
     timestamp = db.Column(db.Integer, index=True)
+    category = db.Column(db.String(140))
+    subcategory = db.Column(db.String(140))
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     images = db.relationship('Image', backref='listing', lazy='dynamic')
     comments = db.relationship('Comment', backref='post_comments', lazy='dynamic')
@@ -64,7 +65,3 @@ class Image(db.Model):
 
     def __repr__(self):
         return '<Image {}>'.format(self.link)
-
-@login.user_loader
-def load_user(id):
-    return User.query.get(int(id))
