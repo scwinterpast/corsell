@@ -45,13 +45,13 @@
 		margin-bottom: 10px;
 		width: 100%;
 		box-sizing: border-box;
-		color: #2C3E50;
+		color: #B22222;
 		font-size: 13px;
 	}
 	/*buttons*/
 	#msform .action-button {
 		width: 100px;
-		background: #27AE60;
+		background: #B22222;
 		font-weight: bold;
 		color: white;
 		border: 0 none;
@@ -61,7 +61,7 @@
 		margin: 10px 5px;
 	}
 	#msform .action-button:hover, #msform .action-button:focus {
-		box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
+		box-shadow: 0 0 0 2px white, 0 0 0 3px #B22222;
 	}
 	/*headings*/
 	.fs-title {
@@ -122,7 +122,7 @@
 	/*marking active/completed steps green*/
 	/*The number of the step and the connector before it = green*/
 	#progressbar li.active:before,  #progressbar li.active:after{
-		background: #27AE60;
+		background: #F08080;
 		color: white;
 	}
 .height {
@@ -219,27 +219,27 @@
 	function next_step1() {
 	document.getElementById("first").style.display = "none";
 	document.getElementById("second").style.display = "block";
-	document.getElementById("active2").style.color = "red";
+	document.getElementById("active2").style.color = "darkred";
 
 	}
 	// Function that executes on click of first previous button.
 	function prev_step1() {
 	document.getElementById("first").style.display = "block";
 	document.getElementById("second").style.display = "none";
-	document.getElementById("active1").style.color = "red";
+	document.getElementById("active1").style.color = "darkred";
 	document.getElementById("active2").style.color = "gray";
 	}
 	// Function that executes on click of second next button.
 	function next_step2() {
 	document.getElementById("second").style.display = "none";
 	document.getElementById("third").style.display = "block";
-	document.getElementById("active3").style.color = "red";
+	document.getElementById("active3").style.color = "darkred";
 	}
 	// Function that executes on click of second previous button.
 	function prev_step2() {
 	document.getElementById("third").style.display = "none";
 	document.getElementById("second").style.display = "block";
-	document.getElementById("active2").style.color = "red";
+	document.getElementById("active2").style.color = "darkred";
 	document.getElementById("active3").style.color = "gray";
 	}
 	</script>
@@ -260,30 +260,33 @@
 		    <h2 class="fs-title">Upload Images</h2>
 		    <h3 class="fs-subtitle">Files accepted: ('png,jpg,jpeg')</h3>
 				{{ form.photo(multiple="multiple") }}
+
 				<input type="button" class="next action-button" onclick="next_step1()" value="Next" />
 		  </fieldset>
 
 		  <fieldset id="second">
 		    <h2 class="fs-title">Product Details</h2>
 		    <h3 class="fs-subtitle">Tell people about your product</h3>
-				{{ wtf.form_field(form.title) }}
+				<input id="title" name="title" type="text" value="" placeholder="Title" />
 					{% for error in form.title.errors %}
 					<span style="color: red;">[{{ error }}]</span>
 					{% endfor %}
 
-					{{ wtf.form_field(form.description, rows = 5) }}
+					<textarea id="description" name="description" form="msform" placeholder="Product description"></textarea>
 						{% for error in form.description.errors %}
 						<span style="color: red;">[{{ error }}]</span>
 						{% endfor %}
 
-									{{ wtf.form_field(form.price) }}
+		    <input id="price" name="price" type="number" value="" placeholder="$" />
 							{% for error in form.price.errors %}
 							<span style="color: red;">[{{ error }}]</span>
 							{% endfor %}
 
-					{{ form.category.label }}
-					{{ form.category }}
+							{{ form.condition.label }}
+							{{ form.condition }}
 
+							{{ form.category.label }}
+							{{ form.category }}
 		    <input type="button" onclick="prev_step1()" class="previous action-button" value="Previous" />
 		    <input type="button" onclick="next_step2()" class="next action-button" value="Next" />
 		  </fieldset>

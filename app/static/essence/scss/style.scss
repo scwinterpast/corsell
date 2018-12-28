@@ -793,7 +793,7 @@ img {
     &:hover {
         .catagory-content {
             a {
-                color: $bg-default;
+                color: 	#C00000 ;
             }
         }
     }
@@ -1216,7 +1216,7 @@ img {
 
 .footer_area {
     position: relative;
-    z-index: 1;
+    z-index: 0;
     background-color: #252525;
     padding: 70px 0 60px;
     .single_widget_area {

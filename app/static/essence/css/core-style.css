@@ -701,7 +701,7 @@ img {
       .single_catagory_area .catagory-content a {
         font-size: 18px; } }
   .single_catagory_area:hover .catagory-content a {
-    color: #0315ff; }
+    color: 	#C00000 ; }
 
 /* :: 7.0 CTA Area CSS */
 .cta-area {
@@ -1056,7 +1056,7 @@ img {
 /* :: 11.0 Footer Area CSS */
 .footer_area {
   position: relative;
-  z-index: 1;
+  z-index: 0;
   background-color: #252525;
   padding: 70px 0 60px; }
   .footer_area .single_widget_area .footer_menu ul {
@@ -2459,7 +2459,7 @@ img {
       .single_catagory_area .catagory-content a {
         font-size: 18px; } }
   .single_catagory_area:hover .catagory-content a {
-    color: #0315ff; }
+    color: 	#C00000; }
 
 /* :: 7.0 CTA Area CSS */
 .cta-area {

@@ -98,7 +98,7 @@ def upload():
 
         p = Product(title=form.title.data, description=form.description.data,\
         price=form.price.data, author=current_user, timestamp=current_time,\
-        category=form.category.data)
+        condition=form.condition.data,category=form.category.data)
         db.session.add(p)
         db.session.commit()
         print('posted!')

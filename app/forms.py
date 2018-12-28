@@ -8,9 +8,9 @@ try:
 except ImportError:
     from flask_wtf import Form as FlaskForm     # Fallback to Flask-WTF v0.12 or older
 from werkzeug.security import check_password_hash, generate_password_hash
-from wtforms import BooleanField, HiddenField, PasswordField, SubmitField, StringField, TextAreaField, SelectField
+from wtforms import BooleanField, HiddenField, PasswordField, SubmitField, StringField, TextAreaField, SelectField, RadioField, DecimalField
 from wtforms import ValidationError
-from wtforms.validators import DataRequired, InputRequired, Email, Length, EqualTo
+from wtforms.validators import DataRequired, InputRequired, Email, Length, EqualTo, NumberRange
 from flask_wtf.file import FileField, FileRequired, FileAllowed
 from app.models import User
 
@@ -57,11 +57,14 @@ class UploadForm(FlaskForm):
     """Upload Form"""
     title = StringField('Title', validators=[DataRequired(message='Title is required')])
     description = TextAreaField('Description', validators=[DataRequired(message='Description is required')])
-    price = StringField('Price', validators=[DataRequired(message='Price is required')])
+    price = DecimalField('Price', validators=[DataRequired(message='Price is required'),\
+    NumberRange(min=0, message='Price must be a valid number, at least 0')])
     photo = FileField('Image', validators=[FileRequired(),FileAllowed(['jpg', 'png','jpeg'], 'Images only!')])
+    condition = SelectField(u'Condition', choices=[('na','N/A'),('new','New'),('used','Used')])
     category = SelectField(u'Category', validators=[DataRequired(message='Category is required')],\
-    choices=[('property','Cars & Housing'),('clothing','Clothing'),('living','Living'),\
+    choices=[('property','Cars & Housing'),('fashion','Fashion'),('living','Living'),\
     ('education','Education'),('services','Serivces'),('electronics','Electronics')])
+    # subcategory = SelectField()
     submit_1 = SubmitField('Next')
     submit_2 = SubmitField('Next')
     submit_final = SubmitField('Upload')
