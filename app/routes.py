@@ -69,19 +69,10 @@ def register():
     form2 = RegisterForm2()
     form3 = RegisterForm3()
     if form1.submit_1.data and form1.validate() and not form2.submit_2.data:
-        form2.email.data = form1.email.data;
-        form2.password.data = form1.password.data;
-        form2.confirm.data = form1.confirm.data;
         return render_template('register.html', title='Register', form=form2, step=2);
     if form2.submit_2.data and not form2.validate():
         return render_template('register.html', title='Register', form=form2, step=2);
     if form2.submit_2.data and form2.validate() and not form3.submit_final.data:
-        form3.email.data=form2.email.data;
-        form3.password.data=form2.password.data;
-        form3.confirm.data=form2.confirm.data;
-        form3.username.data=form2.username.data;
-        form3.firstname.data=form2.firstname.data;
-        form3.lastname.data=form2.lastname.data;
         return render_template('register.html', title='Register', form=form3, step=3);
     if form3.submit_final.data and not form3.validate():
         return render_template('register.html', title='Register', form=form3, step=3);
@@ -94,7 +85,6 @@ def register():
         db.session.commit()
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form= form1, step=1)
-
 
 #LOGOUT
 @app.route('/logout')
