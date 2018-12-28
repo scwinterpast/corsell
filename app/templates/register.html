@@ -7,9 +7,8 @@
 <head>
 	<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 	<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js'></script>
-	<script  src="{{ url_for('static', filename='essence/js/form.js') }}"></script>
+	<script src="{{ url_for('static', filename='essence/js/form.js') }}"></script>
 <!--===============================================================================================-->
-
 </head>
 
 <style>
@@ -187,89 +186,83 @@
 <body onload='determine_step()'>
 	<section class="welcome_area bg-img background-overlay height" style="background-image: url('/static/essence/img/bg-img/login.jpg'); height="900px">
 	    <div class="container h-100">
-
-		<form id="msform" method="POST">
-			{{ form.hidden_tag() }}
-		  <!-- progressbar -->
-		  <ul id="progressbar">
-		    <li id="active1">Account Setup</li>
-		    <li id="active2">Account Details</li>
-		    <li id="active3">Personal Details</li>
-		  </ul>
-		  <!-- fieldsets -->
-		  <fieldset id="first" style="display:none">		
-		    <h2 class="fs-title">Create your account</h2>
-		    <h3 class="fs-subtitle">This is step 1</h3>
-				<!-- {{ wtf.form_field(form.email) }}
-				{{ wtf.form_field(form.password) }}
-				{{ wtf.form_field(form.confirm) }} -->
-		    <input id="email" name="email" type="text" value="{{ request.form['email']}}" placeholder="Cornell Email" />
-				{% for error in form.email.errors %}
-				<span style="color: red;">[{{ error }}]</span>
-				{% endfor %}
-		    <input id="password" name="password" value="{{ request.form['password']}}" type="password"  placeholder="Password" />
-				{% for error in form.password.errors %}
-				<span style="color: red;">[{{ error }}]</span>
-				{% endfor %}
-		    <input id="confirm" name="confirm" value="{{ request.form['confirm']}}" type="password" placeholder="Confirm Password" />
-				{% for error in form.confirm.errors %}
-				<span style="color: red;">[{{ error }}]</span>
-				{% endfor %}
-<<<<<<< HEAD
-			<input id="submit_1" name="submit_1" type="submit" class="next action-button" value="Next" />
-=======
-				<input id="submit_1" type="button" class="next action-button" onclick="next_step1()" value="Next" />
->>>>>>> 60e1b9683e9b3df6d030e3d7fa75514dcddd82e4
-		  </fieldset>
-		  <fieldset id="second" style="display:none">
-		    <h2 class="fs-title">Account Details</h2>
-		    <h3 class="fs-subtitle">Your presence on this site</h3>
-				<!-- {{ wtf.form_field(form.username) }}
-				{{ wtf.form_field(form.firstname) }}
-				{{ wtf.form_field(form.lastname) }} -->
-		    <input id="username" name="username" type="text" value="{{ request.form['username']}}" placeholder="Username" />
-				{% for error in form.username.errors %}
-				<span style="color: red;">[{{ error }}]</span>
-				{% endfor %}
-		    <input id="firstname" name="firstname" type="text" value="{{ request.form['firstname']}}" placeholder="First Name" />
-				{% for error in form.firstname.errors %}
-				<span style="color: red;">[{{ error }}]</span>
-				{% endfor %}
-		    <input id="lastname" name="lastname" type="text" value="{{ request.form['lastname']}}" placeholder="Last Name" />
-				{% for error in form.lastname.errors %}
-				<span style="color: red;">[{{ error }}]</span>
-				{% endfor %}
-		    <input type="button" class="previous action-button" onClick="step1()" value="Previous" />
-		    <input id="submit_2" name="submit_2" type="submit" class="next action-button" value="Next" />
-		  </fieldset>
-		  <fieldset id="third" style="display:none">
-		    <h2 class="fs-title">Personal Details</h2>
-		    <h3 class="fs-subtitle">We will never sell it</h3>
-				<!-- {{ wtf.form_field(form.contact) }}
-				{{ wtf.form_field(form.college) }} -->
-		    <input id="contact" name="contact" type="text" value="{{ request.form['contact']}}" placeholder="Contact Number" />
-				{% for error in form.contact.errors %}
-				<span style="color: red;">[{{ error }}]</span>
-				{% endfor %}
-		    <input id="college" name="college" type="text" value="{{ request.form['college']}}" placeholder="College (eg.A&S, CALS)" />
-				{% for error in form.college.errors %}
-				<span style="color: red;">[{{ error }}]</span>
-				{% endfor %}
-		    <input type="button" class="previous action-button" onClick="step2()" value="Previous" />
-			<input id="submit_final" name="submit_final" type="submit" class="next action-button" value="Register" />
-		  </fieldset>
-		</form>
-	</div>
+		   	<br />
+			<form id="msform" method="POST">
+				{{ form.hidden_tag() }}
+			  <!-- progressbar -->
+			  <ul id="progressbar">
+			    <li id="active1">Account Setup</li>
+			    <li id="active2">Account Details</li>
+			    <li id="active3">Personal Details</li>
+			  </ul>
+			  <!-- fieldsets -->
+			  <fieldset id="first" style="display:none">		
+			    <h2 class="fs-title">Create your account</h2>
+			    <h3 class="fs-subtitle">This is step 1</h3>
+					<!-- {{ wtf.form_field(form.email) }}
+					{{ wtf.form_field(form.password) }}
+					{{ wtf.form_field(form.confirm) }} -->
+			    <input id="email" name="email" type="text" value="{{ request.form['email']}}" placeholder="Cornell Email" />
+					{% for error in form.email.errors %}
+					<span style="color: red;">[{{ error }}]</span>
+					{% endfor %}
+			    <input id="password" name="password" value="{{ request.form['password']}}" type="password"  placeholder="Password" />
+					{% for error in form.password.errors %}
+					<span style="color: red;">[{{ error }}]</span>
+					{% endfor %}
+			    <input id="confirm" name="confirm" value="{{ request.form['confirm']}}" type="password" placeholder="Confirm Password" />
+					{% for error in form.confirm.errors %}
+					<span style="color: red;">[{{ error }}]</span>
+					{% endfor %}
+				<input id="submit_1" name="submit_1" type="submit" class="next action-button" value="Next" />
+			  </fieldset>
+			  <fieldset id="second" style="display:none">
+			    <h2 class="fs-title">Account Details</h2>
+			    <h3 class="fs-subtitle">Your presence on this site</h3>
+					<!-- {{ wtf.form_field(form.username) }}
+					{{ wtf.form_field(form.firstname) }}
+					{{ wtf.form_field(form.lastname) }} -->
+			    <input id="username" name="username" type="text" value="{{ request.form['username']}}" placeholder="Username" />
+					{% for error in form.username.errors %}
+					<span style="color: red;">[{{ error }}]</span>
+					{% endfor %}
+			    <input id="firstname" name="firstname" type="text" value="{{ request.form['firstname']}}" placeholder="First Name" />
+					{% for error in form.firstname.errors %}
+					<span style="color: red;">[{{ error }}]</span>
+					{% endfor %}
+			    <input id="lastname" name="lastname" type="text" value="{{ request.form['lastname']}}" placeholder="Last Name" />
+					{% for error in form.lastname.errors %}
+					<span style="color: red;">[{{ error }}]</span>
+					{% endfor %}
+			    <input type="button" class="previous action-button" onClick="step1()" value="Previous" />
+			    <input id="submit_2" name="submit_2" type="submit" class="next action-button" value="Next" />
+			  </fieldset>
+			  <fieldset id="third" style="display:none">
+			    <h2 class="fs-title">Personal Details</h2>
+			    <h3 class="fs-subtitle">We will never sell it</h3>
+					<!-- {{ wtf.form_field(form.contact) }}
+					{{ wtf.form_field(form.college) }} -->
+			    <input id="contact" name="contact" type="text" value="{{ request.form['contact']}}" placeholder="Contact Number" />
+					{% for error in form.contact.errors %}
+					<span style="color: red;">[{{ error }}]</span>
+					{% endfor %}
+			    <input id="college" name="college" type="text" value="{{ request.form['college']}}" placeholder="College (eg.A&S, CALS)" />
+					{% for error in form.college.errors %}
+					<span style="color: red;">[{{ error }}]</span>
+					{% endfor %}
+			    <input type="button" class="previous action-button" onClick="step2()" value="Previous" />
+				<input id="submit_final" name="submit_final" type="submit" class="next action-button" value="Register" />
+			  </fieldset>
+			</form>
+		</div>
+	</section>
 	<div class="w-full text-center p-t-55">
 		<span class="txt2">
 			Already registered?
 		</span>
-
-		<a class="txt2 bo1" href="{{ url_for('register') }}">
+		<a class="txt2 bo1" href="{{ url_for('login') }}">
 			Sign in here
 		</a>
 	</div>
-	</section>
-
 </body>
 {% endblock %}
