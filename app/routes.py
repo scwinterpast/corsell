@@ -12,7 +12,10 @@ from werkzeug.utils import secure_filename
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from flask_sqlalchemy  import SQLAlchemy
 from app.models import User, Product, Image, Comment
-from app.forms import LoginForm, RegisterForm1, RegisterForm2, RegisterForm3, UploadForm, CommentForm
+from app.forms import (
+    LoginForm, RegisterForm1, RegisterForm2, RegisterForm3, \
+    CommentForm, UploadForm1, UploadForm2, FashionForm, LivingForm, PropertyForm, \
+    EducationForm, ElectronicsForm, ServicesForm)
 from app import db, login
 
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -96,8 +99,31 @@ def logout():
 @app.route('/upload', methods=['GET', 'POST'])
 @login_required
 def upload():
-    form = UploadForm()
-    if form.validate_on_submit():
+
+    form1 = UploadForm1()
+    form2 = UploadForm2()
+    form3 = PropertyForm()
+
+    if form1.submit_1.data and form1.validate() and not form2.submit_2.data:
+        return render_template('upload.html', form=form2, step=2);
+    if form2.submit_2.data and not form2.validate():
+        return render_template('upload.html', form=form2, step=2);
+    if form2.submit_2.data and form2.validate() and not form3.submit_final.data:
+        if form2.category.data == 'fashion':
+            form3 = FashionForm()
+        elif form2.category.data == 'living':
+            form3 = LivingForm()
+        elif form2.category.data == 'education':
+            form3 = EducationForm()
+        elif form2.category.data == 'services':
+            form3 = ServicesForm()
+        elif form2.category.data == 'electronics':
+            form3 = ElectronicsForm()
+        return render_template('upload.html', form=form3, step=3);
+    if form3.submit_final.data and not form3.validate():
+        return render_template('upload.html', form=form3, step=3);
+
+    if form3.submit_final.data and form3.validate():
         user_folder = os.path.join(MEDIA_ROOT, str(current_user.username))
         if not os.path.isdir(user_folder):
             os.mkdir(user_folder)
@@ -105,12 +131,11 @@ def upload():
         product_folder = os.path.join(user_folder, str(current_time))
         os.mkdir(product_folder)
 
-        p = Product(title=form.title.data, description=form.description.data,\
-        price=form.price.data, author=current_user, timestamp=current_time,\
-        condition=form.condition.data,category=form.category.data)
+        p = Product(title=form3.title.data, description=form3.description.data,\
+        price=form3.price.data, author=current_user, timestamp=current_time,\
+        condition=form3.condition.data,category=form3.category.data,subcategory=form3.subcategory.data)
         db.session.add(p)
         db.session.commit()
-        print('posted!')
 
         for f in request.files.getlist('photo'):
             filename = secure_filename(f.filename)
@@ -123,10 +148,8 @@ def upload():
             i = Image(link=link ,user_id=product.id)
             db.session.add(i)
             db.session.commit()
-
         return redirect(url_for('user', username=current_user.username))
-
-    return render_template('upload.html', form=form)
+    return render_template('upload.html', form=form1, step=1)
 
 #PROFILE
 @app.route('/user/<username>')

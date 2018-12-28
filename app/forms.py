@@ -60,7 +60,7 @@ class RegisterForm3(RegisterForm2):
     contact = StringField('Phone Number', validators=[DataRequired()])
     college = StringField('College', validators=[DataRequired()])
     submit_final = SubmitField('Register')
-    
+
 class LoginForm(FlaskForm):
     """Login form."""
     username = StringField('Username', validators=[DataRequired(message='Username is required')])
@@ -99,3 +99,72 @@ class CommentForm(FlaskForm):
     """Comment Form"""
     comment = TextAreaField('Post a comment:',validators=[DataRequired()])
     submit = SubmitField("Post")
+
+class UploadForm(FlaskForm):
+    """Upload Form Template"""
+    title = StringField('Title')
+    description = TextAreaField('Description')
+    price = DecimalField('Price')
+    photo = FileField('Image')
+    condition = SelectField(u'Condition')
+    category = SelectField(u'Category')
+    subcategory = SelectField(u'Subcategory')
+
+class UploadForm1(UploadForm):
+    """Upload Form Part 1"""
+    photo = FileField('Image', validators=[FileRequired(),FileAllowed(['jpg', 'png','jpeg'], 'Images only!')])
+    submit_1 = SubmitField('Next')
+
+class UploadForm2(UploadForm1):
+    """Upload Form Part 2"""
+    title = StringField('Title', validators=[DataRequired(message='Title is required')])
+    description = TextAreaField('Description', validators=[DataRequired(message='Description is required')])
+    price = DecimalField('Price', validators=[DataRequired(message='Price is required'),\
+    NumberRange(min=0, message='Price must be a valid number, at least 0')])
+    condition = SelectField(u'Condition', choices=[('na','N/A'),('new','New'),('used','Used')])
+    category = SelectField(u'Category', validators=[DataRequired(message='Category is required')],\
+    choices=[('property','Cars & Housing'),('fashion','Fashion'),('living','Living'),\
+    ('education','Education'),('services','Services'),('electronics','Electronics')])
+    submit_2 = SubmitField('Next')
+
+class PropertyForm(UploadForm2):
+    """Upload Form Part 3 - Cars & Housing"""
+    subcategory = SelectField(u'Subcategory', choices=[('cars','Cars'),('sublet','Subletting'),('lease','Leasing')])
+    submit_final = SubmitField('Upload')
+
+class FashionForm(UploadForm2):
+    """Upload Form Part 3 - Fashion"""
+    subcategory = SelectField(u'Subcategory', choices=[('watches','Watches'),('accessories','Accessories'),\
+    ('bags','Bags'),('wallets','Wallets'),('jackets','Jackets & Sweaters'),('tops','Tops'),\
+    ('bottoms','Bottoms'),('footwear','Footwear'),('jewellery','Jewellery'),\
+    ('health&beauty','Health & Beauty')])
+    submit_final = SubmitField('Upload')
+
+class LivingForm(UploadForm2):
+    """Upload Form Part 3 - Living"""
+    subcategory = SelectField(u'Subcategory', choices=[('furniture','Furniture'),\
+    ('bedsandmattresses','Beds & Mattresses'),('shelvesanddrawers','Shelves & Drawers'),\
+    ('sofas','Sofas'),('tablesandchairs','Tables & Chairs'),('decor','Home Decor'),\
+    ('plants','Plants'),('gardening','Gardening Tools'),('tv','TVs & Entertainment Systems'),\
+    ('kitchen','Kitchenware'),('laundry','Cleaning & Laundry'),('aircare','Cooling & Air Care')])
+    submit_final = SubmitField('Upload')
+
+class EducationForm(UploadForm2):
+    """Upload Form Part 3 - Education"""
+    subcategory = SelectField(u'Subcategory', choices=[('textbooks','Textbooks'),\
+    ('iclickers','Iclickers'),('stationery','Stationery'),('calculators','Calculators')])
+    submit_final = SubmitField('Upload')
+
+class ElectronicsForm(UploadForm2):
+    """Upload Form Part 3 - Electronics"""
+    subcategory = SelectField(u'Subcategory', choices=[('audio','Audio'),\
+    ('computers','Computers'),('computerparts','Computer Parts & Accessories'),\
+    ('phones','Mobile Phones'),('tablets','Tablets'),('mobileparts','Mobile & Tablet Accessories')])
+    submit_final = SubmitField('Upload')
+
+class ServicesForm(UploadForm2):
+    """Upload Form Part 3 - Services"""
+    subcategory = SelectField(u'Subcategory', choices=[('photography','Photography'),\
+    ('haircuts','Haircuts'),('tuition','Tuition'),('flowers','Flowers & Bouquets'),\
+    ('repairs','Home Repairs'),('rides','Ride Hitching')])
+    submit_final = SubmitField('Upload')

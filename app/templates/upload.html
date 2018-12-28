@@ -6,7 +6,7 @@
 <head>
 	<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 	<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js'></script>
-	<script  src="{{ url_for('static', filename='essence/js/form.js') }}"></script>
+	<script src="{{ url_for('static', filename='essence/js/form.js') }}"></script>
 <!--===============================================================================================-->
 </head>
 
@@ -44,13 +44,13 @@
 		margin-bottom: 10px;
 		width: 100%;
 		box-sizing: border-box;
-		color: #B22222;
+		color: #2C3E50;
 		font-size: 13px;
 	}
 	/*buttons*/
 	#msform .action-button {
 		width: 100px;
-		background: #B22222;
+		background: #27AE60;
 		font-weight: bold;
 		color: white;
 		border: 0 none;
@@ -60,7 +60,7 @@
 		margin: 10px 5px;
 	}
 	#msform .action-button:hover, #msform .action-button:focus {
-		box-shadow: 0 0 0 2px white, 0 0 0 3px #B22222;
+		box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
 	}
 	/*headings*/
 	.fs-title {
@@ -81,15 +81,22 @@
 		overflow: hidden;
 		/*CSS counters to number the steps*/
 		counter-reset: step;
+		background: white;
+		padding: 8px;
+		border-radius: 8px;
 	}
 	#progressbar li {
 		list-style-type: none;
-		color: black;
+		color: gray;
 		text-transform: uppercase;
 		font-size: 9px;
 		width: 33.33%;
 		float: left;
 		position: relative;
+	}
+	#progressbar li.active {
+		color: black;
+		font-weight: 600;
 	}
 	#progressbar li:before {
 		content: counter(step);
@@ -121,7 +128,7 @@
 	/*marking active/completed steps green*/
 	/*The number of the step and the connector before it = green*/
 	#progressbar li.active:before,  #progressbar li.active:after{
-		background: #F08080;
+		background: #27AE60;
 		color: white;
 	}
 .height {
@@ -131,115 +138,47 @@
 </style>
 
 <script>
-	var current_fs, next_fs, previous_fs; //fieldsets
-	var left, opacity, scale; //fieldset properties which we will animate
-	var animating; //flag to prevent quick multi-click glitches
+	var step = '{{step}}'
 
-	$(".next").click(function(){
-		if(animating) return false;
-		animating = true;
-
-		current_fs = $(this).parent();
-		next_fs = $(this).parent().next();
-
-		//activate next step on progressbar using the index of next_fs
-		$("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
-
-		//show the next fieldset
-		next_fs.show();
-		//hide the current fieldset with style
-		current_fs.animate({opacity: 0}, {
-			step: function(now, mx) {
-				//as the opacity of current_fs reduces to 0 - stored in "now"
-				//1. scale current_fs down to 80%
-				scale = 1 - (1 - now) * 0.2;
-				//2. bring next_fs from the right(50%)
-				left = (now * 50)+"%";
-				//3. increase opacity of next_fs to 1 as it moves in
-				opacity = 1 - now;
-				current_fs.css({
-	        'transform': 'scale('+scale+')',
-	        'position': 'absolute'
-	      });
-				next_fs.css({'left': left, 'opacity': opacity});
-			},
-			duration: 800,
-			complete: function(){
-				current_fs.hide();
-				animating = false;
-			},
-			//this comes from the custom easing plugin
-			easing: 'easeInOutBack'
-		});
-	});
-
-	$(".previous").click(function(){
-		if(animating) return false;
-		animating = true;
-
-		current_fs = $(this).parent();
-		previous_fs = $(this).parent().prev();
-
-		//de-activate current step on progressbar
-		$("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
-
-		//show the previous fieldset
-		previous_fs.show();
-		//hide the current fieldset with style
-		current_fs.animate({opacity: 0}, {
-			step: function(now, mx) {
-				//as the opacity of current_fs reduces to 0 - stored in "now"
-				//1. scale previous_fs from 80% to 100%
-				scale = 0.8 + (1 - now) * 0.2;
-				//2. take current_fs to the right(50%) - from 0%
-				left = ((1-now) * 50)+"%";
-				//3. increase opacity of previous_fs to 1 as it moves in
-				opacity = 1 - now;
-				current_fs.css({'left': left});
-				previous_fs.css({'transform': 'scale('+scale+')', 'opacity': opacity});
-			},
-			duration: 800,
-			complete: function(){
-				current_fs.hide();
-				animating = false;
-			},
-			//this comes from the custom easing plugin
-			easing: 'easeInOutBack'
-		});
-	});
-
-	$(".submit").click(function(){
-		return true;
-	})
-
-	/*---------------------------------------------------------*/
-	// Function that executes on click of first next button.
-	// https://www.formget.com/create-multi-step-form-using-javascript-and-css3/
-	function next_step1() {
-	document.getElementById("first").style.display = "none";
-	document.getElementById("second").style.display = "block";
-	document.getElementById("active2").style.color = "darkred";
-
+	function step1() {
+		document.getElementById("first").style.display = "block";
+		document.getElementById("second").style.display = "none";
+		document.getElementById("third").style.display = "none";
+		document.getElementById("active1").classList.add('active');
+		document.getElementById("active2").classList.remove('active');
+		document.getElementById("active3").classList.remove('active');
 	}
-	// Function that executes on click of first previous button.
-	function prev_step1() {
-	document.getElementById("first").style.display = "block";
-	document.getElementById("second").style.display = "none";
-	document.getElementById("active1").style.color = "darkred";
-	document.getElementById("active2").style.color = "gray";
+
+	function step2() {
+		document.getElementById("first").style.display = "none";
+		document.getElementById("second").style.display = "block";
+		document.getElementById("third").style.display = "none";
+		document.getElementById("active1").classList.remove('active');
+		document.getElementById("active2").classList.add('active');
+		document.getElementById("active3").classList.remove('active');
 	}
-	// Function that executes on click of second next button.
-	function next_step2() {
-	document.getElementById("second").style.display = "none";
-	document.getElementById("third").style.display = "block";
-	document.getElementById("active3").style.color = "darkred";
+
+	function step3() {
+		document.getElementById("first").style.display = "none";
+		document.getElementById("second").style.display = "none";
+		document.getElementById("third").style.display = "block";
+		document.getElementById("active1").classList.remove('active');
+		document.getElementById("active2").classList.remove('active');
+		document.getElementById("active3").classList.add('active');
 	}
-	// Function that executes on click of second previous button.
-	function prev_step2() {
-	document.getElementById("third").style.display = "none";
-	document.getElementById("second").style.display = "block";
-	document.getElementById("active2").style.color = "darkred";
-	document.getElementById("active3").style.color = "gray";
+
+	function determine_step() {
+		switch(step){
+			case "1":
+				step1();
+				break;
+			case "2":
+				step2();
+				break;
+			case '3':
+				step3();
+				break;
+		}
 	}
 	</script>
 
@@ -249,21 +188,20 @@
 		<form id="msform" method="POST" enctype="multipart/form-data">
 			  {{ form.hidden_tag() }}
 		  <!-- progressbar -->
-		  <ul id="progressbar">
-		    <li class="active" id="active1">Upload Images</li>
+			<ul id="progressbar">
+		    <li id="active1">Upload Images</li>
 		    <li id="active2">Product Details</li>
 		    <li id="active3">Category</li>
 		  </ul>
 		  <!-- fieldsets -->
-		  <fieldset id="first">
+		  <fieldset id="first" style="display:none">
 		    <h2 class="fs-title">Upload Images</h2>
 		    <h3 class="fs-subtitle">Files accepted: ('png,jpg,jpeg')</h3>
 				{{ form.photo(multiple="multiple") }}
-
-				<input type="button" class="next action-button" onclick="next_step1()" value="Next" />
+				<input id="submit_1" name="submit_1" type="submit" class="next action-button" value="Next" />
 		  </fieldset>
 
-		  <fieldset id="second">
+		  <fieldset id="second" style="display:none">
 		    <h2 class="fs-title">Product Details</h2>
 		    <h3 class="fs-subtitle">Tell people about your product</h3>
 				<input id="title" name="title" type="text" value="" placeholder="Title" />
@@ -271,7 +209,7 @@
 					<span style="color: red;">[{{ error }}]</span>
 					{% endfor %}
 
-					<textarea id="description" name="description" form="msform" placeholder="Product description"></textarea>
+					<textarea id="description" name="description" form="msform" value="" placeholder="Product description"></textarea>
 						{% for error in form.description.errors %}
 						<span style="color: red;">[{{ error }}]</span>
 						{% endfor %}
@@ -281,21 +219,22 @@
 							<span style="color: red;">[{{ error }}]</span>
 							{% endfor %}
 
-							{{ form.condition.label }}
+							<!-- {{ form.condition.label }}
 							{{ form.condition }}
 
 							{{ form.category.label }}
-							{{ form.category }}
-		    <input type="button" onclick="prev_step1()" class="previous action-button" value="Previous" />
-		    <input type="button" onclick="next_step2()" class="next action-button" value="Next" />
+							{{ form.category }} -->
+				<input type="button" class="previous action-button" onClick="step1()" value="Previous" />
+				<input id="submit_2" name="submit_2" type="submit" class="next action-button" value="Next" />
 		  </fieldset>
 
-		  <fieldset id="third">
+		  <fieldset id="third" style="display:none">
 		    <h2 class="fs-title">Category</h2>
 		    <h3 class="fs-subtitle">Choose a subcategory</h3>
-
-		    <input type="button" onclick="prev_step2()" class="previous action-button" value="Previous" />
-			 <button id="submit_final" type="submit" class="action-button">Submit</button>
+				<!-- {{ form.subcategory.label }}
+				{{ form.subcategory }} -->
+			<input type="button" class="previous action-button" onClick="step2()" value="Previous" />
+			<input id="submit_final" name="submit_final" type="submit" class="next action-button" value="Upload" />
 		  </fieldset>
 		</form>
 	</div>
