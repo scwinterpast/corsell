@@ -15,37 +15,52 @@ from flask_wtf.file import FileField, FileRequired, FileAllowed
 from app.models import User
 
 class RegisterForm(FlaskForm):
-    """Sign Up Form"""
+    """Sign Up Form Template"""
+    email = StringField('Email')
+    username = StringField('Username')
+    firstname = StringField('First Name')
+    lastname = StringField('Last Name')
+    contact = StringField('Phone Number')
+    college = StringField('College')
+    password = PasswordField('Password')
+    confirm = PasswordField('Verify password')
+
+class RegisterForm1(RegisterForm):
+    """Sign Up Form Part 1"""
     email = StringField('Email', validators=[DataRequired(), \
     Email(), Length(max=50)])
-
-    username = StringField('Username', validators=[DataRequired(),\
-    Length(min=4,max=15)])
-
-    firstname = StringField('First Name', validators=[DataRequired()])
-    lastname = StringField('Last Name', validators=[DataRequired()])
-    contact = StringField('Phone Number', validators=[DataRequired()])
-    college = StringField('College', validators=[DataRequired()])
-
     password = PasswordField('Password', validators=[DataRequired(),\
     Length(min=8,max=30)])
     confirm = PasswordField('Verify password',
             validators=[DataRequired(), EqualTo('password',
             message='Passwords must match')])
     submit_1 = SubmitField('Next')
-    submit_2 = SubmitField('Next')
-    submit_final = SubmitField('Register')
-
-    def validate_username(self, username):
-        user = User.query.filter_by(username=username.data).first()
-        if user is not None:
-            raise ValidationError('Please use a different username.')
 
     def validate_email(self, email):
         user = User.query.filter_by(email=email.data).first()
         if user is not None:
             raise ValidationError('Please use a different email address.')
 
+class RegisterForm2(RegisterForm1):
+    """Sign Up Form Part 2"""
+    username = StringField('Username', validators=[DataRequired(),\
+    Length(min=4,max=15)])
+    firstname = StringField('First Name', validators=[DataRequired()])
+    lastname = StringField('Last Name', validators=[DataRequired()])
+    submit_2 = SubmitField('Next')
+
+    def validate_username(self, username):
+        user = User.query.filter_by(username=username.data).first()
+        if user is not None:
+            raise ValidationError('Please use a different username.')
+            raise ValidationError('Please use a different email address.')
+
+class RegisterForm3(RegisterForm2):
+    """Sign Up Form Part 3"""
+    contact = StringField('Phone Number', validators=[DataRequired()])
+    college = StringField('College', validators=[DataRequired()])
+    submit_final = SubmitField('Register')
+    
 class LoginForm(FlaskForm):
     """Login form."""
     username = StringField('Username', validators=[DataRequired(message='Username is required')])
