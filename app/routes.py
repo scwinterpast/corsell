@@ -12,7 +12,7 @@ from werkzeug.utils import secure_filename
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from flask_sqlalchemy  import SQLAlchemy
 from app.models import User, Product, Image, Comment
-from app.forms import LoginForm, RegisterForm, UploadForm, CommentForm
+from app.forms import LoginForm, RegisterForm1, RegisterForm2, RegisterForm3, UploadForm, CommentForm
 from app import db, login
 
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -65,16 +65,35 @@ def login():
 def register():
     if current_user.is_authenticated:
         return redirect(url_for('index'))
-    form = RegisterForm()
-    if form.validate_on_submit():
-        user = User(username=form.username.data, email=form.email.data,\
-        firstname=form.firstname.data, lastname=form.lastname.data, \
-        contact=form.contact.data, college=form.college.data)
-        user.set_password(form.password.data)
+    form1 = RegisterForm1()
+    form2 = RegisterForm2()
+    form3 = RegisterForm3()
+    if form1.submit_1.data and form1.validate() and not form2.submit_2.data:
+        form2.email.data = form1.email.data;
+        form2.password.data = form1.password.data;
+        form2.confirm.data = form1.confirm.data;
+        return render_template('register.html', title='Register', form=form2, step=2);
+    if form2.submit_2.data and not form2.validate():
+        return render_template('register.html', title='Register', form=form2, step=2);
+    if form2.submit_2.data and form2.validate() and not form3.submit_final.data:
+        form3.email.data=form2.email.data;
+        form3.password.data=form2.password.data;
+        form3.confirm.data=form2.confirm.data;
+        form3.username.data=form2.username.data;
+        form3.firstname.data=form2.firstname.data;
+        form3.lastname.data=form2.lastname.data;
+        return render_template('register.html', title='Register', form=form3, step=3);
+    if form3.submit_final.data and not form3.validate():
+        return render_template('register.html', title='Register', form=form3, step=3);
+    if form3.submit_final.data and form3.validate():
+        user = User(email=form3.email.data, username=form3.username.data, \
+        firstname=form3.firstname.data, lastname=form3.lastname.data, \
+        contact=form3.contact.data, college=form3.college.data)
+        user.set_password(form3.password.data)
         db.session.add(user)
         db.session.commit()
         return redirect(url_for('login'))
-    return render_template('register.html', title='Register', form=form)
+    return render_template('register.html', title='Register', form= form1, step=1)
 
 
 #LOGOUT

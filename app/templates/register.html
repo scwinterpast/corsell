@@ -84,15 +84,22 @@
 		overflow: hidden;
 		/*CSS counters to number the steps*/
 		counter-reset: step;
+		background: white;
+		padding: 8px;
+		border-radius: 8px;
 	}
 	#progressbar li {
 		list-style-type: none;
-		color: black;
+		color: gray;
 		text-transform: uppercase;
 		font-size: 9px;
 		width: 33.33%;
 		float: left;
 		position: relative;
+	}
+	#progressbar li.active {
+		color: black;
+		font-weight: 600;
 	}
 	#progressbar li:before {
 		content: counter(step);
@@ -134,188 +141,119 @@
 </style>
 
 <script>
-	var current_fs, next_fs, previous_fs; //fieldsets
-	var left, opacity, scale; //fieldset properties which we will animate
-	var animating; //flag to prevent quick multi-click glitches
+	var step = '{{step}}'
 
-	$(".next").click(function(){
-		if(animating) return false;
-		animating = true;
-
-		current_fs = $(this).parent();
-		next_fs = $(this).parent().next();
-
-		//activate next step on progressbar using the index of next_fs
-		$("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
-
-		//show the next fieldset
-		next_fs.show();
-		//hide the current fieldset with style
-		current_fs.animate({opacity: 0}, {
-			step: function(now, mx) {
-				//as the opacity of current_fs reduces to 0 - stored in "now"
-				//1. scale current_fs down to 80%
-				scale = 1 - (1 - now) * 0.2;
-				//2. bring next_fs from the right(50%)
-				left = (now * 50)+"%";
-				//3. increase opacity of next_fs to 1 as it moves in
-				opacity = 1 - now;
-				current_fs.css({
-	        'transform': 'scale('+scale+')',
-	        'position': 'absolute'
-	      });
-				next_fs.css({'left': left, 'opacity': opacity});
-			},
-			duration: 800,
-			complete: function(){
-				current_fs.hide();
-				animating = false;
-			},
-			//this comes from the custom easing plugin
-			easing: 'easeInOutBack'
-		});
-	});
-
-	$(".previous").click(function(){
-		if(animating) return false;
-		animating = true;
-
-		current_fs = $(this).parent();
-		previous_fs = $(this).parent().prev();
-
-		//de-activate current step on progressbar
-		$("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
-
-		//show the previous fieldset
-		previous_fs.show();
-		//hide the current fieldset with style
-		current_fs.animate({opacity: 0}, {
-			step: function(now, mx) {
-				//as the opacity of current_fs reduces to 0 - stored in "now"
-				//1. scale previous_fs from 80% to 100%
-				scale = 0.8 + (1 - now) * 0.2;
-				//2. take current_fs to the right(50%) - from 0%
-				left = ((1-now) * 50)+"%";
-				//3. increase opacity of previous_fs to 1 as it moves in
-				opacity = 1 - now;
-				current_fs.css({'left': left});
-				previous_fs.css({'transform': 'scale('+scale+')', 'opacity': opacity});
-			},
-			duration: 800,
-			complete: function(){
-				current_fs.hide();
-				animating = false;
-			},
-			//this comes from the custom easing plugin
-			easing: 'easeInOutBack'
-		});
-	});
-
-	$(".submit").click(function(){
-		return true;
-	})
-
-	/*---------------------------------------------------------*/
-	// Function that executes on click of first next button.
-	// https://www.formget.com/create-multi-step-form-using-javascript-and-css3/
-	function next_step1() {
-	document.getElementById("first").style.display = "none";
-	document.getElementById("second").style.display = "block";
-	document.getElementById("active2").style.color = "red";
-
+	function step1() {
+		document.getElementById("first").style.display = "block";
+		document.getElementById("second").style.display = "none";
+		document.getElementById("third").style.display = "none";
+		document.getElementById("active1").classList.add('active');
+		document.getElementById("active2").classList.remove('active');
+		document.getElementById("active3").classList.remove('active');
 	}
-	// Function that executes on click of first previous button.
-	function prev_step1() {
-	document.getElementById("first").style.display = "block";
-	document.getElementById("second").style.display = "none";
-	document.getElementById("active1").style.color = "red";
-	document.getElementById("active2").style.color = "gray";
+
+	function step2() {
+		document.getElementById("first").style.display = "none";	
+		document.getElementById("second").style.display = "block";
+		document.getElementById("third").style.display = "none";
+		document.getElementById("active1").classList.remove('active');
+		document.getElementById("active2").classList.add('active');
+		document.getElementById("active3").classList.remove('active');
 	}
-	// Function that executes on click of second next button.
-	function next_step2() {
-	document.getElementById("second").style.display = "none";
-	document.getElementById("third").style.display = "block";
-	document.getElementById("active3").style.color = "red";
+
+	function step3() {
+		document.getElementById("first").style.display = "none";
+		document.getElementById("second").style.display = "none";
+		document.getElementById("third").style.display = "block";
+		document.getElementById("active1").classList.remove('active');
+		document.getElementById("active2").classList.remove('active');
+		document.getElementById("active3").classList.add('active');
 	}
-	// Function that executes on click of second previous button.
-	function prev_step2() {
-	document.getElementById("third").style.display = "none";
-	document.getElementById("second").style.display = "block";
-	document.getElementById("active2").style.color = "red";
-	document.getElementById("active3").style.color = "gray";
+
+	function determine_step() {
+		switch(step){
+			case "1":
+				step1();
+				break;
+			case "2":
+				step2();
+				break;
+			case '3':
+				step3();
+				break;
+		}
 	}
 	</script>
 
-<body>
-
+<body onload='determine_step()'>
 	<section class="welcome_area bg-img background-overlay height" style="background-image: url('/static/essence/img/bg-img/login.jpg'); height="900px">
 	    <div class="container h-100">
 				<
 		<form id="msform" method="POST">
-			  {{ form.hidden_tag() }}
+			{{ form.hidden_tag() }}
 		  <!-- progressbar -->
 		  <ul id="progressbar">
-		    <li class="active" id="active1">Account Setup</li>
+		    <li id="active1">Account Setup</li>
 		    <li id="active2">Account Details</li>
 		    <li id="active3">Personal Details</li>
 		  </ul>
 		  <!-- fieldsets -->
-		  <fieldset id="first">
+		  <fieldset id="first" style="display:none">		
 		    <h2 class="fs-title">Create your account</h2>
 		    <h3 class="fs-subtitle">This is step 1</h3>
 				<!-- {{ wtf.form_field(form.email) }}
 				{{ wtf.form_field(form.password) }}
 				{{ wtf.form_field(form.confirm) }} -->
-		    <input id="email" name="email" type="text" value="" placeholder="Cornell Email" />
+		    <input id="email" name="email" type="text" value="{{ request.form['email']}}" placeholder="Cornell Email" />
 				{% for error in form.email.errors %}
 				<span style="color: red;">[{{ error }}]</span>
 				{% endfor %}
-		    <input id="password" name="password" value="" type="password" placeholder="Password" />
+		    <input id="password" name="password" value="{{ request.form['password']}}" type="password"  placeholder="Password" />
 				{% for error in form.password.errors %}
 				<span style="color: red;">[{{ error }}]</span>
 				{% endfor %}
-		    <input id="confirm" name="confirm" value="" type="password" placeholder="Confirm Password" />
+		    <input id="confirm" name="confirm" value="{{ request.form['confirm']}}" type="password" placeholder="Confirm Password" />
 				{% for error in form.confirm.errors %}
 				<span style="color: red;">[{{ error }}]</span>
 				{% endfor %}
-				<input id="submit_1" type="submit" class="next action-button" onclick="next_step1()" value="Next" />
+			<input id="submit_1" name="submit_1" type="submit" class="next action-button" value="Next" />
 		  </fieldset>
-		  <fieldset id="second">
+		  <fieldset id="second" style="display:none">
 		    <h2 class="fs-title">Account Details</h2>
 		    <h3 class="fs-subtitle">Your presence on this site</h3>
 				<!-- {{ wtf.form_field(form.username) }}
 				{{ wtf.form_field(form.firstname) }}
 				{{ wtf.form_field(form.lastname) }} -->
-		    <input id="username" name="username" type="text" value="" placeholder="Username" />
+		    <input id="username" name="username" type="text" value="{{ request.form['username']}}" placeholder="Username" />
 				{% for error in form.username.errors %}
 				<span style="color: red;">[{{ error }}]</span>
 				{% endfor %}
-		    <input id="firstname" name="firstname" type="text" value="" placeholder="First Name" />
+		    <input id="firstname" name="firstname" type="text" value="{{ request.form['firstname']}}" placeholder="First Name" />
 				{% for error in form.firstname.errors %}
 				<span style="color: red;">[{{ error }}]</span>
 				{% endfor %}
-		    <input id="lastname" name="lastname" type="text" value="" placeholder="Last Name" />
+		    <input id="lastname" name="lastname" type="text" value="{{ request.form['lastname']}}" placeholder="Last Name" />
 				{% for error in form.lastname.errors %}
 				<span style="color: red;">[{{ error }}]</span>
 				{% endfor %}
-		    <input type="button" onclick="prev_step1()" class="previous action-button" value="Previous" />
-		    <input id="submit_2" type="button" onclick="next_step2()" class="next action-button" value="Next" />
+		    <input type="button" class="previous action-button" onClick="step1()" value="Previous" />
+		    <input id="submit_2" name="submit_2" type="submit" class="next action-button" value="Next" />
 		  </fieldset>
-		  <fieldset id="third">
+		  <fieldset id="third" style="display:none">
 		    <h2 class="fs-title">Personal Details</h2>
 		    <h3 class="fs-subtitle">We will never sell it</h3>
 				<!-- {{ wtf.form_field(form.contact) }}
 				{{ wtf.form_field(form.college) }} -->
-		    <input id="contact" name="contact" type="text" value="" placeholder="Contact Number" />
+		    <input id="contact" name="contact" type="text" value="{{ request.form['contact']}}" placeholder="Contact Number" />
 				{% for error in form.contact.errors %}
 				<span style="color: red;">[{{ error }}]</span>
 				{% endfor %}
-		    <input id="college" name="college" type="text" value="" placeholder="College (eg.A&S, CALS)" />
+		    <input id="college" name="college" type="text" value="{{ request.form['college']}}" placeholder="College (eg.A&S, CALS)" />
 				{% for error in form.college.errors %}
 				<span style="color: red;">[{{ error }}]</span>
 				{% endfor %}
-		    <input type="button" onclick="prev_step2()" class="previous action-button" value="Previous" />
-			 <button id="submit_final" type="submit" class="action-button">Submit</button>
+		    <input type="button" class="previous action-button" onClick="step2()" value="Previous" />
+			<input id="submit_final" name="submit_final" type="submit" class="next action-button" value="Register" />
 		  </fieldset>
 		</form>
 	</div>
