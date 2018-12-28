@@ -47,15 +47,13 @@ class Product(db.Model):
         return '<Product {}>'.format(self.title)
 
 class Comment(db.Model):
+    """https://blog.miguelgrinberg.com/post/implementing-user-comments-with-sqlalchemy"""
     __tablename__ = 'comments'
     id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.String())
     timestamp = db.Column(db.DateTime,index=True, default=datetime.utcnow)
     post_id = db.Column(db.Integer, db.ForeignKey('products.id'))
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-
-    def __repr__(self):
-        return '<Comment %r>' % (self.text)
 
 class Image(db.Model):
     __tablename__ = 'images'

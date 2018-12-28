@@ -97,7 +97,8 @@ def upload():
         os.mkdir(product_folder)
 
         p = Product(title=form.title.data, description=form.description.data,\
-        price=form.price.data, author=current_user, timestamp=current_time)
+        price=form.price.data, author=current_user, timestamp=current_time,\
+        category=form.category.data)
         db.session.add(p)
         db.session.commit()
         print('posted!')
@@ -141,7 +142,7 @@ def product(username,key):
         if username not in d:
             d[username]=[comment]
         else:
-            d[username].append(comment)
+            d[username].insert(0,comment)
 
     if form.validate_on_submit():
         c=Comment(text=form.comment.data,post_id=product.id,user_id=current_user.id)
@@ -151,8 +152,8 @@ def product(username,key):
         if current_user.username not in d:
             d[current_user.username]=[c]
         else:
-            d[current_user.username].append(c)
+            d[current_user.username].insert(0,c)
 
-        return render_template('product.html', product=product, user=user, current=current_user, comments=d, form=form)
+        return redirect(url_for('product', username=user.username, key=product.timestamp))
 
     return render_template('product.html', product=product, user=user, current=current_user, comments=d, form=form)

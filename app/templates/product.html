@@ -3,7 +3,6 @@
 {% block title %}{{ product.title }}{% endblock %}
 
 {% block content %}
-
 <!-- ##### Single Product Details Area Start ##### -->
 <section class="single_product_details_area d-flex align-items-center">
 
@@ -35,23 +34,78 @@
 
 </section>
 
-<div class=="row">
-  <form method='post'>
-    {{ form.hidden_tag() }}
-    {{ wtf.form_field(form.comment) }}
-    {{ wtf.form_field(form.submit) }}
-    <h2>{{current.username}}</h2>
-  </form>
-</div>
+<style>
+  form button { margin: 5px 0px; }
+textarea { display: block; margin-bottom: 10px; }
+/*post*/
+.post { border: 1px solid #ccc; margin-top: 10px; }
+/*comments*/
+.comments-section { margin-top: 10px; border: 1px solid #ccc; margin:0px auto; max-width:100%}
+.comment { margin-bottom: 10px; }
+.comment .comment-name { font-weight: bold; }
+.comment .comment-date {
+	font-style: italic;
+	font-size: 0.8em;
+}
+.comment .reply-btn, .edit-btn { font-size: 0.8em; }
+.comment-details { width: 91.5%; float: left; }
+.comment-details p { margin-bottom: 0px; }
+.comment .profile_pic {
+	width: 35px;
+	height: 35px;
+	margin-right: 5px;
+	float: left;
+	border-radius: 50%;
+}
+/*replies*/
+.reply { margin-left: 30px; }
+.reply_form {
+	margin-left: 40px;
+	display: none;
+}
+#comment_form { margin-top: 10px; }
+</style>
 
-<div class=="row">
-{% for u,comment in comments.items() %}
-{% for c in comment %}
-<span>{{ u }}</span>
-<span>{{ c.text }}</span>
-<span>{{ c.timestamp }}</span>
-{% endfor %}
-{% endfor %}
-</div>
+<!-- comments section -->
+		<div class="col-md-6 col-md-offset-3 comments-section">
+			<!-- comment form -->
+      {% if current_user.is_authenticated %}
+			<form class="clearfix" action="" method="post" id="comment_form">
+        {{ form.hidden_tag() }}
+        {{ wtf.form_field(form.comment) }}
+				<button class="btn btn-primary btn-sm pull-right" id="submit">Submit comment</button>
+			</form>
+      {% else %}
+      <div class="well" style="margin-top: 20px;">
+        <div class="text-center"><a href="{{ url_for('login') }}">Sign in</a><a> to post a comment</a>
+      </div>
+      {% endif %}
+
+			<!-- Display total number of comments on this post  -->
+			<h5><span id="comments_count">{{product.comments.count()}}</span> Comment(s)</h5>
+			<hr>
+			<!-- comments wrapper -->
+			<div id="comments-wrapper">
+        {% for u,comment in comments.items() %}
+        {% for c in comment %}
+				<div class="comment clearfix">
+						<img src="profile.png" alt="" class="profile_pic">
+						<div class="comment-details">
+							<span class="comment-name">{{u}}</span>
+							<span class="comment-date">{{ c.timestamp }}</span>
+							<p>{{ c.text }}</p>
+						</div>
+				</div>
+        {% endfor %}
+        {% endfor %}
+			<!-- // comments wrapper -->
+		</div>
+		<!-- // comments section -->
+	</div>
+
+<!-- Javascripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- Bootstrap Javascript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 {% endblock %}
