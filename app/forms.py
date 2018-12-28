@@ -77,6 +77,9 @@ class UploadForm(FlaskForm):
     category = SelectField(u'Category', validators=[DataRequired(message='Category is required')],\
     choices=[('property','Cars & Housing'),('clothing','Clothing'),('living','Living'),\
     ('education','Education'),('services','Serivces'),('electronics','Electronics')])
+    submit_1 = SubmitField('Next')
+    submit_2 = SubmitField('Next')
+    submit_final = SubmitField('Upload')
 
     # def validate_username(self, username):
     #     user = User.query.filter_by(username=username.data).first()
@@ -91,5 +94,5 @@ class UploadForm(FlaskForm):
 
 class CommentForm(FlaskForm):
     """Comment Form"""
-    comment = TextAreaField('Add a comment', validators=[DataRequired()])
+    comment = TextAreaField('Post a comment:',validators=[DataRequired()])
     submit = SubmitField("Post")

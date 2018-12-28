@@ -46,7 +46,6 @@
 		margin-bottom: 10px;
 		width: 100%;
 		box-sizing: border-box;
-		font-family: montserrat;
 		color: #2C3E50;
 		font-size: 13px;
 	}
@@ -188,7 +187,7 @@
 <body onload='determine_step()'>
 	<section class="welcome_area bg-img background-overlay height" style="background-image: url('/static/essence/img/bg-img/login.jpg'); height="900px">
 	    <div class="container h-100">
-				<
+
 		<form id="msform" method="POST">
 			{{ form.hidden_tag() }}
 		  <!-- progressbar -->
@@ -216,7 +215,11 @@
 				{% for error in form.confirm.errors %}
 				<span style="color: red;">[{{ error }}]</span>
 				{% endfor %}
+<<<<<<< HEAD
 			<input id="submit_1" name="submit_1" type="submit" class="next action-button" value="Next" />
+=======
+				<input id="submit_1" type="button" class="next action-button" onclick="next_step1()" value="Next" />
+>>>>>>> 60e1b9683e9b3df6d030e3d7fa75514dcddd82e4
 		  </fieldset>
 		  <fieldset id="second" style="display:none">
 		    <h2 class="fs-title">Account Details</h2>
@@ -256,6 +259,15 @@
 			<input id="submit_final" name="submit_final" type="submit" class="next action-button" value="Register" />
 		  </fieldset>
 		</form>
+	</div>
+	<div class="w-full text-center p-t-55">
+		<span class="txt2">
+			Already registered?
+		</span>
+
+		<a class="txt2 bo1" href="{{ url_for('register') }}">
+			Sign in here
+		</a>
 	</div>
 	</section>
 
