@@ -220,11 +220,11 @@
     							<span style="color: red;">[{{ error }}]</span>
     							{% endfor %}
 
-    							{{ form.condition.label }}
+    							<!-- {{ form.condition.label }}
     							{{ form.condition }}
 
     							{{ form.category.label }}
-    							{{ form.category }}
+    							{{ form.category }} -->
     				<input type="button" class="previous action-button" onClick="step1()" value="Previous" />
     				<input id="submit_2" name="submit_2" type="submit" class="next action-button" value="Next" />
     		  </fieldset>
@@ -232,8 +232,8 @@
           <fieldset id="third" style="display:none">
     		    <h2 class="fs-title">Category</h2>
     		    <h3 class="fs-subtitle">Choose a subcategory</h3>
-    				{{ form.subcategory.label }}
-    				{{ form.subcategory }}
+    				<!-- {{ form.subcategory.label }}
+    				{{ form.subcategory }} -->
     			<input type="button" class="previous action-button" onClick="step2()" value="Previous" />
     			<input id="submit_final" name="submit_final" type="submit" class="next action-button" value="Upload" />
     		  </fieldset>
@@ -244,4 +244,4 @@
   	</section>
 
   </body>
-  {% endblock %}
+{% endblock %}
