@@ -89,6 +89,7 @@ def register():
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form= form1, step=1)
 
+
 #LOGOUT
 @app.route('/logout')
 def logout():
@@ -99,29 +100,18 @@ def logout():
 @app.route('/upload', methods=['GET', 'POST'])
 @login_required
 def upload():
-
     form1 = UploadForm1()
     form2 = UploadForm2()
     form3 = PropertyForm()
 
     if form1.submit_1.data and form1.validate() and not form2.submit_2.data:
-        return render_template('upload.html', form=form2, step=2);
+        return render_template('upload.html', title='Upload', form=form2, step=2);
     if form2.submit_2.data and not form2.validate():
-        return render_template('upload.html', form=form2, step=2);
+        return render_template('upload.html', title='Upload', form=form2, step=2);
     if form2.submit_2.data and form2.validate() and not form3.submit_final.data:
-        if form2.category.data == 'fashion':
-            form3 = FashionForm()
-        elif form2.category.data == 'living':
-            form3 = LivingForm()
-        elif form2.category.data == 'education':
-            form3 = EducationForm()
-        elif form2.category.data == 'services':
-            form3 = ServicesForm()
-        elif form2.category.data == 'electronics':
-            form3 = ElectronicsForm()
-        return render_template('upload.html', form=form3, step=3);
+        return render_template('upload.html', title='Upload', form=form3, step=3);
     if form3.submit_final.data and not form3.validate():
-        return render_template('upload.html', form=form3, step=3);
+        return render_template('upload.html', title='Upload', form=form3, step=3);
 
     if form3.submit_final.data and form3.validate():
         user_folder = os.path.join(MEDIA_ROOT, str(current_user.username))
@@ -149,7 +139,8 @@ def upload():
             db.session.add(i)
             db.session.commit()
         return redirect(url_for('user', username=current_user.username))
-    return render_template('upload.html', form=form1, step=1)
+
+    return render_template('upload.html', title='Upload', form=form1, step=1)
 
 #PROFILE
 @app.route('/user/<username>')
