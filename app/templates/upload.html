@@ -215,15 +215,15 @@
 							<span style="color: red;">[{{ error }}]</span>
 							{% endfor %}
 
-							<textarea id="description" name="description" form="msform" value="{{ request.form['description']}}" placeholder="Product description"></textarea>
-								{% for error in form.description.errors %}
-								<span style="color: red;">[{{ error }}]</span>
-								{% endfor %}
+						<textarea id="description" name="description" form="msform" value="{{ request.form['description']}}" placeholder="Product description"></textarea>
+							{% for error in form.description.errors %}
+							<span style="color: red;">[{{ error }}]</span>
+							{% endfor %}
 
 						<input id="price" name="price" type="number" value="{{ request.form['price']}}" placeholder="$" />
-									{% for error in form.price.errors %}
-									<span style="color: red;">[{{ error }}]</span>
-									{% endfor %}
+							{% for error in form.price.errors %}
+							<span style="color: red;">[{{ error }}]</span>
+							{% endfor %}
 
 						<select id="condition" name="condition" value="{{ request.form['condition']}}" >
 							<option value="na">N/A</option>

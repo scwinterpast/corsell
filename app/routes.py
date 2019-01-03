@@ -103,11 +103,10 @@ def upload():
     form1 = UploadForm1()
     form2 = UploadForm2()
     form3 = PropertyForm()
-    print('hi')
 
     list = []
-
-    if form1.submit_1.data and not form2.submit_2.data:
+    
+    if form1.submit_1.data and form1.validate() and not form2.submit_2.data:
         user_folder = os.path.join(MEDIA_ROOT, str(current_user.username))
         if not os.path.isdir(user_folder):
             os.mkdir(user_folder)
@@ -149,7 +148,6 @@ def upload():
             # db.session.add(i)
             # db.session.commit()
         return redirect(url_for('user', username=current_user.username))
-    print('here1')
     return render_template('upload.html', form=form1, step=1)
 
 #PROFILE

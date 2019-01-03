@@ -104,11 +104,16 @@ class UploadForm0(FlaskForm):
     """Upload Form Template"""
     title = StringField('Title')
     description = TextAreaField('Description')
-    price = FloatField('Price')
+    price = TextAreaField('Price')
     photo = FileField('Image')
-    condition = SelectField(u'Condition')
-    category = SelectField(u'Category')
-    subcategory = SelectField(u'Subcategory')
+    condition = SelectField(u'Condition', choices=[('na','N/A'),('new','New'),('used','Used')], default='na')
+    category = SelectField(u'Category', validators=[DataRequired(message='Category is required')],\
+    choices=[('property','Cars & Housing'),('fashion','Fashion'),('living','Living'),\
+    ('education','Education'),('services','Services'),('electronics','Electronics')], default='property')
+    subcategory = SelectField(u'Subcategory', choices=[('watches','Watches'),('accessories','Accessories'),\
+    ('bags','Bags'),('wallets','Wallets'),('jackets','Jackets & Sweaters'),('tops','Tops'),\
+    ('bottoms','Bottoms'),('footwear','Footwear'),('jewellery','Jewellery'),\
+    ('health&beauty','Health & Beauty')], default='watches')
 
 class UploadForm1(UploadForm0):
     """Upload Form Part 1"""
@@ -121,15 +126,10 @@ class UploadForm2(UploadForm1):
     description = TextAreaField('Description', validators=[DataRequired(message='Description is required')])
     price = FloatField('Price', validators=[DataRequired(message='Price is required'),\
     NumberRange(min=0, message='Price must be a valid number, at least 0')])
-    condition = SelectField(u'Condition', choices=[('na','N/A'),('new','New'),('used','Used')])
-    category = SelectField(u'Category', validators=[DataRequired(message='Category is required')],\
-    choices=[('property','Cars & Housing'),('fashion','Fashion'),('living','Living'),\
-    ('education','Education'),('services','Services'),('electronics','Electronics')])
     submit_2 = SubmitField('Next')
 
 class PropertyForm(UploadForm2):
     """Upload Form Part 3 - Cars & Housing"""
-    subcategory = SelectField(u'Subcategory', choices=[('cars','Cars'),('sublet','Subletting'),('lease','Leasing')])
     submit_final = SubmitField('Upload')
 
 class FashionForm(UploadForm2):
