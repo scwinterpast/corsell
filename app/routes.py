@@ -103,8 +103,30 @@ def upload():
     form1 = UploadForm1()
     form2 = UploadForm2()
     form3 = PropertyForm()
+    print('hi')
 
-    if form1.submit_1.data and form1.validate() and not form2.submit_2.data:
+    list = []
+
+    if form1.submit_1.data and not form2.submit_2.data:
+        user_folder = os.path.join(MEDIA_ROOT, str(current_user.username))
+        if not os.path.isdir(user_folder):
+            os.mkdir(user_folder)
+        current_time = math.floor(time.time())
+        product_folder = os.path.join(user_folder, str(current_time))
+        os.mkdir(product_folder)
+
+        for f in request.files.getlist('photo'):
+            filename = secure_filename(f.filename)
+            destination = os.path.join(product_folder, filename)
+            f.save(destination)
+
+            link = os.sep + os.path.relpath(destination, APP_ROOT)
+
+            i = Image(link=link)
+            list.append(i)
+            db.session.add(i)
+            db.session.commit()
+        print(list)
         return render_template('upload.html', title='Upload', form=form2, step=2);
     if form2.submit_2.data and not form2.validate():
         return render_template('upload.html', title='Upload', form=form2, step=2);
@@ -114,33 +136,21 @@ def upload():
         return render_template('upload.html', title='Upload', form=form3, step=3);
 
     if form3.submit_final.data and form3.validate():
-        user_folder = os.path.join(MEDIA_ROOT, str(current_user.username))
-        if not os.path.isdir(user_folder):
-            os.mkdir(user_folder)
-        current_time = math.floor(time.time())
-        product_folder = os.path.join(user_folder, str(current_time))
-        os.mkdir(product_folder)
-
         p = Product(title=form3.title.data, description=form3.description.data,\
         price=form3.price.data, author=current_user, timestamp=current_time,\
         condition=form3.condition.data,category=form3.category.data,subcategory=form3.subcategory.data)
         db.session.add(p)
         db.session.commit()
 
-        for f in request.files.getlist('photo'):
-            filename = secure_filename(f.filename)
-            destination = os.path.join(product_folder, filename)
-            f.save(destination)
-
-            link = os.sep + os.path.relpath(destination, APP_ROOT)
-
-            product = Product.query.filter_by(author=current_user, title=form.title.data).first()
-            i = Image(link=link ,user_id=product.id)
-            db.session.add(i)
-            db.session.commit()
+        product = Product.query.filter_by(author=current_user, title=form.title.data).first()
+        for i in list:
+            i.user_id=product.id
+            # i = Image(link=link ,user_id=product.id)
+            # db.session.add(i)
+            # db.session.commit()
         return redirect(url_for('user', username=current_user.username))
-
-    return render_template('upload.html', title='Upload', form=form1, step=1)
+    print('here1')
+    return render_template('upload.html', form=form1, step=1)
 
 #PROFILE
 @app.route('/user/<username>')
