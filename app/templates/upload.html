@@ -200,15 +200,9 @@
 						<h2 class="fs-title">Product Details</h2>
 						<h3 class="fs-subtitle">Tell people about your product</h3>
 
-						<input id="title" name="title" type="text" value="{{ request.form['title']}}" placeholder="Title" />
-							{% for error in form.title.errors %}
-							<span style="color: red;">[{{ error }}]</span>
-							{% endfor %}
+						{{form.title(placeholder="Title")}}
 
-						<textarea id="description" name="description" value="{{ request.form['description']}}" placeholder="Product description"></textarea>
-							{% for error in form.description.errors %}
-							<span style="color: red;">[{{ error }}]</span>
-							{% endfor %}
+							{{ form.description(placeholder="Product Description")}}
 
 						<input id="price" name="price" type="number" value="{{ request.form['price']}}" placeholder="$" />
 							{% for error in form.price.errors %}
@@ -224,7 +218,7 @@
 					<fieldset id="second" style="display:none">
 						<h2 class="fs-title">Category</h2>
 						<h3 class="fs-subtitle">Choose a subcategory</h3>
-						{{ form.hidden_tag() }}
+
 						{{ form.subcategory }}
 
 						<input type="button" class="previous action-button" onClick="step1()" value="Previous" />
