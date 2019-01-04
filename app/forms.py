@@ -8,7 +8,7 @@ try:
 except ImportError:
     from flask_wtf import Form as FlaskForm     # Fallback to Flask-WTF v0.12 or older
 from werkzeug.security import check_password_hash, generate_password_hash
-from wtforms import BooleanField, HiddenField, PasswordField, SubmitField, StringField, TextAreaField, SelectField, FloatField
+from wtforms import BooleanField, HiddenField, PasswordField, SubmitField, StringField, TextAreaField, SelectField, IntegerField
 from wtforms import ValidationError
 from wtforms.validators import DataRequired, InputRequired, Email, Length, EqualTo, NumberRange
 from flask_wtf.file import FileField, FileRequired, FileAllowed
@@ -90,19 +90,36 @@ class UploadForm0(FlaskForm):
     """Upload Form Template"""
     title = StringField('Title')
     description = TextAreaField('Description')
-    price = TextAreaField('Price')
+    price = IntegerField('Price')
     photo = FileField('Image')
     condition = SelectField(u'Condition', choices=[('na','N/A'),('new','New'),('used','Used')], default='na')
     category = SelectField(u'Category', validators=[DataRequired(message='Category is required')],\
     choices=[('property','Cars & Housing'),('fashion','Fashion'),('living','Living'),\
     ('education','Education'),('services','Services'),('electronics','Electronics')], default='property')
-
+    subcategory = SelectField(u'Subcategory', choices=[('watches','Watches'),('accessories','Accessories'),\
+    ('bags','Bags'),('wallets','Wallets'),('jackets','Jackets & Sweaters'),('tops','Tops'),\
+    ('bottoms','Bottoms'),('footwear','Footwear'),('jewellery','Jewellery'),\
+    ('health&beauty','Health & Beauty'), \
+    ('cars','Cars'),('sublet','Subletting'),('lease','Leasing'),\
+    ('furniture','Furniture'),\
+    ('bedsandmattresses','Beds & Mattresses'),('shelvesanddrawers','Shelves & Drawers'),\
+    ('sofas','Sofas'),('tablesandchairs','Tables & Chairs'),('decor','Home Decor'),\
+    ('plants','Plants'),('gardening','Gardening Tools'),('tv','TVs & Entertainment Systems'),\
+    ('kitchen','Kitchenware'),('laundry','Cleaning & Laundry'),('aircare','Cooling & Air Care'),\
+    ('textbooks','Textbooks'),\
+    ('iclickers','Iclickers'),('stationery','Stationery'),('calculators','Calculators'),\
+    ('audio','Audio'),\
+    ('computers','Computers'),('computerparts','Computer Parts & Accessories'),\
+    ('phones','Mobile Phones'),('tablets','Tablets'),('mobileparts','Mobile & Tablet Accessories'),\
+    ('photography','Photography'),\
+    ('haircuts','Haircuts'),('tuition','Tuition'),('flowers','Flowers & Bouquets'),\
+    ('repairs','Home Repairs'),('rides','Ride Hitching')])
 
 class UploadForm1(UploadForm0):
     """Upload Form Part 1"""
     title = StringField('Title', validators=[DataRequired(message='Title is required')])
     description = TextAreaField('Description', validators=[DataRequired(message='Description is required')])
-    price = FloatField('Price', validators=[DataRequired(message='Price is required'),\
+    price = IntegerField('Price', validators=[DataRequired(message='Price is required'),\
     NumberRange(min=0, message='Price must be a valid number, at least 0')])
     submit_1 = SubmitField('Next')
 
@@ -148,7 +165,7 @@ class ServicesForm(UploadForm1):
     ('repairs','Home Repairs'),('rides','Ride Hitching')])
     submit_2 = SubmitField('Next')
 
-class UploadForm3(UploadForm0):
+class UploadForm3(PropertyForm,LivingForm,EducationForm,ElectronicsForm,ServicesForm,FashionForm):
     """Upload Form Part 3"""
     photo = FileField('Image', validators=[FileRequired(),FileAllowed(['jpg', 'png','jpeg'], 'Images only!')])
     submit_final = SubmitField('Upload')

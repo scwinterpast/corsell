@@ -117,13 +117,10 @@ def upload():
         form2=EducationForm()
 
     if form1.submit_1.data and form1.validate() and not form2.submit_2.data:
-        print('form1v')
         return render_template('upload.html', title='Upload', form=form2, step=2);
     if form2.submit_2.data and not form2.validate():
-        print('form2 fail')
         return render_template('upload.html', title='Upload', form=form2, step=2);
     if form2.submit_2.data and form2.validate() and not form3.submit_final.data:
-        print('form 2 ok')
         return render_template('upload.html', title='Upload', form=form3, step=3);
     if form3.submit_final.data and not form3.validate():
         return render_template('upload.html', title='Upload', form=form3, step=3);
@@ -149,11 +146,11 @@ def upload():
 
             link = os.sep + os.path.relpath(destination, APP_ROOT)
 
-            product = Product.query.filter_by(author=current_user, title=form.title.data).first()
+            product = Product.query.filter_by(author=current_user, title=form3.title.data).first()
             i = Image(link=link ,user_id=product.id)
             db.session.add(i)
             db.session.commit()
-    print('here')
+        return redirect(url_for('user',username=current_user.username))
     return render_template('upload.html', form=form1, step=1)
 
 #PROFILE

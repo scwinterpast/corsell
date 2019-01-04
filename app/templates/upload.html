@@ -199,28 +199,18 @@
 					<fieldset id="first" style="display:none">
 						<h2 class="fs-title">Product Details</h2>
 						<h3 class="fs-subtitle">Tell people about your product</h3>
-
 						{{form.title(placeholder="Title")}}
-
-							{{ form.description(placeholder="Product Description")}}
-
-						<input id="price" name="price" type="number" value="{{ request.form['price']}}" placeholder="$" />
-							{% for error in form.price.errors %}
-							<span style="color: red;">[{{ error }}]</span>
-							{% endfor %}
-
+						{{ form.description(placeholder="Product Description")}}
+						{{form.price(placeholder="$")}}
 							{{form.condition}}
 							{{form.category}}
-
 					<input id="submit_1" name="submit_1" type="submit" class="next action-button" value="Next" />
 					</fieldset>
 
 					<fieldset id="second" style="display:none">
 						<h2 class="fs-title">Category</h2>
 						<h3 class="fs-subtitle">Choose a subcategory</h3>
-
 						{{ form.subcategory }}
-
 						<input type="button" class="previous action-button" onClick="step1()" value="Previous" />
 						<input id="submit_2" name="submit_2" type="submit" class="next action-button" value="Next" />
 					</fieldset>
@@ -229,7 +219,6 @@
 						<h2 class="fs-title">Upload Images</h2>
 						<h3 class="fs-subtitle">Files accepted: ('png,jpg,jpeg')</h3>
 					{{ form.photo(multiple="multiple") }}
-
 					<input type="button" class="previous action-button" onClick="step2()" value="Previous" />
 					<input id="submit_final" name="submit_final" type="submit" class="next action-button" value="Upload" />
 					</fieldset>
