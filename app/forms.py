@@ -25,7 +25,7 @@ class RegisterForm(FlaskForm):
     password = PasswordField('Password')
     confirm = PasswordField('Verify password')
 
-class RegisterForm1(RegisterForm):
+class RegisterForm1(RegisterForm): #used to validate whether passwords are matching or not 
     """Sign Up Form Part 1"""
     email = StringField('Email', validators=[DataRequired(), \
     Email(), Length(max=50)])
@@ -41,7 +41,7 @@ class RegisterForm1(RegisterForm):
         if user is not None:
             raise ValidationError('Please use a different email address.')
 
-class RegisterForm2(RegisterForm1):
+class RegisterForm2(RegisterForm1): #ensure no duplicate users
     """Sign Up Form Part 2"""
     username = StringField('Username', validators=[DataRequired(),\
     Length(min=4,max=15)])
@@ -55,7 +55,7 @@ class RegisterForm2(RegisterForm1):
             raise ValidationError('Please use a different username.')
             raise ValidationError('Please use a different email address.')
 
-class RegisterForm3(RegisterForm2):
+class RegisterForm3(RegisterForm2): #Data required 
     """Sign Up Form Part 3"""
     contact = StringField('Phone Number', validators=[DataRequired()])
     college = StringField('College', validators=[DataRequired()])

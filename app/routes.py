@@ -84,7 +84,7 @@ def register():
         firstname=form3.firstname.data, lastname=form3.lastname.data, \
         contact=form3.contact.data, college=form3.college.data)
         user.set_password(form3.password.data)
-        db.session.add(user)
+        db.session.add(user) #add user to the existing working database
         db.session.commit()
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form= form1, step=1)
