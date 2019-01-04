@@ -86,7 +86,7 @@ class CommentForm(FlaskForm):
     submit = SubmitField("Post")
 
 
-class UploadForm0(FlaskForm):
+class UploadForm0(FlaskForm): # overall upload form 
     """Upload Form Template"""
     title = StringField('Title')
     description = TextAreaField('Description')
@@ -94,21 +94,21 @@ class UploadForm0(FlaskForm):
     photo = FileField('Image')
     condition = SelectField(u'Condition', choices=[('na','N/A'),('new','New'),('used','Used')], default='na')
     category = SelectField(u'Category', validators=[DataRequired(message='Category is required')],\
-    choices=[('property','Cars & Housing'),('fashion','Fashion'),('living','Living'),\
-    ('education','Education'),('services','Services'),('electronics','Electronics')], default='property')
+    choices=[('property', 'Cars & Housing'),('fashion', 'Fashion'),('living', 'Living'),\
+    ('education', 'Education'),('services', 'Services'),('electronics', 'Electronics')], default='property')
 
 
 class UploadForm1(UploadForm0):
     """Upload Form Part 1"""
     title = StringField('Title', validators=[DataRequired(message='Title is required')])
-    description = TextAreaField('Description', validators=[DataRequired(message='Description is required')])
-    price = FloatField('Price', validators=[DataRequired(message='Price is required'),\
-    NumberRange(min=0, message='Price must be a valid number, at least 0')])
+    description = TextAreaField('Description', validators=[DataRequired(message='A brief description of the item is required')])
+    price = FloatField('Price', validators=[DataRequired(message='Price of listing is required'),\
+    NumberRange(min=0, message='Price must be a valid number: at least 0')])
     submit_1 = SubmitField('Next')
 
 class PropertyForm(UploadForm1):
     """Upload Form Part 2 - Cars & Housing"""
-    subcategory = SelectField(u'Subcategory', validators=[DataRequired(message='Category is required')], choices=[('cars','Cars'),('sublet','Subletting'),('lease','Leasing')])
+    subcategory = SelectField(u'Subcategory', validators=[DataRequired(message='Please choose a category')], choices=[('cars','Cars'),('sublet','Subletting'),('lease','Leasing')])
     submit_2 = SubmitField('Next')
 
 class FashionForm(UploadForm1):
