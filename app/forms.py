@@ -68,21 +68,6 @@ class LoginForm(FlaskForm):
     remember = BooleanField('Remember me')
     submit = SubmitField('Login')
 
-# class UploadForm(FlaskForm):
-#     """Upload Form"""
-#     title = StringField('Title', validators=[DataRequired(message='Title is required')])
-#     description = TextAreaField('Description', validators=[DataRequired(message='Description is required')])
-#     price = FloatField('Price', validators=[DataRequired(message='Price is required'),\
-#     NumberRange(min=0, message='Price must be a valid number, at least 0')])
-#     photo = FileField('Image', validators=[FileRequired(),FileAllowed(['jpg', 'png','jpeg'], 'Images only!')])
-#     condition = SelectField(u'Condition', choices=[('na','N/A'),('new','New'),('used','Used')])
-#     category = SelectField(u'Category', validators=[DataRequired(message='Category is required')],\
-#     choices=[('property','Cars & Housing'),('fashion','Fashion'),('living','Living'),\
-#     ('education','Education'),('services','Serivces'),('electronics','Electronics')])
-#     # subcategory = SelectField()
-#     submit_1 = SubmitField('Next')
-#     submit_2 = SubmitField('Next')
-#     submit_final = SubmitField('Upload')
 
     # def validate_username(self, username):
     #     user = User.query.filter_by(username=username.data).first()
@@ -100,6 +85,7 @@ class CommentForm(FlaskForm):
     comment = TextAreaField('Post a comment:',validators=[DataRequired()])
     submit = SubmitField("Post")
 
+
 class UploadForm0(FlaskForm):
     """Upload Form Template"""
     title = StringField('Title')
@@ -110,61 +96,59 @@ class UploadForm0(FlaskForm):
     category = SelectField(u'Category', validators=[DataRequired(message='Category is required')],\
     choices=[('property','Cars & Housing'),('fashion','Fashion'),('living','Living'),\
     ('education','Education'),('services','Services'),('electronics','Electronics')], default='property')
-    subcategory = SelectField(u'Subcategory', choices=[('watches','Watches'),('accessories','Accessories'),\
-    ('bags','Bags'),('wallets','Wallets'),('jackets','Jackets & Sweaters'),('tops','Tops'),\
-    ('bottoms','Bottoms'),('footwear','Footwear'),('jewellery','Jewellery'),\
-    ('health&beauty','Health & Beauty')], default='watches')
+
 
 class UploadForm1(UploadForm0):
     """Upload Form Part 1"""
-    photo = FileField('Image', validators=[FileRequired(),FileAllowed(['jpg', 'png','jpeg'], 'Images only!')])
-    submit_1 = SubmitField('Next')
-
-class UploadForm2(UploadForm1):
-    """Upload Form Part 2"""
     title = StringField('Title', validators=[DataRequired(message='Title is required')])
     description = TextAreaField('Description', validators=[DataRequired(message='Description is required')])
     price = FloatField('Price', validators=[DataRequired(message='Price is required'),\
     NumberRange(min=0, message='Price must be a valid number, at least 0')])
+    submit_1 = SubmitField('Next')
+
+class PropertyForm(UploadForm1):
+    """Upload Form Part 2 - Cars & Housing"""
+    subcategory = SelectField(u'Subcategory', validators=[DataRequired(message='Category is required')], choices=[('cars','Cars'),('sublet','Subletting'),('lease','Leasing')])
     submit_2 = SubmitField('Next')
 
-class PropertyForm(UploadForm2):
-    """Upload Form Part 3 - Cars & Housing"""
-    submit_final = SubmitField('Upload')
-
-class FashionForm(UploadForm2):
-    """Upload Form Part 3 - Fashion"""
+class FashionForm(UploadForm1):
+    """Upload Form Part 2 - Fashion"""
     subcategory = SelectField(u'Subcategory', choices=[('watches','Watches'),('accessories','Accessories'),\
     ('bags','Bags'),('wallets','Wallets'),('jackets','Jackets & Sweaters'),('tops','Tops'),\
     ('bottoms','Bottoms'),('footwear','Footwear'),('jewellery','Jewellery'),\
     ('health&beauty','Health & Beauty')])
-    submit_final = SubmitField('Upload')
+    submit_2 = SubmitField('Next')
 
-class LivingForm(UploadForm2):
-    """Upload Form Part 3 - Living"""
+class LivingForm(UploadForm1):
+    """Upload Form Part 2 - Living"""
     subcategory = SelectField(u'Subcategory', choices=[('furniture','Furniture'),\
     ('bedsandmattresses','Beds & Mattresses'),('shelvesanddrawers','Shelves & Drawers'),\
     ('sofas','Sofas'),('tablesandchairs','Tables & Chairs'),('decor','Home Decor'),\
     ('plants','Plants'),('gardening','Gardening Tools'),('tv','TVs & Entertainment Systems'),\
     ('kitchen','Kitchenware'),('laundry','Cleaning & Laundry'),('aircare','Cooling & Air Care')])
-    submit_final = SubmitField('Upload')
+    submit_2 = SubmitField('Next')
 
-class EducationForm(UploadForm2):
-    """Upload Form Part 3 - Education"""
+class EducationForm(UploadForm1):
+    """Upload Form Part 2 - Education"""
     subcategory = SelectField(u'Subcategory', choices=[('textbooks','Textbooks'),\
     ('iclickers','Iclickers'),('stationery','Stationery'),('calculators','Calculators')])
-    submit_final = SubmitField('Upload')
+    submit_2 = SubmitField('Next')
 
-class ElectronicsForm(UploadForm2):
-    """Upload Form Part 3 - Electronics"""
+class ElectronicsForm(UploadForm1):
+    """Upload Form Part 2 - Electronics"""
     subcategory = SelectField(u'Subcategory', choices=[('audio','Audio'),\
     ('computers','Computers'),('computerparts','Computer Parts & Accessories'),\
     ('phones','Mobile Phones'),('tablets','Tablets'),('mobileparts','Mobile & Tablet Accessories')])
-    submit_final = SubmitField('Upload')
+    submit_2 = SubmitField('Next')
 
-class ServicesForm(UploadForm2):
-    """Upload Form Part 3 - Services"""
+class ServicesForm(UploadForm1):
+    """Upload Form Part 2 - Services"""
     subcategory = SelectField(u'Subcategory', choices=[('photography','Photography'),\
     ('haircuts','Haircuts'),('tuition','Tuition'),('flowers','Flowers & Bouquets'),\
     ('repairs','Home Repairs'),('rides','Ride Hitching')])
+    submit_2 = SubmitField('Next')
+
+class UploadForm3(UploadForm0):
+    """Upload Form Part 3"""
+    photo = FileField('Image', validators=[FileRequired(),FileAllowed(['jpg', 'png','jpeg'], 'Images only!')])
     submit_final = SubmitField('Upload')

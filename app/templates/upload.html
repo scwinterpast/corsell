@@ -7,6 +7,7 @@
 	<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 	<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js'></script>
 	<script src="{{ url_for('static', filename='essence/js/form.js') }}"></script>
+	<script src="{{ url_for('static', filename='essence/js/new.js')}}"></script>
 <!--===============================================================================================-->
 </head>
 
@@ -181,41 +182,30 @@
 		}
 	}
 	</script>
-	<!-- <body onload='determine_step()'>
-		<section class="welcome_area bg-img background-overlay height" style="background-image: url('/static/essence/img/bg-img/login.jpg'); height="900px">
-				<div class="container h-100">
-	<h1>hi</h1>
 
-	</body> -->
 	<body onload='determine_step()'>
-		<section class="welcome_area bg-img background-overlay height" style="background-image: url('/static/essence/img/bg-img/login.jpg'); height="900px">
+		<section class="welcome_area bg-img background-overlay height" style="background-image: url('/static/essence/img/bg-img/login.jpg'); height="1500px">
 				<div class="container h-100">
+
 				<form id="msform" method="POST" enctype="multipart/form-data">
 					{{ form.hidden_tag() }}
 					<!-- progressbar -->
 					<ul id="progressbar">
-						<li id="active1">Upload Images</li>
-						<li id="active2">Product Details</li>
-						<li id="active3">Category</li>
+						<li id="active1">Product Details</li>
+						<li id="active2">Choose a Subcategory</li>
+						<li id="active3">Upload Images</li>
 					</ul>
 					<!-- fieldsets -->
 					<fieldset id="first" style="display:none">
-						<h2 class="fs-title">Upload Images</h2>
-						<h3 class="fs-subtitle">Files accepted: ('png,jpg,jpeg')</h3>
-						{{ form.photo(multiple="multiple") }}
-
-					<input id="submit_1" name="submit_1" type="submit" class="next action-button" value="Next" />
-					</fieldset>
-
-					<fieldset id="second" style="display:none">
 						<h2 class="fs-title">Product Details</h2>
 						<h3 class="fs-subtitle">Tell people about your product</h3>
+
 						<input id="title" name="title" type="text" value="{{ request.form['title']}}" placeholder="Title" />
 							{% for error in form.title.errors %}
 							<span style="color: red;">[{{ error }}]</span>
 							{% endfor %}
 
-						<textarea id="description" name="description" form="msform" value="{{ request.form['description']}}" placeholder="Product description"></textarea>
+						<textarea id="description" name="description" value="{{ request.form['description']}}" placeholder="Product description"></textarea>
 							{% for error in form.description.errors %}
 							<span style="color: red;">[{{ error }}]</span>
 							{% endfor %}
@@ -225,28 +215,26 @@
 							<span style="color: red;">[{{ error }}]</span>
 							{% endfor %}
 
-						<select id="condition" name="condition" value="{{ request.form['condition']}}" >
-							<option value="na">N/A</option>
-							<option value="new">New</option>
-							<option value="used">Used</option>
-						</select>
+							{{form.condition}}
+							{{form.category}}
 
-						<select id="category" name="category" value="{{ request.form['category']}}" >
-							<option value="property">Cars & Housing</option>
-							<option value="fashion">Fashion</option>
-							<option value="living">Living</option>
-							<option value="education">Education</option>
-							<option value="services">Services</option>
-							<option value="electronics">Electronics</option>
-						</select>
+					<input id="submit_1" name="submit_1" type="submit" class="next action-button" value="Next" />
+					</fieldset>
+
+					<fieldset id="second" style="display:none">
+						<h2 class="fs-title">Category</h2>
+						<h3 class="fs-subtitle">Choose a subcategory</h3>
+						{{ form.hidden_tag() }}
+						{{ form.subcategory }}
 
 						<input type="button" class="previous action-button" onClick="step1()" value="Previous" />
 						<input id="submit_2" name="submit_2" type="submit" class="next action-button" value="Next" />
 					</fieldset>
 
 					<fieldset id="third" style="display:none">
-						<h2 class="fs-title">Category</h2>
-						<h3 class="fs-subtitle">Choose a subcategory</h3>
+						<h2 class="fs-title">Upload Images</h2>
+						<h3 class="fs-subtitle">Files accepted: ('png,jpg,jpeg')</h3>
+					{{ form.photo(multiple="multiple") }}
 
 					<input type="button" class="previous action-button" onClick="step2()" value="Previous" />
 					<input id="submit_final" name="submit_final" type="submit" class="next action-button" value="Upload" />

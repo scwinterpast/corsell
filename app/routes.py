@@ -14,7 +14,7 @@ from flask_sqlalchemy  import SQLAlchemy
 from app.models import User, Product, Image, Comment
 from app.forms import (
     LoginForm, RegisterForm1, RegisterForm2, RegisterForm3, \
-    CommentForm, UploadForm1, UploadForm2, FashionForm, LivingForm, PropertyForm, \
+    CommentForm, UploadForm1, UploadForm3, FashionForm, LivingForm, PropertyForm, \
     EducationForm, ElectronicsForm, ServicesForm)
 from app import db, login
 
@@ -101,18 +101,46 @@ def logout():
 @login_required
 def upload():
     form1 = UploadForm1()
-    form2 = UploadForm2()
-    form3 = PropertyForm()
+    form3 = UploadForm3()
+    form2=PropertyForm()
+    if form1.category.data == 'property':
+        form2=PropertyForm()
+    elif form1.category.data == 'fashion':
+        form2=FashionForm()
+    elif form1.category.data == 'electronics':
+        form2=ElectronicsForm()
+    elif form1.category.data == 'living':
+        form2=LivingForm()
+    elif form1.category.data == 'services':
+        form2=ServicesForm()
+    else:
+        form2=EducationForm()
 
-    list = []
-    
     if form1.submit_1.data and form1.validate() and not form2.submit_2.data:
+        print('form1v')
+        return render_template('upload.html', title='Upload', form=form2, step=2);
+    if form2.submit_2.data and not form2.validate():
+        print('form2 fail')
+        return render_template('upload.html', title='Upload', form=form2, step=2);
+    if form2.submit_2.data and form2.validate() and not form3.submit_final.data:
+        print('form 2 ok')
+        return render_template('upload.html', title='Upload', form=form3, step=3);
+    if form3.submit_final.data and not form3.validate():
+        return render_template('upload.html', title='Upload', form=form3, step=3);
+
+    if form3.submit_final.data and form3.validate():
         user_folder = os.path.join(MEDIA_ROOT, str(current_user.username))
         if not os.path.isdir(user_folder):
             os.mkdir(user_folder)
         current_time = math.floor(time.time())
         product_folder = os.path.join(user_folder, str(current_time))
         os.mkdir(product_folder)
+
+        p = Product(title=form3.title.data, description=form3.description.data,\
+        price=form3.price.data, author=current_user, timestamp=current_time,\
+        condition=form3.condition.data,category=form3.category.data,subcategory=form3.subcategory.data)
+        db.session.add(p)
+        db.session.commit()
 
         for f in request.files.getlist('photo'):
             filename = secure_filename(f.filename)
@@ -121,33 +149,11 @@ def upload():
 
             link = os.sep + os.path.relpath(destination, APP_ROOT)
 
-            i = Image(link=link)
-            list.append(i)
+            product = Product.query.filter_by(author=current_user, title=form.title.data).first()
+            i = Image(link=link ,user_id=product.id)
             db.session.add(i)
             db.session.commit()
-        print(list)
-        return render_template('upload.html', title='Upload', form=form2, step=2);
-    if form2.submit_2.data and not form2.validate():
-        return render_template('upload.html', title='Upload', form=form2, step=2);
-    if form2.submit_2.data and form2.validate() and not form3.submit_final.data:
-        return render_template('upload.html', title='Upload', form=form3, step=3);
-    if form3.submit_final.data and not form3.validate():
-        return render_template('upload.html', title='Upload', form=form3, step=3);
-
-    if form3.submit_final.data and form3.validate():
-        p = Product(title=form3.title.data, description=form3.description.data,\
-        price=form3.price.data, author=current_user, timestamp=current_time,\
-        condition=form3.condition.data,category=form3.category.data,subcategory=form3.subcategory.data)
-        db.session.add(p)
-        db.session.commit()
-
-        product = Product.query.filter_by(author=current_user, title=form.title.data).first()
-        for i in list:
-            i.user_id=product.id
-            # i = Image(link=link ,user_id=product.id)
-            # db.session.add(i)
-            # db.session.commit()
-        return redirect(url_for('user', username=current_user.username))
+    print('here')
     return render_template('upload.html', form=form1, step=1)
 
 #PROFILE
