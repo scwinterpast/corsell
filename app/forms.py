@@ -94,26 +94,26 @@ class UploadForm0(FlaskForm): # overall upload form
     photo = FileField('Image')
     condition = SelectField(u'Condition', choices=[('na','N/A'),('new','New'),('used','Used')], default='na')
     category = SelectField(u'Category', validators=[DataRequired(message='Category is required')],\
-    choices=[('property','Cars & Housing'),('fashion','Fashion'),('living','Living'),\
-    ('education','Education'),('services','Services'),('electronics','Electronics')], default='property')
-    subcategory = SelectField(u'Subcategory', choices=[('watches','Watches'),('accessories','Accessories'),\
-    ('bags','Bags'),('wallets','Wallets'),('jackets','Jackets & Sweaters'),('tops','Tops'),\
-    ('bottoms','Bottoms'),('footwear','Footwear'),('jewellery','Jewellery'),\
-    ('health&beauty','Health & Beauty'), \
-    ('cars','Cars'),('sublet','Subletting'),('lease','Leasing'),\
-    ('furniture','Furniture'),\
-    ('bedsandmattresses','Beds & Mattresses'),('shelvesanddrawers','Shelves & Drawers'),\
-    ('sofas','Sofas'),('tablesandchairs','Tables & Chairs'),('decor','Home Decor'),\
-    ('plants','Plants'),('gardening','Gardening Tools'),('tv','TVs & Entertainment Systems'),\
-    ('kitchen','Kitchenware'),('laundry','Cleaning & Laundry'),('aircare','Cooling & Air Care'),\
-    ('textbooks','Textbooks'),\
-    ('iclickers','Iclickers'),('stationery','Stationery'),('calculators','Calculators'),\
-    ('audio','Audio'),\
-    ('computers','Computers'),('computerparts','Computer Parts & Accessories'),\
-    ('phones','Mobile Phones'),('tablets','Tablets'),('mobileparts','Mobile & Tablet Accessories'),\
-    ('photography','Photography'),\
-    ('haircuts','Haircuts'),('tuition','Tuition'),('flowers','Flowers & Bouquets'),\
-    ('repairs','Home Repairs'),('rides','Ride Hitching')])
+    choices=[('Property','Cars & Housing'),('Fashion','Fashion'),('Living','Living'),\
+    ('Education','Education'),('Services','Services'),('Electronics','Electronics')], default='Property')
+    # subcategory = SelectField(u'Subcategory', choices=[('watches','Watches'),('accessories','Accessories'),\
+    # ('bags','Bags'),('wallets','Wallets'),('jackets','Jackets & Sweaters'),('tops','Tops'),\
+    # ('bottoms','Bottoms'),('footwear','Footwear'),('jewellery','Jewellery'),\
+    # ('health&beauty','Health & Beauty'), \
+    # ('cars','Cars'),('sublet','Subletting'),('lease','Leasing'),\
+    # ('furniture','Furniture'),\
+    # ('bedsandmattresses','Beds & Mattresses'),('shelvesanddrawers','Shelves & Drawers'),\
+    # ('sofas','Sofas'),('tablesandchairs','Tables & Chairs'),('decor','Home Decor'),\
+    # ('plants','Plants'),('gardening','Gardening Tools'),('tv','TVs & Entertainment Systems'),\
+    # ('kitchen','Kitchenware'),('laundry','Cleaning & Laundry'),('aircare','Cooling & Air Care'),\
+    # ('textbooks','Textbooks'),\
+    # ('iclickers','Iclickers'),('stationery','Stationery'),('calculators','Calculators'),\
+    # ('audio','Audio'),\
+    # ('computers','Computers'),('computerparts','Computer Parts & Accessories'),\
+    # ('phones','Mobile Phones'),('tablets','Tablets'),('mobileparts','Mobile & Tablet Accessories'),\
+    # ('photography','Photography'),\
+    # ('haircuts','Haircuts'),('tuition','Tuition'),('flowers','Flowers & Bouquets'),\
+    # ('repairs','Home Repairs'),('rides','Ride Hitching')])
 
 
 class UploadForm1(UploadForm0):
@@ -126,44 +126,45 @@ class UploadForm1(UploadForm0):
 
 class PropertyForm(UploadForm1):
     """Upload Form Part 2 - Cars & Housing"""
-    subcategory = SelectField(u'Subcategory', validators=[DataRequired(message='Please choose a category')], choices=[('cars','Cars'),('sublet','Subletting'),('lease','Leasing')])
+    subcategory = SelectField(u'Subcategory', validators=[DataRequired(message='Please choose a category')], \
+    choices=[('Cars','Cars'),('Subletting','Subletting'),('Leasing','Leasing')])
     submit_2 = SubmitField('Next')
 
 class FashionForm(UploadForm1):
     """Upload Form Part 2 - Fashion"""
-    subcategory = SelectField(u'Subcategory', choices=[('watches','Watches'),('accessories','Accessories'),\
-    ('bags','Bags'),('wallets','Wallets'),('jackets','Jackets & Sweaters'),('tops','Tops'),\
-    ('bottoms','Bottoms'),('footwear','Footwear'),('jewellery','Jewellery'),\
-    ('health&beauty','Health & Beauty')])
+    subcategory = SelectField(u'Subcategory', choices=[('Watches','Watches'),('Accessories','Accessories'),\
+    ('Bags','Bags'),('Wallets','Wallets'),('Jackets & Sweaters','Jackets & Sweaters'),('Tops','Tops'),\
+    ('Bottoms','Bottoms'),('Footwear','Footwear'),('Jewellery','Jewellery'),\
+    ('Health & Beauty','Health & Beauty')])
     submit_2 = SubmitField('Next')
 
 class LivingForm(UploadForm1):
     """Upload Form Part 2 - Living"""
-    subcategory = SelectField(u'Subcategory', choices=[('furniture','Furniture'),\
-    ('bedsandmattresses','Beds & Mattresses'),('shelvesanddrawers','Shelves & Drawers'),\
-    ('sofas','Sofas'),('tablesandchairs','Tables & Chairs'),('decor','Home Decor'),\
-    ('plants','Plants'),('gardening','Gardening Tools'),('tv','TVs & Entertainment Systems'),\
-    ('kitchen','Kitchenware'),('laundry','Cleaning & Laundry'),('aircare','Cooling & Air Care')])
+    subcategory = SelectField(u'Subcategory', choices=[('Furniture','Furniture'),\
+    ('Beds & Mattresses','Beds & Mattresses'),('Shelves & Drawers','Shelves & Drawers'),\
+    ('Sofas','Sofas'),('Tables & Chairs','Tables & Chairs'),('Home Decor','Home Decor'),\
+    ('Plants','Plants'),('Gardening Tools','Gardening Tools'),('TVs & Entertainment Systems','TVs & Entertainment Systems'),\
+    ('Kitchenware','Kitchenware'),('Cleaning & Laundry','Cleaning & Laundry'),('Cooling & Air Care','Cooling & Air Care')])
     submit_2 = SubmitField('Next')
 
 class EducationForm(UploadForm1):
     """Upload Form Part 2 - Education"""
-    subcategory = SelectField(u'Subcategory', choices=[('textbooks','Textbooks'),\
-    ('iclickers','Iclickers'),('stationery','Stationery'),('calculators','Calculators')])
+    subcategory = SelectField(u'Subcategory', choices=[('Textbooks','Textbooks'),\
+    ('Iclickers','Iclickers'),('Stationery','Stationery'),('Calculators','Calculators')])
     submit_2 = SubmitField('Next')
 
 class ElectronicsForm(UploadForm1):
     """Upload Form Part 2 - Electronics"""
-    subcategory = SelectField(u'Subcategory', choices=[('audio','Audio'),\
-    ('computers','Computers'),('computerparts','Computer Parts & Accessories'),\
-    ('phones','Mobile Phones'),('tablets','Tablets'),('mobileparts','Mobile & Tablet Accessories')])
+    subcategory = SelectField(u'Subcategory', choices=[('Audio','Audio'),\
+    ('Computers','Computers'),('Computer Parts & Accessories','Computer Parts & Accessories'),\
+    ('Mobile Phones','Mobile Phones'),('Tablets','Tablets'),('Mobile & Tablet Accessories','Mobile & Tablet Accessories')])
     submit_2 = SubmitField('Next')
 
 class ServicesForm(UploadForm1):
     """Upload Form Part 2 - Services"""
-    subcategory = SelectField(u'Subcategory', choices=[('photography','Photography'),\
-    ('haircuts','Haircuts'),('tuition','Tuition'),('flowers','Flowers & Bouquets'),\
-    ('repairs','Home Repairs'),('rides','Ride Hitching')])
+    subcategory = SelectField(u'Subcategory', choices=[('Photography','Photography'),\
+    ('Haircuts','Haircuts'),('Tuition','Tuition'),('Flowers & Bouquets','Flowers & Bouquets'),\
+    ('Home Repairs','Home Repairs'),('Ride Hitching','Ride Hitching')])
     submit_2 = SubmitField('Next')
 
 class UploadForm3(PropertyForm,LivingForm,EducationForm,ElectronicsForm,ServicesForm,FashionForm):
