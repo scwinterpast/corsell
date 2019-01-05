@@ -8,7 +8,7 @@ try:
 except ImportError:
     from flask_wtf import Form as FlaskForm     # Fallback to Flask-WTF v0.12 or older
 from werkzeug.security import check_password_hash, generate_password_hash
-from wtforms import BooleanField, HiddenField, PasswordField, SubmitField, StringField, TextAreaField, SelectField, IntegerField
+from wtforms import BooleanField, HiddenField, PasswordField, SubmitField, StringField, TextAreaField, SelectField, FloatField
 from wtforms import ValidationError
 from wtforms.validators import DataRequired, InputRequired, Email, Length, EqualTo, NumberRange
 from flask_wtf.file import FileField, FileRequired, FileAllowed
@@ -25,7 +25,7 @@ class RegisterForm(FlaskForm):
     password = PasswordField('Password')
     confirm = PasswordField('Verify password')
 
-class RegisterForm1(RegisterForm): #used to validate whether passwords are matching or not 
+class RegisterForm1(RegisterForm): #used to validate whether passwords are matching or not
     """Sign Up Form Part 1"""
     email = StringField('Email', validators=[DataRequired(), \
     Email(), Length(max=50)])
@@ -55,7 +55,7 @@ class RegisterForm2(RegisterForm1): #ensure no duplicate users
             raise ValidationError('Please use a different username.')
             raise ValidationError('Please use a different email address.')
 
-class RegisterForm3(RegisterForm2): #Data required 
+class RegisterForm3(RegisterForm2): #Data required
     """Sign Up Form Part 3"""
     contact = StringField('Phone Number', validators=[DataRequired()])
     college = StringField('College', validators=[DataRequired()])
@@ -86,15 +86,14 @@ class CommentForm(FlaskForm):
     submit = SubmitField("Post")
 
 
-class UploadForm0(FlaskForm): # overall upload form 
+class UploadForm0(FlaskForm): # overall upload form
     """Upload Form Template"""
     title = StringField('Title')
     description = TextAreaField('Description')
-    price = IntegerField('Price')
+    price = TextAreaField('Price')
     photo = FileField('Image')
     condition = SelectField(u'Condition', choices=[('na','N/A'),('new','New'),('used','Used')], default='na')
     category = SelectField(u'Category', validators=[DataRequired(message='Category is required')],\
-<<<<<<< HEAD
     choices=[('property','Cars & Housing'),('fashion','Fashion'),('living','Living'),\
     ('education','Education'),('services','Services'),('electronics','Electronics')], default='property')
     subcategory = SelectField(u'Subcategory', choices=[('watches','Watches'),('accessories','Accessories'),\
@@ -115,24 +114,14 @@ class UploadForm0(FlaskForm): # overall upload form
     ('photography','Photography'),\
     ('haircuts','Haircuts'),('tuition','Tuition'),('flowers','Flowers & Bouquets'),\
     ('repairs','Home Repairs'),('rides','Ride Hitching')])
-=======
-    choices=[('property', 'Cars & Housing'),('fashion', 'Fashion'),('living', 'Living'),\
-    ('education', 'Education'),('services', 'Services'),('electronics', 'Electronics')], default='property')
 
->>>>>>> e0480a54008ab25d30af439fce28344e30fd4850
 
 class UploadForm1(UploadForm0):
     """Upload Form Part 1"""
     title = StringField('Title', validators=[DataRequired(message='Title is required')])
-<<<<<<< HEAD
-    description = TextAreaField('Description', validators=[DataRequired(message='Description is required')])
-    price = IntegerField('Price', validators=[DataRequired(message='Price is required'),\
-    NumberRange(min=0, message='Price must be a valid number, at least 0')])
-=======
     description = TextAreaField('Description', validators=[DataRequired(message='A brief description of the item is required')])
     price = FloatField('Price', validators=[DataRequired(message='Price of listing is required'),\
     NumberRange(min=0, message='Price must be a valid number: at least 0')])
->>>>>>> e0480a54008ab25d30af439fce28344e30fd4850
     submit_1 = SubmitField('Next')
 
 class PropertyForm(UploadForm1):
