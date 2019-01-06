@@ -103,15 +103,15 @@ def upload():
     form1 = UploadForm1()
     form3 = UploadForm3()
     form2=PropertyForm()
-    if form1.category.data == 'property':
+    if form1.category.data == 'Property':
         form2=PropertyForm()
-    elif form1.category.data == 'fashion':
+    elif form1.category.data == 'Fashion':
         form2=FashionForm()
-    elif form1.category.data == 'electronics':
+    elif form1.category.data == 'Electronics':
         form2=ElectronicsForm()
-    elif form1.category.data == 'living':
+    elif form1.category.data == 'Living':
         form2=LivingForm()
-    elif form1.category.data == 'services':
+    elif form1.category.data == 'Services':
         form2=ServicesForm()
     else:
         form2=EducationForm()

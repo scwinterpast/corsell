@@ -92,7 +92,7 @@ class UploadForm0(FlaskForm): # overall upload form
     description = TextAreaField('Description')
     price = TextAreaField('Price')
     photo = FileField('Image')
-    condition = SelectField(u'Condition', choices=[('na','N/A'),('new','New'),('used','Used')], default='na')
+    condition = SelectField(u'Condition', choices=[('NA','N/A'),('New','New'),('Used','Used')], default='NA')
     category = SelectField(u'Category', validators=[DataRequired(message='Category is required')],\
     choices=[('Property','Cars & Housing'),('Fashion','Fashion'),('Living','Living'),\
     ('Education','Education'),('Services','Services'),('Electronics','Electronics')], default='Property')
